@@ -1,0 +1,68 @@
+body{
+    background-color: rgb(193, 248, 255);
+    
+   text-align: center; 
+}
+#name{
+    font-size: larger;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#my{
+    color: aliceblue;
+    font-size: larger;
+    text-align: center;
+}
+
+#myphoto{
+
+    background-color: white;
+    height: 20em;
+    width: 20em;
+    display: inline-block;
+    
+    text-align: center;
+    border-radius: 50%;
+    background-image: url(my_photo.jpg);
+    background-size: cover;
+ 
+}
+
+@keyframes neonLightAnimation {
+    0%, 100% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 400% 0;
+    }
+  }
+  
+  #myphoto::before{
+    content: "";
+    position: absolute;
+    top: -2%;
+    left: -2%;
+    right: -2%;
+    bottom: -2%;
+    border-radius: 2%;
+    animation: neonLightAnimation 5s linear infinite;
+    background: linear-gradient(45deg, #ff00ff, #00ffff, #ff00ff, #00ffff);
+    background-size: 400% 100%;
+    z-index: -1;
+  }
+
+#name{
+    font-size: larger;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn{
+    margin-top: 2em;
+    width: 40%;
+    border-color: black;
+    border-width: 2%;
+    border-style: solid;
+    border-radius: 50px;
+}
