@@ -1,36 +1,52 @@
 
-.offcanvas-body{
+#profile{
     text-align: center;
+  
 }
+p{
+    color: rgb(0, 191, 255);
+   font-size: 1.5rem;
+   font-weight: 500;
+
+}
+
+
 #my_photo{
     border-radius: 50%;
     border-width:2%;
     border-style: solid;
     border-color: white;
     background-color: orange;
-    height: 22rem;
-    width: 22rem;
+    height: 20rem;
+    width: 20rem;
     position: relative;
     background-image: url(my_photo.jpg);
     background-size: cover;
-    position:relative;
+    left: 1rem;
     
+
+   
+   
+     
     
 }
 .id_btn{
-    height: 3rem;
-    width: 20rem; 
+    height: 2.5rem;
+    width: 15rem; 
     position: relative;
-    margin-top: 3rem; 
-    border-radius: 5rem;
+    margin-top: 5vh; 
+    border-radius: 50px;
     background-color: transparent; 
     color: white;
     border-width: 0.1vh;
     border-color: white;
     border-style: solid;
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight:600;
+    
+   
+ 
     
 }
 a{
@@ -41,4 +57,9 @@ a{
     border-style: solid;
     border-color: rgb(0, 191, 255);
     color: rgb(0, 191, 255);
+}
+#profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
