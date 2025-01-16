@@ -1,34 +1,8 @@
 
-.navbar {
-    background-color: rgb(39, 39, 39) !important;
-  }
-  
-
-  .navbar-brand,
-  .nav-link {
-    color: white !important;
-  }
-  
- 
-  .offcanvas-title,
-  .offcanvas-body .nav-link {
-    color: white !important;
-  }
-  
-
-  .nav-link:hover {
-    color: gray !important;
-  }
-  .navbar-toggler{
-    color: #000000;
-    background-color: rgb(255, 255, 255);
-  }
-  
-  .offcanvas{
-
-    background-color: rgba(39, 39, 39, 0.705);
-  }
-  .nav-link:hover{
-    color: aqua !important;
+  bi,.nav-link:hover{
+    color: rgb(0, 26, 255) !important;
     font-size:1.22em;
+  }
+  .bi{
+    color: rgba(0, 0, 0, 0.671) !important;
   }
