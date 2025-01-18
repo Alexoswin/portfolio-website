@@ -1,0 +1,17 @@
+#box{
+
+    background-color: rgb(2, 2, 82);
+    color: white;
+    height: 2.5rem; 
+    padding: 0.5rem;
+    display:inline-block;
+    margin-left: 0.5rem;
+    margin-top: 1rem;
+    border-radius: 1vh;
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.430);
+    
+}
+#box:hover{
+    background-color: rgb(0, 0, 158);
+    color:rgb(194, 235, 192);
+}

@@ -1,0 +1,19 @@
+/* ImageBox.css */
+.Simage {
+    display: inline-block;
+    margin: 1vw; /* Add spacing between images */
+    text-align: center;
+}
+
+/* Styling the image */
+#skillimage {
+    height: 10vh; /* Make the image smaller */
+    width: 10vh; /* Set both width and height to make it square */
+    object-fit: contain; /* Ensures the image fits within the container */
+    
+    transition: transform 0.3s ease; /* Smooth transition effect */
+}
+
+#skillimage:hover {
+    transform: scale(1.1); /* Scale up the image slightly on hover */
+}

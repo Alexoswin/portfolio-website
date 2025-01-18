@@ -1,13 +1,14 @@
 import './Container.css';
 import profile from './Pictures/Profile.jpg';
 import resume from './Pictures/Resume.pdf'
+
 function Container (){
 
     return(
         <>
         <div class="container-sm">
               <div className="imageBox">
-              <img  id="profile" src={profile} alt="" />
+              <img  id="profile" src={profile} alt="Profile" />
 
 
               </div>
@@ -24,6 +25,7 @@ function Container (){
               <div>
               <button type="button" class="btn btn-success"><a  id="link" href={resume}>View Resume </a></button>
               </div> 
+            
                       
         </div>
         </>
