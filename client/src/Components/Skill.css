@@ -1,11 +1,14 @@
 #boxofimages{
      display: inline-block;
      background-color: rgb(255, 255, 255);
-     width: 40vh;
+     width: 45vh;
+     position: relative;
+     bottom: 2.5vw;
+     margin-left: 1vh
 }
 #boxofskills{
      display: inline-block;
      background-color: rgb(255, 255, 255);
-     width: 40vh;
+     width: 45vh;
     
 }
