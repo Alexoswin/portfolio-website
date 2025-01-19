@@ -6,3 +6,7 @@
   .bi{
     color: rgba(0, 0, 0, 0.671) !important;
   }
+  .contact{
+    color: blue;
+    margin-top: 1vh;
+  }

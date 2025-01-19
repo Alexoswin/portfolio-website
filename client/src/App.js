@@ -14,7 +14,8 @@ function App() {
       <Skills/>
       
       <Achievements/>
-      <Projects />
+      <Projects/>
+      
       
 
       
