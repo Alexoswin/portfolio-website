@@ -1,21 +1,26 @@
 {
   "files": {
-    "main.css": "/portfolio-website/static/css/main.94e89b09.css",
-    "main.js": "/portfolio-website/static/js/main.8598062c.js",
+    "main.css": "/portfolio-website/static/css/main.c1b825e5.css",
+    "main.js": "/portfolio-website/static/js/main.f3561961.js",
     "static/js/488.5dc00adb.chunk.js": "/portfolio-website/static/js/488.5dc00adb.chunk.js",
+    "static/media/P3.png": "/portfolio-website/static/media/P3.4594c5813d5b9750c53e.png",
     "static/media/Profile.jpg": "/portfolio-website/static/media/Profile.bec1a41c6640bb96a949.jpg",
+    "static/media/p2.png": "/portfolio-website/static/media/p2.b97dc8d25dbb29d22235.png",
     "static/media/A3.jpeg": "/portfolio-website/static/media/A3.b4ccecb40045a6941f9c.jpeg",
+    "static/media/P1.jpeg": "/portfolio-website/static/media/P1.ff1e2f5cd09f681abb1a.jpeg",
     "static/media/A2.jpeg": "/portfolio-website/static/media/A2.af14addf7c2c6762afb8.jpeg",
     "static/media/A4.jpeg": "/portfolio-website/static/media/A4.40ebf4ee0ade15cbab71.jpeg",
+    "static/media/p5.jpeg": "/portfolio-website/static/media/p5.c12ccc08b4a7b3d1cf55.jpeg",
     "static/media/Resume.pdf": "/portfolio-website/static/media/Resume.1570a67ed5dacecce9ee.pdf",
+    "static/media/p6.jpeg": "/portfolio-website/static/media/p6.a0fc0b33589ce455ce3c.jpeg",
     "static/media/Skill4.png": "/portfolio-website/static/media/Skill4.f99c3785c31ad52e1e24.png",
     "index.html": "/portfolio-website/index.html",
-    "main.94e89b09.css.map": "/portfolio-website/static/css/main.94e89b09.css.map",
-    "main.8598062c.js.map": "/portfolio-website/static/js/main.8598062c.js.map",
+    "main.c1b825e5.css.map": "/portfolio-website/static/css/main.c1b825e5.css.map",
+    "main.f3561961.js.map": "/portfolio-website/static/js/main.f3561961.js.map",
     "488.5dc00adb.chunk.js.map": "/portfolio-website/static/js/488.5dc00adb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.94e89b09.css",
-    "static/js/main.8598062c.js"
+    "static/css/main.c1b825e5.css",
+    "static/js/main.f3561961.js"
   ]
 }
