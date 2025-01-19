@@ -11,9 +11,7 @@ function App() {
       <Nav/>
       <Container/>
       <Skills/>
-      <h1>
-        hello world 
-      </h1>
+      
       <Achievements/>
       
 

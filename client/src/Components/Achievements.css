@@ -1,0 +1,13 @@
+.carousel-inner, .carousel {
+    height: 20% !important; 
+    width: 100%;
+}
+
+.carousel-item, .d-block {
+    height: 20% !important; 
+    object-fit: cover; 
+}
+#SIH{
+    height: 10%;
+    width: 10%;
+}
