@@ -47,6 +47,7 @@ function Skills() {
                 <Box Name="Deep Learning"/>
                 <Box Name="Sentiment Analysis"/>
                 <Box Name="Data Analysis" />
+                <Box Name="Postman" />
                 </div>
             </div>
         </div>
