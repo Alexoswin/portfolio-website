@@ -34,18 +34,18 @@ function Skills() {
                 <Box Name="SQL"/>
                 <Box Name="Flutter"/>
                 <Box Name="Git"/>
-                <Box Name="GitHub"/>
-                <Box Name="Web Socket"/>
+            
+         
                 <Box Name="Docker"/>
                 <Box Name="jenkins"/>
                 <Box Name="AWS"/>
-                <Box Name="TypeScript"/>
+             
                 <Box Name ="IOT"/>
                 <Box Name ="Wireshark"/>
                 <Box Name ="REST API"/>
                 <Box Name="Machine Learning"/>
-                <Box Name="Deep Learning"/>
-                <Box Name="Sentiment Analysis"/>
+               
+               
                 <Box Name="Data Analysis" />
                 <Box Name="Postman" />
                 </div>
