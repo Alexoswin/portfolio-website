@@ -1,0 +1,19 @@
+
+  bi,.nav-link:hover{
+    color: rgb(0, 26, 255) !important;
+    font-size:1.22em;
+  }
+  .bi{
+    color: rgba(0, 0, 0, 0.671) !important;
+  }
+  .contact{
+    color: blue;
+    margin-top: 1vh;
+  }
+.navbar-brand{
+    font-size: medium !important;
+    
+  }
+.navbar{
+    background: linear-gradient(135deg, hsl(201, 100%, 93%), #c16af3);
+}  
