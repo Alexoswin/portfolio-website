@@ -1,0 +1,122 @@
+/* Container centers everything */
+.container {
+  width: 100vw;
+  text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  margin-top: 2vh;
+  padding: 2%;
+  box-sizing: border-box;
+  margin-bottom:20%;
+  
+}
+
+/* Image wrapper for spacing */
+.profile-image-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2vh;
+}
+
+/* Responsive profile image */
+.profile-image {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.profile-image:hover {
+  transform: scale(1.05);
+}
+
+/* Typing text styling */
+.typing-text {
+  font-size: 2rem;
+  font-family: monospace;
+  white-space: pre-wrap;
+  display: inline-block;
+  max-width: 90vw;
+  word-break: break-word;
+}
+
+/* Blinking cursor animation */
+.cursor {
+  display: inline-block;
+  width: 10px;
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  0%   { opacity: 1; }
+  50%  { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Responsive font and image scaling for smaller devices */
+@media (max-width: 768px) {
+  .profile-image {
+    width: 180px;
+    height: 180px;
+  }
+
+  .typing-text {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-image {
+    width: 140px;
+    height: 140px;
+  }
+  .profile-image-wrapper {
+ 
+    margin-bottom: 100px;
+}
+
+  .typing-text {
+    font-size: 1.2rem;
+  }
+}
+.arrow-btn {
+  background: #4CAF50;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.5s ease, transform 0.5s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+  /* Fixed position at bottom center */
+  
+  bottom: 40px;
+  
+ 
+}
+
+
+    .arrow-btn:hover {
+      background: #388E3C;
+      transform: scale(1.2);
+    }
+
+    .arrow {
+      width: 0; 
+      height: 0; 
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 15px solid white;
+      transition: transform 0.3s ease;
+    }
+
+    .arrow.rotate {
+      transform: rotate(180deg);
+    }
