@@ -61,7 +61,7 @@ export default function Profile() {
           <span className="cursor">|</span>
         </div>
       </div>
-        <div className='conatainer'>
+        <div className='btn'>
         
         <button className="arrow-btn" onClick={toggleArrow}>
         <div className="arrow" ref={arrowRef}></div>

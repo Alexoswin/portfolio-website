@@ -3,8 +3,9 @@ import Nav from './Components/Nav';
 import Login from './Components/Login';
 import Profile from './Components/Profile';
 import { useEffect, useState } from 'react';
-import CircleLoader from 'react-spinners/CircleLoader';
+import CircleLoader from 'react-spinners/ClimbingBoxLoader';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Skills from './Components/Skills';
 
 function App() {
   const [Loading, setLoading] = useState(true);
@@ -19,7 +20,7 @@ function App() {
     <>
       {Loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-          <CircleLoader size={150} color={"#36d7b7"} loading={Loading}  />
+          <CircleLoader size={40} color={"#36d7b7"} loading={Loading}  />
         </div>
       ) : (
         <Router>
@@ -27,6 +28,8 @@ function App() {
           <Routes>
             <Route path="/Login" element={<Login />} />
             <Route path="/" element={<Profile />} />
+            <Route path="/Skills" element={<Skills />} />
+         
           </Routes>
         </Router>
       )}
