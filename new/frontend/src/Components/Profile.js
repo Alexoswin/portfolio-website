@@ -11,7 +11,6 @@ export default function Profile() {
 
   useEffect(() => {
     let timeout;
-
     if (step === 0) {
       if (displayedText.length < fullText1.length) {
         timeout = setTimeout(() => {
@@ -41,8 +40,7 @@ export default function Profile() {
 
   const toggleArrow = () => {
     arrowRef.current.classList.toggle('rotate');
-    // Optional: Scroll to a section
-    // document.getElementById('about-section').scrollIntoView({ behavior: 'smooth' });
+    // Optional: Scroll to another section
   };
 
   return (
@@ -61,13 +59,10 @@ export default function Profile() {
           <span className="cursor">|</span>
         </div>
       </div>
-        <div className='btn'>
-        
-        <button className="arrow-btn" onClick={toggleArrow}>
+
+      <button className="arrow-btn" onClick={toggleArrow}>
         <div className="arrow" ref={arrowRef}></div>
-        </button>
-        </div>
-     
+      </button>
     </>
   );
 }

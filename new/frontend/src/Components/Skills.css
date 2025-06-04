@@ -1,0 +1,23 @@
+/* Skills.css */
+.container-skills {
+
+  gap: 2rem;
+  padding: 2rem;
+ 
+ 
+  box-sizing: border-box;
+  height: 100vh;
+  position: absolute;
+  top:100vh;
+  text-align: center;
+  
+  
+}
+.skills-header{
+ 
+ align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  
+}

@@ -1,11 +1,11 @@
 import './App.css';
 import Nav from './Components/Nav';
 import Login from './Components/Login';
-import Profile from './Components/Profile';
+import Home from './Components/Home';
 import { useEffect, useState } from 'react';
 import CircleLoader from 'react-spinners/ClimbingBoxLoader';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Skills from './Components/Skills';
+
 
 function App() {
   const [Loading, setLoading] = useState(true);
@@ -25,10 +25,11 @@ function App() {
       ) : (
         <Router>
           <Nav />
+         
           <Routes>
             <Route path="/Login" element={<Login />} />
-            <Route path="/" element={<Profile />} />
-            <Route path="/Skills" element={<Skills />} />
+            <Route path="/" element={<Home />} />
+            
          
           </Routes>
         </Router>
