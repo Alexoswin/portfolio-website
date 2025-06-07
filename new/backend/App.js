@@ -1,5 +1,18 @@
-import { Router } from "express";
-const Router = Router();
+const express = require('express');
+const cors = require('cors');
+const app = express();
+const  Login = require ('./Controller/LoginController');
 
-Router.get("/Login", authController.getLogin);
-Router.get("/Register", authController.getRegister);
+
+app.use(cors());
+app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
+
+app.post('/Login',  Login.loginController );
+
+app.listen(8000, () => {
+    console.log("Server running on http://localhost:8000");
+  });
