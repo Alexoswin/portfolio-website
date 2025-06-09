@@ -9,15 +9,15 @@ mongoose.connect(process.env.MONGO_URI)
 });
 
 const userSchema = new mongoose.Schema({
-    Skill: {
+    name: {
         type: String,
         required: true,
         unique: true
     },
-    Image: {
+    image: {
         type: String,  
         required: true,
-        unique: true
+        
     },
 }); 
 const Skills = mongoose.model('Skills', userSchema);

@@ -4,8 +4,8 @@ const Skills = require('../Database/Skills');
 const skilldata = async (req, res) => {
 
     try{
-        const Skill = await   Skills.find({});
-        res.status(200).json({Skills: Skill});
+        const allSkill = await Skills.find({}).select('name image -_id');
+        res.status(200).json(allSkill);
     }
     catch (error) {
         console.error(error);
@@ -15,19 +15,21 @@ const skilldata = async (req, res) => {
 
 
 const AddSkill = async (req, res) => {
-    const { Skill, Image } = req.body;
-      const data =({
-            Skill: Skill,
-            Image: Image });
-    try {
-        await Skills.insertMany(data);
-        res.status(201).json({ message: "Skill added successfully" });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Internal server error" });
-    }
-}
+  const { name, image } = req.body;
 
+  // Validate input
+  if (!name || !image) {
+    return res.status(400).json({ message: "Name and image are required." });
+  }
+
+  try {
+    await Skills.create({ name, image }); // Use `create` instead of `insertMany` for single inserts
+    res.status(201).json({ message: "Skill added successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
 
 
 module.exports = { skilldata, AddSkill };
