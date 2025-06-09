@@ -5,7 +5,8 @@ import Home from './Components/Home';
 import { useEffect, useState } from 'react';
 import CircleLoader from 'react-spinners/ClimbingBoxLoader';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
+import ProtectedRoutes from './Components/ProtectedRouts';
+import Admin from './Components/Admin';
 
 function App() {
   const [Loading, setLoading] = useState(true);
@@ -29,7 +30,9 @@ function App() {
           <Routes>
             <Route path="/Login" element={<Login />} />
             <Route path="/" element={<Home />} />
-            
+            <Route element={<ProtectedRoutes />}>
+              <Route path="/Admin" element={<Admin />} />
+            </Route>  
          
           </Routes>
         </Router>
