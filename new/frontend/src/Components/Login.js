@@ -1,6 +1,44 @@
 import './Login.css';
+import { useState } from 'react';
+import axios from 'axios';
+import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+      const navigate = useNavigate();
+  
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handelSubmit = async (e) => {
+        e.preventDefault();
+        
+        try{
+            const response = await axios.post('http://localhost:8000/Login', {
+                email,
+               password
+            });
+
+            if (response.status === 200) {
+                 const token = response.data.token;
+                 const userId = response.data.userId;
+                 
+                 Cookies.set('token', token);
+                 Cookies.set('userId', userId);
+                alert('Login successful!');
+                navigate('/');
+
+            }
+            else {
+                alert('Login failed. Please check your credentials.');
+            } 
+        }
+        catch (error) {
+            console.error('Error during login:', error);
+            alert('error', error.message);
+        }
+    }
     return (
         <div className="login-container">
             <form className="login-form">
@@ -19,6 +57,8 @@ export default function Login() {
                     name="email"
                     placeholder="Enter your email"
                     required
+                    onChange={(e) => setEmail(e.target.value)}
+
                 />
                 
                 <div className="input-icon">
@@ -33,9 +73,10 @@ export default function Login() {
                     name="password"
                     placeholder="Enter your password"
                     required
+                    onChange={(e) => setPassword(e.target.value)}
                 />
 
-                <button type="submit">Login</button>
+                <button type="submit" onClick={handelSubmit}>Login</button>
                 <p className="signup-link">Don't have an account? <a href="#">Sign up</a></p>
             </form>
         </div>
