@@ -1,4 +1,4 @@
-const Login = require('../login.js')
+const Login = require('../Database/Login.js')
 
 const loginController = async(req, res) => {
     const { email, password } = req.body;
