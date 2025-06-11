@@ -3,7 +3,7 @@ import Nav from './Components/Nav';
 import Login from './Components/Login';
 import Home from './Components/Home';
 import { useEffect, useState } from 'react';
-import CircleLoader from 'react-spinners/ClimbingBoxLoader';
+import CircleLoader from 'react-spinners/HashLoader';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProtectedRoutes from './Components/ProtectedRouts';
 import Admin from './Components/Admin';
@@ -21,7 +21,7 @@ function App() {
     <>
       {Loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-          <CircleLoader size={40} color={"#36d7b7"} loading={Loading}  />
+          <CircleLoader size={70} color={"#36d3b7"} loading={Loading}  />
         </div>
       ) : (
         <Router>

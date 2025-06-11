@@ -1,0 +1,15 @@
+.card {
+  
+  width: 30rem;
+  height: 35rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin-left: 1vw;
+
+
+  position: relative;
+ overflow: hidden;
+ color: rgb(0, 0, 0);
+ box-shadow: 0.5rem 0.5rem 1rem 0 rgba(0, 0, 0, 0.651);
+  top: 1vh;
+}

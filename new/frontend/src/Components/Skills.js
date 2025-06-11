@@ -23,7 +23,9 @@ export default function Skills() {
     return (
         <div className="container-skills">
             <br />
-            <h1 className="skills-title">Skills</h1>
+             <br />
+              <br />
+            <h1 className="skills-title"><b>SKILLS</b></h1>
             <br />
             <div className="skills-header">
                 {skills.map((skill, index) => (

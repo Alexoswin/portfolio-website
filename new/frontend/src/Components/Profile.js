@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './Profile.css';
 
-export default function Profile() {
+export default function Profile({ scrollToSkills }) {
   const [displayedText, setDisplayedText] = useState('');
   const [step, setStep] = useState(0);
   const arrowRef = useRef(null);
@@ -39,8 +39,8 @@ export default function Profile() {
   }, [displayedText, step]);
 
   const toggleArrow = () => {
-    arrowRef.current.classList.toggle('rotate');
-    // Optional: Scroll to another section
+  
+    scrollToSkills();
   };
 
   return (
