@@ -1,0 +1,23 @@
+.admin-container {
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+
+.card {
+  max-width: 900px;
+  margin: auto;
+  background: #fff;
+}
+
+.active-btn {
+  background-color: #0d6efd;
+  color: #fff !important;
+  border-color: #0d6efd;
+}
+
+.section-box {
+  background: #fefefe;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+}
