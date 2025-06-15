@@ -12,12 +12,14 @@ export default function SectionCard({ title }) {
 
 const styles = {
   card: {
+    
     backgroundColor: '#ffffff',
     padding: '20px',
-    margin: '10px',
     borderRadius: '10px',
     boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
     minWidth: '200px',
-    textAlign: 'center'
+    textAlign: 'center',
+    display: 'inline-block',
+    margin: '5vh'
   }
 };
