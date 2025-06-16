@@ -1,5 +1,4 @@
 
-
 export default function SectionCard({ title }) {
   return (
     <div style={styles.card}>
@@ -20,6 +19,6 @@ const styles = {
     minWidth: '200px',
     textAlign: 'center',
     display: 'inline-block',
-    margin: '5vh'
+    margin: '2vh'
   }
 };
