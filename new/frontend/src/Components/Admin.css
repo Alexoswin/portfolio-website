@@ -1,26 +1,72 @@
-.sections {
-
-  width: 40vw;
-  height: 80vh;
-  text-align: center;
-
-}
-.dashboard{
+/* Container holding sidebar and main content */
+.admin-container {
+  display: flex;
   width: 100vw;
-  height: 90vh;
+  height: 100vh;
+}
+
+/* Sidebar styles with scrollbar on the left */
+.sidebar {
+  direction: rtl; /* Scrollbar on the left */
+  position: relative;
+  top: 5vh;
+  width: 20vw;
+  background: linear-gradient(135deg, hsl(0, 0%, 100%), #cea3ff);
+  padding: 2vh 1vw;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  height: 95vh;
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Reset text/content direction to normal */
+.sidebar * {
+  direction: ltr;
+}
+
+/* Message container */
+.message-container {
+  flex-grow: 1;
+  padding-right: 0.5vw; /* Prevents content from colliding with scrollbar */
+}
+
+/* Each message item */
+.message {
+  background-color: #fff;
+  padding: 1vh 1vw;
+  margin: 1vh 0;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+/* Main dashboard area */
+.dashboard {
+  width: 75vw;
+  height: 100vh;
   text-align: center;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
-  margin-top: 10vh;
-  
-
+  padding-top: 10vh;
+  overflow-y: auto;
 }
-#profileimg{
+
+/* Profile Image */
+#profileimg {
   border-radius: 50%;
   height: 20vh;
   width: 20vh;
   margin: 2vh;
+}
 
+/* Sections */
+.sections {
+  width: 40vw;
+  height: auto;
+  text-align: center;
 }
