@@ -7,9 +7,10 @@ export default function Projects() {
             <div className="container-projects">
                 <br />
                 <br />      
-                
-                <h1>Projects</h1>
+                <br />
 
+                <h1><b>PROJECTS</b></h1>
+                <br/>
             </div>
         </>
     );
