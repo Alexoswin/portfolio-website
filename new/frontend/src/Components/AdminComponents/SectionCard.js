@@ -2,7 +2,7 @@
 export default function SectionCard({ title }) {
   return (
     <div style={styles.card}>
-      <h4>{title}</h4>
+      <h5>{title}</h5>
       <button className="btn btn-add">Add</button>
       <button className="btn btn-delete">Delete</button>
     </div>

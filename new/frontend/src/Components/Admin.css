@@ -2,12 +2,11 @@
 .admin-container {
   display: flex;
   width: 100vw;
-  height: 100vh;}
- 
+  height: 100vh;
+}
 
 /* Mobile menu button */
 .mobile-menu-button {
-  
   position: fixed;
   top: 5vh;
   left: 2vw;
@@ -23,11 +22,9 @@
   font-size: 1rem;
   font-weight: 500;
   transition: all 0.3s ease;
-  
   align-items: center;
   gap: 8px;
   display: none;
-  
 }
 
 .mobile-menu-button:hover {
@@ -49,7 +46,7 @@
   position: relative;
   top: 6vh;
   left: 0.5vw;
-  width: 22vw;
+  width: 24vw;
   min-width: 280px;
   background: linear-gradient(135deg, #f8f9fa, #e2c6ff);
   padding: 20px 15px;
@@ -148,7 +145,6 @@
 .dashboard {
   width: 77.5vw;
   height: 100vh;
-  
   text-align: center;
   display: flex;
   align-items: center;
@@ -201,7 +197,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 95vh;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 998;
   backdrop-filter: blur(2px);
@@ -217,11 +213,7 @@
 @media (max-width: 768px) {
   .mobile-menu-button {
     display: flex;
-    top: 7vh
-  }
-  .message-container{
-    margin-top: 3vh;
-
+    top: 7vh;
   }
   
   .sidebar {
@@ -229,10 +221,10 @@
     top: 0;
     left: 0;
     width: 100vw;
-    max-width: 320px;
     height: 100vh;
     transform: translateX(-100%);
     padding-top: 20px;
+    max-width: none;
   }
   
   .sidebar.open {
@@ -252,6 +244,16 @@
     width: 90%;
     grid-template-columns: 1fr;
   }
+  
+  .message-container {
+    width: 100%;
+    padding: 0 15px;
+  }
+  
+  .message {
+    width: calc(100% - 30px); /* Account for padding */
+    margin: 12px auto;
+  }
 }
 
 @media (max-width: 480px) {
@@ -269,5 +271,22 @@
   .mobile-menu-button {
     font-size: 0.9rem;
     padding: 8px 12px;
+  }
+  
+  .sidebar {
+    padding: 20px 10px;
+  }
+  
+  .message {
+    padding: 12px;
+  }
+  
+  .message-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .message-date {
+    margin-top: 4px;
   }
 }

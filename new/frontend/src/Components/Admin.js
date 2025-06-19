@@ -49,6 +49,7 @@ export default function Admin() {
           <h4><b>Messages</b></h4>
           <span className="message-count">{messages.length} messages</span>
         </div>
+       
         <div className="message-container">
           {messages.map(message => (
             <div 
