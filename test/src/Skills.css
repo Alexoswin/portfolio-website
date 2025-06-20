@@ -1,0 +1,20 @@
+/* Skills.css */
+.container-skills {
+
+  min-height: 100vh;
+  position: relative;
+  left: 0%;
+
+  
+  text-align: center;
+ 
+ 
+  
+}
+.skills-header{
+    display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+
+}

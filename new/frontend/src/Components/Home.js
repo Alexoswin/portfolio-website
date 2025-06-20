@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <div className="home">
       <div><Profile scrollToSkills={scrollToSkills} /> </div>
-      <Profile scrollToSkills={scrollToSkills} />
+     
       <div ref={skillsRef} className="skills-section">
         <Skills />
       </div>
