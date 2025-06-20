@@ -40,6 +40,8 @@ export default function Login() {
         }
     }
     return (
+        <div className="login-background">
+          
         <div className="login-container">
             <form className="login-form">
                 <h2>Welcome Back</h2>
@@ -80,5 +82,6 @@ export default function Login() {
                 <p className="signup-link">Don't have an account? <a href="#">Sign up</a></p>
             </form>
         </div>
+     </div>   
     );
 }

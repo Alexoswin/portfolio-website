@@ -18,9 +18,7 @@ export default function Home() {
       <div ref={skillsRef} className="skills-section">
         <Skills />
       </div>
-      <div >
-        <Projects />
-      </div>
+      
      
         
       
