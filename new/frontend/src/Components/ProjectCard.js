@@ -1,36 +1,18 @@
-import "./Projects.css";
+import "./ProjectCard.css";
 
-export default function Projects(image, title ,description , githubLink, techStack) {
+export default function ProjectCard({ image, title, description, githubUrl, techStack }) {
     return (
-                <>
-                <div id="forc">
-                <div className="card mb-3"  >
+        <div className="project-card">
+            <div className="project-image">
+                <img src={image} alt={title} />
+            </div> 
 
-                        
-                        <div className="row g-0 ">
-                        <div  id="cardimage1" style={{ backgroundImage: `url(${image})` }}>
-                        
-                        </div><br/>
-                        <div className="col-md-8">
-                            <div className="card-body">
-                            <div id="cardtext"> {title} </div>
-                            <p className="card-text"> 
-                                {description}
-                            </p>
-                            <p>
-                                techStack: {techStack}
-                            </p>
-                            <p>
-                                <a href={githubLink} target="_blank" rel="noopener noreferrer">
-                          
-                                </a>
-                            </p>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                <div/> 
-                </div>
-                </>
-  )
+            <div className="project-details">
+                <h2><b>{title}</b></h2>
+                <p>{description}</p>
+                <p><strong>Tech Stack:</strong> {techStack}</p>
+                <a href={githubUrl} target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+        </div>
+    );
 }

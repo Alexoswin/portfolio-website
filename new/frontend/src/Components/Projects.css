@@ -1,9 +1,14 @@
 .projects{
   min-height: 100vh;
-
- 
   
   text-align: center;
   height: 100vh;
+
+}
+.project-cards{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 
 }
