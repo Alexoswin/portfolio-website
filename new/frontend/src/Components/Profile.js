@@ -45,8 +45,10 @@ export default function Profile({ scrollToSkills }) {
 
   return (
     <>
-      <div className="profile">
+      
         <div className="container">
+          <br/>
+          <br/>
         <div className="profile-image-wrapper">
           <img
             src="https://avatars.githubusercontent.com/u/100626688?v=4"
@@ -58,22 +60,25 @@ export default function Profile({ scrollToSkills }) {
         <div className="typing-text">
           {displayedText}
           <span className="cursor">|</span>
-        </div>
-        <br/>
-        <div>
-        <h5 className='Discription'>
+
+          <h5 className='Discription'>
         A Entry-level Software Developer skilled in MERN stack, AWS, and DevOps tools like Docker and Jenkins. Experienced in
         building scalable, data-driven apps using JavaScript, Python, and Java. Passionate about creating real-world solutions with
         clean code and agile practices.
         </h5>
-      </div>
+        </div>
+        
+        
+      
+           <div>
+            <button className="arrow-btn" onClick={toggleArrow}>
+           <div className="arrow" ref={arrowRef}></div>
+           </button>
+           </div>
       </div>
       
 
-      <button className="arrow-btn" onClick={toggleArrow}>
-        <div className="arrow" ref={arrowRef}></div>
-      </button>
-      </div>
+      
     </>
   );
 }

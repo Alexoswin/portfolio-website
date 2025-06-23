@@ -2,7 +2,6 @@
   width: 350px;
   height: 115px !important;
   background: #ffffff;
-  border-radius: 12px;
 box-shadow:
     5px 5px 0px #d8b4fe,        /* Soft lavender */
     10px 10px 0px #c084fc,      /* Medium purple */
@@ -31,7 +30,7 @@ overflow: hidden;
   width: 100px;
   
   object-fit: contain;
-  border-radius: 12px;
+
 }
 
 .Title {

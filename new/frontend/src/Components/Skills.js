@@ -22,9 +22,7 @@ export default function Skills({ scrollToProjects }) {
 
     return (
         <div className="container-skills">
-            <br />
-            <br />
-            <br />
+            
             <h1><b className="skills-title">SKILLS</b></h1>
             <br />
             <div className="skills-header">
@@ -33,9 +31,11 @@ export default function Skills({ scrollToProjects }) {
                 ))}
             </div>
 
-            <button className="arrow-btn" onClick={scrollToProjects}>
+            <div>
+                <button className="arrow-btn" onClick={scrollToProjects}>
                 <div className="arrow"></div>
             </button>
+            </div>
         </div>
     );
 }
