@@ -23,9 +23,7 @@ export default function Projects() {
     return(
         
             <div className="projects">
-                <br />
-                <br />
-              
+               <br />
                 <br />
 
                 <h1><b>PROJECTS</b></h1>
@@ -37,6 +35,7 @@ export default function Projects() {
                         <ProjectCard key={index} title={project.title} description={project.description} image={project.image} githubUrl={project.githubUrl} techStack={project.techStack} />
                     ))}
                 </div>
+                
             </div>
         </div>
     );

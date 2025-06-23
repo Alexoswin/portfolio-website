@@ -5,10 +5,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content:space-evenly;
+  justify-content: center; /* Center vertically */
   text-align: center;
-  
-  
+  padding: 2rem;
+}
+
+/* Wrapper for profile image */
+.profile-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 /* Enhanced Thin Neon Border Effect */
@@ -23,7 +30,7 @@
   content: '';
   position: absolute;
   top: -5px;
-  left: -0px;
+  left: 0;
   width: 250px;
   height: 250px;
   border-radius: 50%;
@@ -66,7 +73,7 @@
 
 /* Typing effect */
 .typing-text {
-  font-size: 2.2rem; /* Slightly larger text */
+  font-size: 2.2rem;
   font-family: monospace;
   white-space: pre-wrap;
   max-width: 90vw;
@@ -91,7 +98,6 @@
 /* Enhanced Arrow button with neon effect */
 .arrow-btn {
   position: relative;
-  
   left: 50%;
   margin-top: 5vh;
   transform: translateX(-50%);
@@ -129,26 +135,32 @@
   transition: transform 1s ease;
 }
 
+/* Description text style */
+.Discription {
+  text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
   .profile-image-wrapper {
     width: 200px;
     height: 200px;
   }
+
   .profile-image-wrapper::before {
     width: 204px;
     height: 204px;
     top: -2px;
     left: -2px;
   }
-  .profile-image-wrapper::after {
-    width: 208px;
-    height: 208px;
-  }
+
   .profile-image {
     width: 200px;
     height: 200px;
   }
+
   .typing-text {
     font-size: 1.8rem;
   }
@@ -159,24 +171,20 @@
     width: 160px;
     height: 160px;
   }
+
   .profile-image-wrapper::before {
     width: 164px;
     height: 164px;
     top: -2px;
     left: -2px;
   }
-  .profile-image-wrapper::after {
-    width: 168px;
-    height: 168px;
-  }
+
   .profile-image {
     width: 160px;
     height: 160px;
   }
+
   .typing-text {
     font-size: 1.4rem;
   }
-}
-.Discription{
-   text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
 }

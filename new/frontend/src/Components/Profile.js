@@ -47,8 +47,6 @@ export default function Profile({ scrollToSkills }) {
     <>
       
         <div className="container">
-          <br/>
-          <br/>
         <div className="profile-image-wrapper">
           <img
             src="https://avatars.githubusercontent.com/u/100626688?v=4"
@@ -68,8 +66,10 @@ export default function Profile({ scrollToSkills }) {
         </h5>
         </div>
         
-        
-      
+        <br />
+        <br />
+        <br/>
+          <br/>  <br/>  <br/>
            <div>
             <button className="arrow-btn" onClick={toggleArrow}>
            <div className="arrow" ref={arrowRef}></div>
