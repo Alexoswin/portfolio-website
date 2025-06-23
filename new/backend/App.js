@@ -4,6 +4,7 @@ const app = express();
 const  Login = require ('./Controller/LoginController');
 const Skill = require ('./Controller/SkillController');
 const Project = require ('./Controller/ProjectController');
+const Education = require ('./Controller/EducationController');
 
 app.use(cors());
 app.use(express.json());
@@ -21,6 +22,10 @@ app.post('/AddSkill', Skill.AddSkill);
 app.post('/addproject', Project.addProjects)
 
 app.get('/projectdata', Project.projectData)
+
+app.get('/educationdata', Education.educationData);
+
+app.post('/addeducation', Education.addEducation);
 
 app.listen(8000, () => {
     console.log("Server running on http://localhost:8000");
