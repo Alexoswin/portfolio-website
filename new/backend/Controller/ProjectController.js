@@ -26,5 +26,19 @@ const addProjects = async(req, res)=>{
         res.status(400).json("Unsucessfull");
     }
 }
+const deleteProject = async (req, res) => {
+    const { title } = req.body; 
 
-module.exports = {projectData , addProjects};
+    try {
+        const deletedProject = await Project.findOneAndDelete({ title });
+        if (!deletedProject) {
+            return res.status(404).json({ message: "Project not found" });
+        }
+        res.status(200).json({ message: "Project deleted successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+module.exports = { projectData, addProjects, deleteProject };

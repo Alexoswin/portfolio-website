@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
+
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {
     console.log("mongodb collection skills connected");
@@ -15,7 +16,7 @@ const userSchema = new mongoose.Schema({
     
     },
     image: {
-        type: String,  
+        type: [String],  
         required: true,
         
     },

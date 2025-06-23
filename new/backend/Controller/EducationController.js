@@ -22,4 +22,19 @@ const addEducation = async (req, res) => {
     }
 }
 
-module.exports = { educationData, addEducation };
+const deleteEducation = async (req, res) => {
+    const { degree } = req.body;
+
+    try {
+        const deletedEducation = await Education.findOneAndDelete({ degree });
+        if (!deletedEducation) {
+            return res.status(404).json({ message: "Education not found" });
+        }
+        res.status(200).json({ message: "Education deleted successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+module.exports = { educationData, addEducation, deleteEducation };
