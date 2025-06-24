@@ -6,6 +6,7 @@ function Nav() {
     <nav className="navbar bg-body-tertiary fixed-top">
       <div className="container-fluid">
        <div id="NavLinks">
+
         <NavLink className="navbar-brand" to="/Login">Login</NavLink>
         <NavLink className="navbar-brand" to="/">Home</NavLink>
         <NavLink className="navbar-brand" >Projects</NavLink>
