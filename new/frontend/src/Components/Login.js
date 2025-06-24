@@ -27,7 +27,7 @@ export default function Login() {
                  Cookies.set('token', token);
                  Cookies.set('userId', userId);
                 alert('Login successful!');
-                navigate('/');
+                navigate('/Admin');
 
             }
             else {

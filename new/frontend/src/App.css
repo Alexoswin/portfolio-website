@@ -17,7 +17,12 @@
   color: white;
 }
 body{
-  font-family: Arial, sans-serif;
-  background-color: aliceblue
 
+  background-color: aliceblue;
+    
+}
+*{
+
+   text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
+ 
 }
