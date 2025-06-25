@@ -3,7 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom';
-
+import Floatingicons from './Floatingicons';
 export default function Login() {
       const navigate = useNavigate();
   
@@ -41,7 +41,7 @@ export default function Login() {
     }
     return (
         <div className="login-background">
-          
+            <Floatingicons/>
         <div className="login-container">
             <form className="login-form">
                 <h2>Welcome Back</h2>

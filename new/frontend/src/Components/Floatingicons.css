@@ -1,0 +1,133 @@
+
+.floating-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Individual tech icon styles */
+.tech-icon {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  opacity: 0.4;
+  animation: float 30s linear infinite;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* Specific icons with position and image */
+.tech-icon.html {
+  top: 10%;
+  left: 5%;
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg');
+}
+
+.tech-icon.css {
+  top: 40%;
+  left: 90%;
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg');
+}
+
+.tech-icon.js {
+  top: 20%;
+  left: 70%;
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg');
+}
+
+.tech-icon.react {
+  top: 80%;
+  left: 10%;
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg');
+}
+
+.tech-icon.node {
+  top: 60%;
+  left: 80%;
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg');
+}
+.tech-icon.terminal {
+  top: 50%;
+  left: 30%;
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg');
+}
+
+.tech-icon.docker {
+  top: 25%;
+  left: 20%;
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg');
+}
+
+.tech-icon.flutter {
+  top: 75%;
+  left: 60%;
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg');
+}
+
+.tech-icon.mongo {
+  top: 15%;
+  left: 50%;
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg');
+}
+.tech-icon.github {
+  top: 5%;
+  left: 60%;
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg');
+}
+
+.tech-icon.aws {
+  top: 85%;
+  left: 45%;
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg');
+}
+
+.tech-icon.vscode {
+  top: 65%;
+  left: 30%;
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg');
+}
+
+.tech-icon.java {
+  top: 40%;
+  left: 10%;
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg');
+}
+
+.tech-icon.python {
+  top: 20%;
+  left: 30%;
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg');
+}
+
+.tech-icon.figma {
+  top: 30%;
+  left: 80%;
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg');
+}
+
+.tech-icon.linux {
+  top: 70%;
+  left: 90%;
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg');
+}
+
+.tech-icon.mysql {
+  top: 10%;
+  left: 40%;
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg');
+}
+
+/* Floating animation for icons */
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+  }
+}

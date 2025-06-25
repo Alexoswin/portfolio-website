@@ -23,7 +23,9 @@ export default function Skills() {
     return (
         <>
         <div className="container-skills">
-            <br /><br />
+            <hr/>
+            
+            
             <h1><b className="skills-title">SKILLS</b></h1>
             <br /><br /><br />
             <div className="skills-header">
