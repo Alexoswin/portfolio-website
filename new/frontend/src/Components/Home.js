@@ -5,28 +5,36 @@ import Projects from './Projects';
 import './Home.css';
 
 export default function Home() {
-  const skillsRef = useRef(null);
-  const projectsRef = useRef(null);
+  const topRef = useRef(null);
 
-  const scrollToSkills = () => {
-    skillsRef.current?.scrollIntoView({ behavior: 'smooth' });
+  const scrollDown = () => {
+    window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
   };
 
-  const scrollToProjects = () => {
-    projectsRef.current?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToTop = () => {
+    topRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <div className="home">
-      <div><Profile scrollToSkills={scrollToSkills} /></div>
+      <div ref={topRef}></div>
+       <div><Profile /></div>
+       
+      <Skills />
+    
+      <Projects />
+      
 
-      <div ref={skillsRef} className="skills-section">
-        <Skills scrollToProjects={scrollToProjects} />
-      </div>
+      {/* Scroll Down Button */}
+      <button className="arrow-button down-arrow" onClick={scrollDown}>
+       <div className='arrow'></div>
+      </button>
 
-      <div ref={projectsRef}>
-        <Projects />
-      </div>
+      {/* Scroll Up Button */}
+      <button className="arrow-button up-arrow" onClick={scrollToTop}>
+        <div className='arrowdn'></div>
+      </button>
     </div>
+    
   );
 }

@@ -21,7 +21,7 @@ function App() {
     <>
       {Loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-          <CircleLoader size={70} color={"#36d3b7"} loading={Loading}  />
+          <CircleLoader id="loader" size={70} color={"black"} loading={Loading}  />
         </div>
       ) : (
         <Router>

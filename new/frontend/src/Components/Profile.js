@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Profile.css';
 
 export default function Profile({ scrollToSkills }) {
   const [displayedText, setDisplayedText] = useState('');
   const [step, setStep] = useState(0);
-  const arrowRef = useRef(null);
+  
 
   const fullText1 = "Hi..";
   const fullText2 = "I am Oswin Alex";
@@ -38,10 +38,7 @@ export default function Profile({ scrollToSkills }) {
     return () => clearTimeout(timeout);
   }, [displayedText, step]);
 
-  const toggleArrow = () => {
-  
-    scrollToSkills();
-  };
+
 
   return (
     <>
@@ -86,18 +83,18 @@ export default function Profile({ scrollToSkills }) {
         clean code and agile practices.
         </h5>
         
-        <br />
-        <br />
-        <br/>
-          <br/>  <br/>  <br/>
-           <div>
-            <button className="arrow-btn" onClick={toggleArrow}>
-           <div className="arrow" ref={arrowRef}></div>
-           </button>
-           </div>
+      <br/>
+        <div>
+          <button className='btns'>
+            View Resume
+          </button>
+        </div>
+        
+           
       </div>
-      
+     
 
+      
       
     </>
   );

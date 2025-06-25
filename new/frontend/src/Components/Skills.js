@@ -3,7 +3,7 @@ import SkillCard from './SkillCard';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export default function Skills({ scrollToProjects }) {
+export default function Skills() {
     const [skills, setSkills] = useState([]);
 
     useEffect(() => {
@@ -21,21 +21,21 @@ export default function Skills({ scrollToProjects }) {
     }, []);
 
     return (
+        <>
         <div className="container-skills">
-            
+            <br /><br />
             <h1><b className="skills-title">SKILLS</b></h1>
-            <br />
+            <br /><br /><br />
             <div className="skills-header">
                 {skills.map((skill, index) => (
                     <SkillCard key={index} Name={skill.name} Image={skill.image} />
                 ))}
             </div>
 
-            <div>
-                <button className="arrow-btn" onClick={scrollToProjects}>
-                <div className="arrow"></div>
-            </button>
-            </div>
+           
         </div>
+             
+      
+        </>
     );
 }
