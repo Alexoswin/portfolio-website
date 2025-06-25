@@ -144,7 +144,7 @@
 /* Main dashboard area */
 .dashboard {
   width: 77.5vw;
-  height: 100vh;
+  min-height: 100vh;
   text-align: center;
   display: flex;
   align-items: center;
@@ -154,9 +154,7 @@
   overflow-y: auto;
 }
 
-.profile-section {
-  margin-bottom: 30px;
-}
+
 
 /* Profile Image */
 #profileimg {
@@ -179,10 +177,10 @@
 }
 
 /* Sections */
-.sections {
+.section {
   width: 40vw;
   min-width: 320px;
-  height: auto;
+
   text-align: center;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));

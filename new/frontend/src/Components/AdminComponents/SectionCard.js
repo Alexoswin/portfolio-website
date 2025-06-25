@@ -20,7 +20,7 @@ const styles = {
     textAlign: 'center',
     display: 'inline-block',
     margin: '2vh',
-    positopn: 'relative',
+    positopn: 'absolute',
     
   }
 };

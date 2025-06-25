@@ -1,3 +1,5 @@
+import "./Floatingicons.css"
+
 export default function Floatingicons() {
 
     return(

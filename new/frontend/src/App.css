@@ -26,9 +26,7 @@ body{
    text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
  
 }
-#loader{
-  background-color: black;
-}
+
 hr {
   width: 90vw;
   border: none;
