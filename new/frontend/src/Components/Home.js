@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import Profile from './Profile';
 import Skills from './Skills';
 import Projects from './Projects';
+import EducationPage from './EducationPage';
 import './Home.css';
 
 export default function Home() {
@@ -21,9 +22,9 @@ export default function Home() {
        <div><Profile /></div>
        
       <Skills />
-    
-      <Projects />
       
+      <Projects />
+      <EducationPage/>
 
       {/* Scroll Down Button */}
       <button className="arrow-button down-arrow" onClick={scrollDown}>

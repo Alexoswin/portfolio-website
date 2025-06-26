@@ -7,7 +7,8 @@ import CircleLoader from 'react-spinners/HashLoader';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProtectedRoutes from './Components/ProtectedRouts';
 import Admin from './Components/Admin';
-import Projects from './Components/Projects';
+
+import EducationPage from './Components/EducationPage';
 function App() {
   const [Loading, setLoading] = useState(true);
 
@@ -33,7 +34,7 @@ function App() {
             <Route element={<ProtectedRoutes />}>
               <Route path="/Admin" element={<Admin />} />
             </Route>  
-            <Route path="/Projects" element={<Projects />} />
+            <Route path="/EducationData" element={<EducationPage/>} />
           </Routes>
         </Router>
       )}
