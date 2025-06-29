@@ -27,7 +27,7 @@ export default function Projects() {
        
               
 
-                <h1><b>PROJECTS</b></h1>
+                <h2><b>Projects</b></h2>
                 
           
                 <div className="project-cards">

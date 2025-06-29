@@ -1,17 +1,30 @@
 /* EducationCard.css */
 .education-card {
   background: #ffffff;
-  border-radius: 16px;
+
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   padding: 20px 24px;
   margin: 16px 0;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-left: 6px solid #7f5fff;
+
+  margin-top: 5vh;
+  width: 35vw;
+
+
+  overflow: hidden;
+  box-shadow:
+    5px 5px 0px #d8b4fe,
+    10px 10px 0px #c084fc,
+    15px 15px 0px #9333ea,
+    20px 20px 0px rgba(147, 51, 234, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .education-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  transform: scale(1.03);
+  box-shadow:
+    4px 4px 10px #c084fc,
+    8px 8px 20px #9333ea;
 }
 
 .education-card h3 {
@@ -22,7 +35,7 @@
 
 .education-card p {
   font-size: 0.95rem;
-  color: #555;
+
   margin: 6px 0;
 }
 

@@ -1,5 +1,6 @@
 .education-page{
     min-height: 100vh;
+    position: relative;
 }
 
 /* EducationPage.css */
@@ -8,13 +9,13 @@
   margin: 0 auto;
   padding: 40px 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f6f9;
+
   min-height: 100vh;
 }
 
 .education-page h2 {
   text-align: center;
-  color: #333;
+
   font-size: 2rem;
   margin-bottom: 30px;
   position: relative;
@@ -23,7 +24,7 @@
 .education-page h2::after {
   content: '';
   display: block;
-  width: 60px;
+  width: 80px;
   height: 4px;
   background-color: #7f5fff;
   margin: 8px auto 0;
@@ -33,5 +34,5 @@
 .education-page p {
   text-align: center;
   font-size: 1rem;
-  color: #888;
+ 
 }

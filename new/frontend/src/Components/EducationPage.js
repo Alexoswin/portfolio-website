@@ -24,15 +24,19 @@ export default function EducationPage() {
   }, []);
 
   return (
+    <><hr/>
     <div className="education-page">
-      <h2>Education</h2>
+      
+      <h2>Education and Certification</h2>
       {loading ? (
         <p>Loading...</p>
       ) : (
+        
         educationList.map((edu) => (
           <EducationCard key={edu._id} education={edu} />
         ))
       )}
     </div>
+    </>
   );
 }

@@ -26,7 +26,7 @@ export default function Skills() {
             <hr/>
             
             
-            <h1><b className="skills-title">SKILLS</b></h1>
+            <h2><b className="skills-title">Skills</b></h2>
             <br /><br /><br />
             <div className="skills-header">
                 {skills.map((skill, index) => (

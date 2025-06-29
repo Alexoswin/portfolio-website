@@ -10,9 +10,9 @@ export default function EducationCard({ education }) {
   return (
     <div className="education-card">
       <h3>{education.institution}</h3>
-      <p><strong>Degree:</strong> {education.degree}</p>
-      <p><strong>Marks:</strong> {education.marks}</p>
-      <p><strong>Duration:</strong> {formatDate(education.startDate)} - {formatDate(education.endDate)}</p>
+      <p> {education.degree}</p>
+      <p>{education.marks}</p>
+      <p>{formatDate(education.startDate)} - {formatDate(education.endDate)}</p>
     </div>
   );
 }

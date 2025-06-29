@@ -4,7 +4,7 @@ import Skills from './Skills';
 import Projects from './Projects';
 import EducationPage from './EducationPage';
 import './Home.css';
-
+import DarkModeToggle from './DarkModeToggle';
 export default function Home() {
   const topRef = useRef(null);
 
@@ -18,6 +18,7 @@ export default function Home() {
 
   return (
     <div className="home">
+      <DarkModeToggle/>
       <div ref={topRef}></div>
        <div><Profile /></div>
        
