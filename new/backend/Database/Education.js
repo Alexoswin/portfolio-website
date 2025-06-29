@@ -25,11 +25,11 @@ const userSchema = new mongoose.Schema({
     },
     endDate: {
         type: Date,
-        required: true
+       
     },
     marks: {
         type: String,
-        required: true
+        
     }
 });
 
