@@ -6,7 +6,7 @@ const Skill = require ('./Controller/SkillController');
 const Project = require ('./Controller/ProjectController');
 const Education = require ('./Controller/EducationController');
 const Achievement = require ('./Controller/AchievementController');
-
+const Certification = require ('./Controller/CertificationController');
 app.use(cors());
 app.use(express.json());
 
@@ -39,6 +39,12 @@ app.get('/achievementdata', Achievement.achievementData);
 app.post('/addachievement', Achievement.addAchievement);
 
 app.post('/deleteachievement', Achievement.deleteAchievement);
+
+app.get('/certificationdata', Certification.certificationData);
+
+app.post('/addcertification', Certification.addCertification);
+
+app.post('/deletecertification', Certification.deleteCertification);
 
 app.listen(8000, () => {
     console.log("Server running on http://localhost:8000");

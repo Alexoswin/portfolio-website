@@ -1,6 +1,6 @@
 .cards {
-  width: 350px;
-  height: 115px !important;
+  width: 300px;
+  height: 90px !important;
   background: #ffffff;
 box-shadow:
     5px 5px 0px #d8b4fe,        /* Soft lavender */
@@ -16,7 +16,7 @@ overflow: hidden;
   padding: 1rem;
   gap: 1rem;
   height: auto;
-  margin: 1rem;
+  margin: 2rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -27,7 +27,8 @@ overflow: hidden;
     8px 8px 20px #9333ea;
 }
 .card-img {
-  width: 100px;
+  width: 90px;
+  border-radius: 8px;;
   
   object-fit: contain;
 

@@ -27,18 +27,18 @@
 }
 
 .login-form h2 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   color: #333;
 }
 
 .login-form p {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   color: #666;
 }
 
 .login-form label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   color: #333;
   font-weight: 500;
 }
@@ -46,7 +46,7 @@
 .login-form input {
   width: 95%;
   padding: 0.8rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   border: 1px solid #ccc;
   border-radius: 8px;
   transition: border-color 0.3s;

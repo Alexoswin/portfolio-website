@@ -9,34 +9,53 @@ export default function EducationPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchEducation = async () => {
+    const fetchEducationAndCertifications = async () => {
       try {
-        const res = await axios.get('http://localhost:8000/educationdata'); // Adjust URL as needed
-        setEducationList(res.data);
-        setLoading(false);
+        const [eduRes, certRes] = await Promise.all([
+          axios.get('http://localhost:8000/educationdata'),
+          axios.get('http://localhost:8000/certificationdata'),
+        ]);
+
+        const formattedCertifications = certRes.data.map(cert => ({
+          institution: cert.issuer,
+          degree: cert.name,
+          startDate: cert.issueDate,
+          marks: cert.credentialUrl,
+          _id: cert._id,
+          isCertification: true,
+        }));
+
+        const formattedEducation = eduRes.data.map(edu => ({
+          ...edu,
+          isCertification: false,
+        }));
+
+        const mergedData = [...formattedEducation, ...formattedCertifications];
+        setEducationList(mergedData);
       } catch (err) {
-        console.error('Error fetching education data:', err);
+        console.error('Error fetching education or certification data:', err);
+      } finally {
         setLoading(false);
       }
     };
 
-    fetchEducation();
+    fetchEducationAndCertifications();
   }, []);
 
   return (
-    <><hr/>
-    <div className="education-page">
-      
-      <h2>Education and Certification</h2>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
+    <>
+     
+      <div className="education-page">
         
-        educationList.map((edu) => (
-          <EducationCard key={edu._id} education={edu} />
-        ))
-      )}
-    </div>
+        <h2>Education and Certification</h2>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          educationList.map((edu) => (
+            <EducationCard key={edu._id} education={edu} />
+          ))
+        )}
+      </div>
     </>
   );
 }

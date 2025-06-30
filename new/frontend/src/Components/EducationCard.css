@@ -42,3 +42,19 @@
 .education-card strong {
   color: #333;
 }
+@media (max-width: 768px) {
+  .education-card {
+    width: 80vw;
+    height: 20vh;
+    margin-top: 10vh;
+  }
+
+  .education-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .education-card p {
+    font-size: 0.9rem;
+  }
+  
+}

@@ -44,7 +44,7 @@ export default function Login() {
             <Floatingicons/>
         <div className="login-container">
             <form className="login-form">
-                <h2>Welcome Back</h2>
+                <h3>Welcome Back Admin</h3>
                 <p>Please login to your account</p>
 
                 <div className="input-icon">
@@ -79,7 +79,7 @@ export default function Login() {
                 />
 
                 <button type="submit" onClick={handelSubmit}>Login</button>
-                <p className="signup-link">Don't have an account? <a href="#">Sign up</a></p>
+                
             </form>
         </div>
      </div>   

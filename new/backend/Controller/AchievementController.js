@@ -36,4 +36,4 @@ const deleteAchievement = async (req, res) => {
     }
 };
 
-module.exports = { achievementData, addAchievement, deleteAchievement };
+module.exports = { achievementData, addAchievement, deleteAchievement    };

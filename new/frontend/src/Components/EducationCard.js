@@ -13,6 +13,10 @@ export default function EducationCard({ education }) {
       <p> {education.degree}</p>
       <p>{education.marks}</p>
       <p>{formatDate(education.startDate)} - {formatDate(education.endDate)}</p>
+      <p> {education.issueDate}</p>
+ 
+      
+    
     </div>
   );
 }

@@ -21,11 +21,12 @@ export default function Home() {
       <DarkModeToggle/>
       <div ref={topRef}></div>
        <div><Profile /></div>
-       
-      <Skills />
+       <EducationPage/>
+ 
       
+      
+           <Skills />
       <Projects />
-      <EducationPage/>
 
       {/* Scroll Down Button */}
       <button className="arrow-button down-arrow" onClick={scrollDown}>
