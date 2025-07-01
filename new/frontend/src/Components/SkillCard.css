@@ -49,7 +49,8 @@ overflow: hidden;
 /* Responsive for mobile */
 @media (max-width: 768px) {
   .cards {
-    width: 90vw;
+    width: 80vw;
+    height: 13vh!important;
 
     align-items: center;
     text-align: center;
