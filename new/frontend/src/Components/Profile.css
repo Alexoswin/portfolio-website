@@ -78,7 +78,7 @@
   white-space: pre-wrap;
   max-width: 90vw;
   word-break: break-word;
-  text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
+  color: var(--textColor);
   margin-top: 20px;
 }
 
@@ -87,7 +87,7 @@
   display: inline-block;
   width: 10px;
   animation: blink 0.8s infinite;
-  text-shadow: 0 0 5px rgba(255, 0, 255, 0.8);
+  
 }
 
 @keyframes blink {
@@ -101,8 +101,8 @@
 
 /* Description text style */
 .Discription {
-  text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
  
+  color: var(--containerTextColor);
   margin-top: 1rem;
 }
 

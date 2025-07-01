@@ -14,7 +14,8 @@
     font-size: medium !important;
     
   }
-.navbar{
+.navbar , .navbar-brand{
  
-  background-color: aliceblue !important;
+  background-color: var(--containerBackground) !important;
+  color: var(--containerTextColor) !important;
 }  

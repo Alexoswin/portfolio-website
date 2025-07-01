@@ -1,7 +1,8 @@
 .cards {
   width: 300px;
   height: 90px !important;
-  background: #ffffff;
+   color: var(--textColor);
+  background-color: var(--containerBackground);
 box-shadow:
     5px 5px 0px #d8b4fe,        /* Soft lavender */
     10px 10px 0px #c084fc,      /* Medium purple */
@@ -41,9 +42,11 @@ overflow: hidden;
 .card-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #333333;
+  
   margin: 0;
-   text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
+  color: var(--textColor);
+ 
+
 }
 
 /* Responsive for mobile */

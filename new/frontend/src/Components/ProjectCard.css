@@ -1,5 +1,6 @@
 .project-card {
-  background-color: white;
+  background-color: var(--containerBackground);
+  color: var(--containerTextColor);
   width: 100%;
   max-width: 400px;
   min-height: 500px;

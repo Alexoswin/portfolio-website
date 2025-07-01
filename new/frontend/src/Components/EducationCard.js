@@ -9,7 +9,7 @@ export default function EducationCard({ education }) {
 
   return (
     <div className="education-card">
-      <h3>{education.institution}</h3>
+      <h3 className='institute'>{education.institution}</h3>
       <p> {education.degree}</p>
       <p>{education.marks}</p>
       <p>{formatDate(education.startDate)} - {formatDate(education.endDate)}</p>
