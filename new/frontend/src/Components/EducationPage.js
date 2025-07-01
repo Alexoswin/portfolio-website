@@ -46,7 +46,7 @@ export default function EducationPage() {
     <>
      
       <div className="education-page">
-        
+       
         <h2>Education and Certification</h2>
         {loading ? (
           <p>Loading...</p>

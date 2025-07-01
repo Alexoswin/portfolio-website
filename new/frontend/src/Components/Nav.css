@@ -1,21 +1,46 @@
-
-  bi,.nav-link:hover{
-    color: rgb(0, 26, 255) !important;
-    font-size:1.22em;
-  }
-  .bi{
-    color: rgba(0, 0, 0, 0.671) !important;
-  }
-  .contact{
-    color: blue;
-    margin-top: 1vh;
-  }
-.navbar-brand{
-    font-size: medium !important;
-    
-  }
-.navbar , .navbar-brand{
- 
+/* Common Styling */
+.navbar, .offcanvas-body, .offcanvas-header {
   background-color: var(--containerBackground) !important;
   color: var(--containerTextColor) !important;
-}  
+}
+
+.navbar a, 
+.navbar .nav-link, 
+.navbar .navbar-brand {
+  color: var(--textColor) !important;
+  transition: all 0.3s ease;
+}
+.navbar-brand{
+  color: var(--textColor) !important;
+}
+/* Hover effect */
+.navbar a:hover, 
+.navbar .nav-link:hover, 
+.navbar .navbar-brand:hover {
+  color: rgb(0, 119, 255) !important;
+  font-size: 1.1em;
+}
+
+/* SVG Icon Styling */
+.bi {
+  color: var(--textColor) !important;
+}
+
+/* Contact Info */
+.contact {
+  color: var(--textColor) !important;
+  margin-top: 1vh;
+  white-space: pre-wrap;
+}
+
+/* Toggler Button Icon */
+.navbar-toggler {
+  border-color: var(--textColor);
+}
+.navbar-toggler-icon {
+  filter: invert(1); /* Light icon for dark theme */
+}
+
+.navbar-brand {
+  font-size: medium !important;
+}

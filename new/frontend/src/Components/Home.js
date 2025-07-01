@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <div className="home">
-      <DarkModeToggle/>
+      
       <div ref={topRef}></div>
        <div><Profile /></div>
        <EducationPage/>

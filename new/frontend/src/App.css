@@ -24,11 +24,12 @@ body{
 
 
 hr {
-  width: 90vw;
+  
   border: none;
   height: 1px;
-  background-color: black;
+  background-color:var(--textColor);
   margin: 2rem auto; 
+  width: 80vw;
 }
 h2 {
   text-align: center;
@@ -61,5 +62,5 @@ h2::after {
 }
 
 *{
-  transition: all 0.5s ease-in;
+  transition: all 0.3s ease-in;
 }

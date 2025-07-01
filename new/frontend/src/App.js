@@ -7,6 +7,7 @@ import CircleLoader from 'react-spinners/HashLoader';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProtectedRoutes from './Components/ProtectedRouts';
 import Admin from './Components/Admin';
+import DarkModeToggle from './Components/DarkModeToggle';
 
 import EducationPage from './Components/EducationPage';
 function App() {
@@ -27,6 +28,7 @@ function App() {
       ) : (
         <Router>
           <Nav />
+          <DarkModeToggle/>
          
           <Routes>
             <Route path="/Login" element={<Login />} />
