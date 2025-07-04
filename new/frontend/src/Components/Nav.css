@@ -35,12 +35,12 @@
 
 /* Toggler Button Icon */
 .navbar-toggler {
-  border-color: var(--textColor);
+  border-color: var(--textColor);               
 }
 .navbar-toggler-icon {
   filter: invert(1); /* Light icon for dark theme */
 }
 
-.navbar-brand {
+.navbar-brand { 
   font-size: medium !important;
 }
