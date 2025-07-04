@@ -11,7 +11,7 @@ export default function ProjectCard({ image, title, description, githubUrl, tech
                 <h2><b>{title}</b></h2>
                 <p>{description}</p>
                 <p><strong>Tech Stack:</strong> {techStack}</p>
-                <a href={githubUrl} target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a className="atag" href={githubUrl} target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
         </div>
     );

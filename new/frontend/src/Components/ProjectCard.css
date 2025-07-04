@@ -101,3 +101,6 @@
     font-size: 0.9em;  /* Adjust text size for mobile */
   }
 }
+.atag{
+  color: rgb(53, 53, 255) !important;
+}
