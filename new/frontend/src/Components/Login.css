@@ -93,7 +93,8 @@
 .input{
   border-style: none !important;
   border-radius: 0% !important;
-  border-bottom: #333 solid 1px !important;
+  border-bottom: solid 1px !important;
+  border-color: var(--textColor);
   
 }
 .input-icon{

@@ -1,0 +1,113 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5vh 2vw;
+  min-height: 100vh;
+}
+.input-group{
+  width: 100%;
+
+  display: inline-block;
+
+}
+
+
+.form-card {
+  background-color: var(--containerBackground);
+  color: var(--containerTextColor);
+  border-radius: 12px;
+  padding: 30px 25px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in;
+}
+
+.form-card h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--containerTextColor);
+}
+
+.form-card label {
+  font-weight: 500;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-card input {
+  width: 90%;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  transition: border 0.3s ease;
+  background-color: var(--containerBackground);
+  border: none;
+  border-bottom: 1px solid var(--containerTextColor);
+  margin-bottom: 30px;
+  color: var(--containerTextColor);
+
+}
+
+ .form-card input:focus {
+  outline: none;
+  border-color: #8a4fff;
+}
+
+
+.form-card button {
+  width: 100%;
+  background-color: #8a4fff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-card-input button:hover {
+  background-color: #7b3dff ;
+  color:#7b3dff;
+  
+}
+
+
+.form-card svg {
+  margin-bottom: -5px;
+  margin-right: 8px;
+  fill: currentColor;
+  color: var(--containerTextColor);
+  transition: color 0.3s ease, fill 0.3s ease;
+  vertical-align: middle;
+}
+
+.form-card svg:hover {
+  color: #8a4fff !important;
+  cursor: pointer;
+}
+
+.form-message {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+  padding: 10px;
+  border-radius: 6px;
+ 
+}
+.input-group:hover svg {
+  color: #8a4fff !important;
+  fill: #8a4fff !important;
+}
+
+.input-group:hover input {
+  border-bottom: 1px solid #8a4fff;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(40%) sepia(100%) saturate(500%) hue-rotate(180deg);
+  cursor: pointer;
+  height: 18px;
+  width: 18px;
+}

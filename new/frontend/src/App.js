@@ -9,7 +9,8 @@ import ProtectedRoutes from './Components/ProtectedRouts';
 import Admin from './Components/Admin';
 import DarkModeToggle from './Components/DarkModeToggle';
 import SkillsForm from './Components/AdminComponents/SkillForm';
-
+import ProjectForm from './Components/AdminComponents/ProjectForm';
+import EducationForm from './Components/AdminComponents/EducationForm';
 import EducationPage from './Components/EducationPage';
 function App() {
   const [Loading, setLoading] = useState(true);
@@ -36,7 +37,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route element={<ProtectedRoutes />}>
               <Route path="/Admin" element={<Admin />} />
-              <Route path="/SkillForm" element={<SkillsForm />} />
+              <Route path="Admin/SkillForm" element={<SkillsForm />} />
+              <Route path='Admin/ProjectForm' element={<ProjectForm/>} />
+              <Route path='Admin/EducationForm' element={<EducationForm/>} />
             </Route>  
             <Route path="/EducationData" element={<EducationPage/>} />
           </Routes>

@@ -145,7 +145,7 @@ h2::after {
 }
 
 .message-count {
-  background: #8a4fff;
+  
   color: white;
   padding: 3px 8px;
   border-radius: 12px;
@@ -161,6 +161,7 @@ h2::after {
 .message-container {
   flex-grow: 1;
   padding-right: 5px;
+  background-color: var(--containerBackground);
 }
 
 /* Messages */
@@ -172,7 +173,7 @@ h2::after {
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   border-left: 3px solid transparent;
 }
 
@@ -183,7 +184,7 @@ h2::after {
 
 .message.unread {
   border-left: 3px solid #8a4fff;
-  background-color: rgba(138, 79, 255, 0.1);
+  background-color: var(--bodyBackground);
 }
 
 .message-header {
@@ -209,6 +210,7 @@ h2::after {
   color: var(--containerTextColor);
   font-size: 0.9rem;
   line-height: 1.4;
+
 }
 
 /* Dashboard */
