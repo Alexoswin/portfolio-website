@@ -6,13 +6,9 @@ function Nav() {
     <nav className="navbar bg-body-tertiary fixed-top">
       <div className="container-fluid">
        <div id="NavLinks">
-
+         <NavLink className="navbar-brand" to="/">Home</NavLink>
         <NavLink className="navbar-brand" to="/Login">Login</NavLink>
-        <NavLink className="navbar-brand" to="/">Home</NavLink>
-        <NavLink className="navbar-brand" >Projects</NavLink>
-        <NavLink className="navbar-brand" >Skills</NavLink>
-     
-        <NavLink className="navbar-brand" >Admin</NavLink>
+        <NavLink className="navbar-brand" to="/Admin" >Admin</NavLink>
        </div>
         <button className="navbar-btn navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>

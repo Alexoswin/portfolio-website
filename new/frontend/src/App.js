@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProtectedRoutes from './Components/ProtectedRouts';
 import Admin from './Components/Admin';
 import DarkModeToggle from './Components/DarkModeToggle';
+import SkillsForm from './Components/AdminComponents/SkillForm';
 
 import EducationPage from './Components/EducationPage';
 function App() {
@@ -35,6 +36,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route element={<ProtectedRoutes />}>
               <Route path="/Admin" element={<Admin />} />
+              <Route path="/SkillForm" element={<SkillsForm />} />
             </Route>  
             <Route path="/EducationData" element={<EducationPage/>} />
           </Routes>

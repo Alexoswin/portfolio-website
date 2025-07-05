@@ -1,8 +1,7 @@
-
 export default function SectionCard({ title }) {
   return (
     <div style={styles.card}>
-      <h5>{title}</h5>
+      <h5 style={styles.heading}>{title}</h5>
       <button className="btn btn-add">Add</button>
       <button className="btn btn-delete">Delete</button>
     </div>
@@ -11,16 +10,20 @@ export default function SectionCard({ title }) {
 
 const styles = {
   card: {
-    
-    backgroundColor: '#ffffff',
+    backgroundColor: 'var(--containerBackground)',
+    color: 'var(--containerTextColor)',
     padding: '20px',
     borderRadius: '10px',
     boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
     minWidth: '200px',
     textAlign: 'center',
     display: 'inline-block',
-    margin: '2vh',
-    positopn: 'absolute',
-    
+    margin: '0.5vh',
+    position: 'relative',
+    transition: 'all 0.3s ease-in',
+  },
+  heading: {
+    color: 'var(--containerTextColor)',
+    marginBottom: '15px',
   }
 };

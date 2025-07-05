@@ -50,12 +50,14 @@ h2::after {
 }
 .light {
   background-color: #f9fafb; /* Light grayish white */
+  --bodyBackground: #f9fafb;
   --textColor: #111827;       /* Almost black (cool tone) */
   --containerBackground: #ffffff; /* True white for cards */
   --containerTextColor: #1f2937;  /* Dark slate */
 }
 .dark {
-  background-color: #1e1e2f;         /* Deep indigo-gray */
+  background-color:    #1e1e2f;
+   --bodyBackground:  #1e1e2f;      /* Deep indigo-gray */
   --textColor: #f8f8f2;              /* Soft white */
   --containerBackground: #2c2c3e;    /* Slightly lighter for cards */
   --containerTextColor: #e5e5e5;     /* Gentle white-gray */
