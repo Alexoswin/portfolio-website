@@ -1,21 +1,33 @@
-const Login = require('../Database/Login.js')
+const Login = require('../Database/Login.js');
+const bcrypt = require("bcrypt"); 
 
-const loginController = async(req, res) => {
+const loginController = async (req, res) => {
     const { email, password } = req.body;
-    const check = await Login.findOne({ email, password });
 
-    try{
-        if(check){
-            res.status(200).json({message: "Login successful",token : await check.generateAuthToken(), userId : check._id.toString() });
-        } 
-        else{
-            res.status(400).json({message: "Invalid credentials"});
-        }  
+    try {
+        const user = await Login.findOne({ email });
+
+        if (!user) {
+            return res.status(400).json({ message: "Invalid credentials" });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            return res.status(400).json({ message: "Invalid credentials" });
+        }
+
+        const token = await user.generateAuthToken();
+
+        res.status(200).json({
+            message: "Login successful",
+            token: token,
+            userId: user._id.toString(),
+        });
+    } catch (error) {
+        console.error("Login error:", error);
+        res.status(500).json({ message: "Internal server error" });
     }
-    catch (error) {
-        console.error(error);
-        res.status(500).json({message: "Internal server error"});
-    }
-}
+};
 
 module.exports = { loginController };

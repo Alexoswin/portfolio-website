@@ -21,7 +21,7 @@ const authMiddleware = async (req, res, next) => {
 
     // Attach decoded user info to request for use in next middleware or route
     req.user = decoded;
-    console.log(decoded)
+   
 
     next(); // Continue to the next middleware/route handler
   } catch (err) {
