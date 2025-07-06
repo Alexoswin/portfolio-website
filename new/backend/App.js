@@ -7,6 +7,8 @@ const Project = require ('./Controller/ProjectController');
 const Education = require ('./Controller/EducationController');
 const Achievement = require ('./Controller/AchievementController');
 const Certification = require ('./Controller/CertificationController');
+const authMiddleware = require('./Middleware/authMiddleware')
+
 app.use(cors());
 app.use(express.json());
 
@@ -45,6 +47,10 @@ app.get('/certificationdata', Certification.certificationData);
 app.post('/addcertification', Certification.addCertification);
 
 app.post('/deletecertification', Certification.deleteCertification);
+
+app.post('/verify', authMiddleware, (req, res) => {
+  res.status(200).json({ message: "Token is valid" });
+});
 
 app.listen(8000, () => {
     console.log("Server running on http://localhost:8000");

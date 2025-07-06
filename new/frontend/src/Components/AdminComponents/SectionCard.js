@@ -1,8 +1,15 @@
-export default function SectionCard({ title }) {
+import { useNavigate } from 'react-router-dom';
+
+export default function SectionCard({ title , path }) {
+  const navigate = useNavigate();
+  const RedirectForm=()=>{
+      navigate(path)
+  }
+
   return (
     <div style={styles.card}>
       <h5 style={styles.heading}>{title}</h5>
-      <button className="btn btn-add">Add</button>
+      <button onClick={RedirectForm} className="btn btn-add">Add</button>
       <button className="btn btn-delete">Delete</button>
     </div>
   );

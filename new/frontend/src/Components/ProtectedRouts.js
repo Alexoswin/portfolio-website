@@ -1,12 +1,54 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export default function ProtectedRoutes() {
-  
-    if( !Cookies.get('token') && !Cookies.get('userId') ) {
-        return <Navigate to="/Login" replace />;
-    }
-    else {
-        return <Outlet />;
-    }
+  const [isVerified, setIsVerified] = useState(null); // null = loading, false = not verified, true = verified
+
+  useEffect(() => {
+    const verifyToken = async () => {
+      const token = Cookies.get('token');
+      const userId = Cookies.get('userId');
+
+      if (!token || !userId) {
+        setIsVerified(false);
+        return;
+      }
+
+      try {
+        const response = await axios.post(
+          'http://localhost:8000/verify', // ✅ lowercase route
+          {},
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          setIsVerified(true);
+        } else {
+          setIsVerified(false);
+        }
+      } catch (error) {
+        console.error("JWT Verification Error:", error.response?.data?.error || error.message);
+
+        // 🧹 Clear expired/invalid token and force logout
+        Cookies.remove('token');
+        Cookies.remove('userId');
+
+        setIsVerified(false);
+      }
+    };
+
+    verifyToken();
+  }, []);
+
+  if (isVerified === null) {
+    return <div>Loading...</div>;
+  }
+
+  return isVerified ? <Outlet /> : <Navigate to="/Login" replace />;
 }

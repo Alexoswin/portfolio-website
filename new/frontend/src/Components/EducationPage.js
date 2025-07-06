@@ -46,6 +46,7 @@ export default function EducationPage() {
     <>
      
       <div className="education-page">
+       <br/>
        
         <h2>Education and Certification</h2>
         {loading ? (

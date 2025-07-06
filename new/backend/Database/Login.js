@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.methods.generateAuthToken = function() {
     try{
-        return jwt.sign({ _id: this._id.toString(), email : this.email, }, process.env.JWT_SECRET_KEY, { expiresIn: '2minutes' });
+        return jwt.sign({ _id: this._id.toString(), email : this.email, }, process.env.JWT_SECRET_KEY, { expiresIn: '20minutes' });
     }
     catch (error) {
         console.error(error);

@@ -1,25 +1,17 @@
-// DarkModeToggle.js
-
 import "./DarkModeToggle.css";
 import { FaSun, FaMoon } from "react-icons/fa";
-import { use, useEffect , useState} from "react";
-export default function DarkModeToggle() {
+import { useEffect, useState } from "react";
 
-  const [theme, setTheme] = useState("light");
+export default function DarkModeToggle() {
+  const [theme, setTheme] = useState("dark"); // Set default to dark
+
   useEffect(() => {
     document.body.className = theme;
   }, [theme]);
 
   const changeMode = () => {
-
-    if (theme =="light"){
-      setTheme("dark");
-     
-    }
-    else {
-      setTheme("light");
-    }
-  }
+    setTheme(theme === "light" ? "dark" : "light");
+  };
 
   return (
     <div className="toggle-wrapper">
@@ -28,8 +20,7 @@ export default function DarkModeToggle() {
         id="toggle"
         className="toggle-checkbox"
         onChange={changeMode}
-       
-      
+        checked={theme === "dark"} // Ensure UI reflects the dark mode default
       />
       <label htmlFor="toggle" className="toggle-label">
         <span className="icon sun"><FaSun /></span>
