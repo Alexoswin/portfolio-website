@@ -1,13 +1,13 @@
-const monngoose = require('mongoose');
+const mongoose = require('mongoose');
 require('dotenv').config();
-monngoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI)
 .then(() => {
     console.log("mongodb collection project connected");
 })  
 .catch(() => {
     console.log('failed to connect to project collection');
 });
-const userSchema = new monngoose.Schema({
+const userSchema = new mongoose.Schema({
 
     name:{
         type: String, 
@@ -29,5 +29,5 @@ const userSchema = new monngoose.Schema({
 
 });
 
-const Messages = monngoose.model('Messages',userSchema);
+const Messages = mongoose.model('Messages',userSchema);
 module.exports = Messages
