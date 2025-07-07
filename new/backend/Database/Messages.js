@@ -11,20 +11,20 @@ const userSchema = new mongoose.Schema({
 
     name:{
         type: String, 
-        require: true       
+        required: true       
     },
     email:{
         type: String,
-        require: true
+        required: true
     },
     Subject:{
         type: String,
-        require: true
+        required: true
 
     },
     Message:{
         type: String,
-        require: true
+        required: true
     }
 
 });
