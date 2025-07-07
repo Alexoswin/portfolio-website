@@ -12,6 +12,7 @@ import SkillsForm from './Components/AdminComponents/SkillForm';
 import ProjectForm from './Components/AdminComponents/ProjectForm';
 import EducationForm from './Components/AdminComponents/EducationForm';
 import EducationPage from './Components/EducationPage';
+import ContactMe from './Components/AdminComponents/ContactMe';
 function App() {
   const [Loading, setLoading] = useState(true);
 
@@ -42,6 +43,7 @@ function App() {
               <Route path='Admin/EducationForm' element={<EducationForm/>} />
             </Route>  
             <Route path="/EducationData" element={<EducationPage/>} />
+            <Route path='ContactMe' element={<ContactMe/>} />
           </Routes>
         </Router>
       )}

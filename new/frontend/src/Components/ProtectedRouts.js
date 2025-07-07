@@ -18,7 +18,7 @@ export default function ProtectedRoutes() {
 
       try {
         const response = await axios.post(
-          'http://localhost:8000/verify', // ✅ lowercase route
+          'http://localhost:8000/verify', 
           {},
           {
             headers: {
@@ -35,7 +35,7 @@ export default function ProtectedRoutes() {
       } catch (error) {
         console.error("JWT Verification Error:", error.response?.data?.error || error.message);
 
-        // 🧹 Clear expired/invalid token and force logout
+
         Cookies.remove('token');
         Cookies.remove('userId');
 

@@ -9,6 +9,7 @@ function Nav() {
          <NavLink className="navbar-brand" to="/">Home</NavLink>
         <NavLink className="navbar-brand" to="/Login">Login</NavLink>
         <NavLink className="navbar-brand" to="/Admin" >Admin</NavLink>
+        <NavLink className="navbar-brand" to="/ContactMe">Contact Me</NavLink>
        </div>
         <button className="navbar-btn navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>

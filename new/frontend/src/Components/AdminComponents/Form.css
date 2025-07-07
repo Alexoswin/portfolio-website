@@ -36,7 +36,7 @@
   display: block;
 }
 
-.form-card input {
+.form-card textarea , .form-card input {
   width: 90%;
   padding: 10px 12px;
   font-size: 0.95rem;
@@ -49,7 +49,7 @@
 
 }
 
- .form-card input:focus {
+ .form-card input:focus ,.form-card input:focus {
   outline: none;
   border-color: #8a4fff;
 }
@@ -102,6 +102,10 @@
 }
 
 .input-group:hover input {
+  border-bottom: 1px solid #8a4fff;
+}
+
+.input-group:hover textarea {
   border-bottom: 1px solid #8a4fff;
 }
 
