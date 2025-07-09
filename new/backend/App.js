@@ -10,8 +10,10 @@ const Certification = require ('./Controller/CertificationController');
 const authMiddleware = require('./Middleware/authMiddleware')
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '15mb' }));
+app.use(express.urlencoded({ extended: true, limit: '15mb' }));
 
+ 
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
@@ -20,7 +22,7 @@ app.post('/Login',  Login.loginController );
 
 app.get('/Skill', Skill.skilldata);
 
-app.post('/AddSkill', Skill.AddSkill);
+app.post('/AddSkill',authMiddleware, Skill.AddSkill);
 
 app.post('/deleteskill', Skill.deleteSkill);
 

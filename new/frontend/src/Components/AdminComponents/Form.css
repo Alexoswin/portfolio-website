@@ -115,3 +115,39 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   height: 18px;
   width: 18px;
 }
+
+/* Hide default file input */
+input[type="file"] {
+  display: none;
+}
+
+/* Style the custom file upload label */
+.custom-file-upload {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  padding: 10px ;
+  margin-left: 18px;
+  
+  background-color: var(--containerBackground);
+  color: var(--containerTextColor);
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--containerTextColor);
+  cursor: pointer;
+  margin-bottom: 5vh !important;
+  transition: all 0.3s ease;
+}
+
+.custom-file-upload:hover {
+  border-bottom: 1px solid #8a4fff;
+  color: #8a4fff;
+}
+
+/* Optional: Add icon inside the label */
+.custom-file-upload svg {
+  margin-right: 8px;
+  fill: currentColor;
+  color: var(--containerTextColor);
+  transition: color 0.3s ease, fill 0.3s ease;
+}
