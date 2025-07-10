@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
     marks: {
         type: String,
         
-    }
+    } 
 });
 
 const Education = mongoose.model('Education', userSchema);

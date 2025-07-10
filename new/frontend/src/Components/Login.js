@@ -7,7 +7,7 @@ import Floatingicons from './Floatingicons';
 export default function Login() {
       const navigate = useNavigate();
   
-
+    const [message , setMessage] = useState("");    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -26,17 +26,19 @@ export default function Login() {
                  
                  Cookies.set('token', token);
                  Cookies.set('userId', userId);
-                alert('Login successful!');
+                setMessage("✅ Login Sucessfull")
                 navigate('/Admin');
 
             }
-            else {
-                alert('Login failed. Please check your credentials.');
+            else if(response.status === 400) {
+                setMessage("❌ Invalid Credentials")
+                
             } 
         }
         catch (error) {
             console.error('Error during login:', error);
-            alert('error', error.message);
+             setMessage("❌ Invalid Credentials")
+            
         }
     }
     return (
@@ -46,7 +48,8 @@ export default function Login() {
             <form className="login-form">
                 <h3>Welcome Back Admin</h3>
                 <p>Please login to your account</p>
-
+                  <h5>{message}</h5>
+                
                 <div className="input-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
                         <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/>

@@ -6,15 +6,15 @@ const achievementData = async (req, res) => {
         res.status(200).json(data);
     } catch (error) {
         console.error(error);
-        res.status(500).json("Server error");
+        res.status(400).json("Server error");
     }
 }   
 const addAchievement = async (req, res) => {
-    const { title, description, date } = req.body;
+    const { title, description, date , image} = req.body;
 
     try {
-        await Achievements.create({ title, description, date });
-        res.status(201).json("Successful");
+        await Achievements.create({ title, description, date, image });
+        res.status(200).json("Successful");
     } catch (error) {
         console.error(error);
         res.status(400).json("Unsuccessful");

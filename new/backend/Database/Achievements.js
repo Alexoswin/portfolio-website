@@ -21,8 +21,8 @@ const userschema = new mangoose.Schema({
         type: Date,
         required: true
     },
-    images: {
-        type: String,
+    image: {
+        type: [String],
         required: true
     } 
 });

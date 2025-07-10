@@ -33,7 +33,7 @@ export default function Projects() {
                 <div className="project-cards">
                     <div className="project-cards">
                     {projects.map((project, index) => (
-                        <ProjectCard key={index} title={project.title} description={project.description} image={project.image} githubUrl={project.githubUrl} techStack={project.techStack} />
+                        <ProjectCard key={index} title={project.title} description={project.description} image={project.image} githubUrl={project.githubLink} techStack={project.techStack} />
                     ))}
                 </div>
                 

@@ -151,3 +151,6 @@ input[type="file"] {
   color: var(--containerTextColor);
   transition: color 0.3s ease, fill 0.3s ease;
 }
+.form-card textarea{
+  margin-left: 28px !important;
+}

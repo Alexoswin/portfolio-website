@@ -26,7 +26,7 @@ app.post('/AddSkill',authMiddleware, Skill.AddSkill);
 
 app.post('/deleteskill', Skill.deleteSkill);
 
-app.post('/addproject', Project.addProjects)
+app.post('/addproject', authMiddleware , Project.addProjects)
 
 app.get('/projectdata', Project.projectData)
 
@@ -40,7 +40,7 @@ app.post('/deleteeducation', Education.deleteEducation);
 
 app.get('/achievementdata', Achievement.achievementData);
 
-app.post('/addachievement', Achievement.addAchievement);
+app.post('/addachievement',authMiddleware, Achievement.addAchievement);
 
 app.post('/deleteachievement', Achievement.deleteAchievement);
 

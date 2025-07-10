@@ -16,10 +16,11 @@ const projectData = async (req, res) =>{
 
 const addProjects = async(req, res)=>{
     const {title , description, image, githubLink, techStack} = req.body
+ const techStackArray = techStack.split(',').map(item => item.trim());
 
     try{
-        await Project.create({title , description, image, githubLink, techStack});
-        res.status(201).json("Sucessfull");
+        await Project.create({title , description, image, githubLink,  techStack: techStackArray,});
+        res.status(200).json("Sucessfull");
     }
     catch(error){
         console.error(error);
