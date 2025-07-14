@@ -2,7 +2,8 @@ import "./ProjectCard.css";
 
 export default function ProjectCard({ image, title, description, githubUrl, techStack }) {
     return (
-        <div className="project-card">
+  
+         <div className="project-card">
             <div className="project-image">
                 <img src={image} alt={title} />
             </div> 
@@ -14,5 +15,6 @@ export default function ProjectCard({ image, title, description, githubUrl, tech
                 <a className="atag" href={githubUrl} target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
         </div>
+ 
     );
 }

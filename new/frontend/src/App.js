@@ -6,14 +6,16 @@ import { useEffect, useState } from 'react';
 import CircleLoader from 'react-spinners/HashLoader';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProtectedRoutes from './Components/ProtectedRouts';
-import Admin from './Components/Admin';
+import Admin from './Components/AdminComponents/Admin';
 import DarkModeToggle from './Components/DarkModeToggle';
 import SkillsForm from './Components/AdminComponents/SkillForm';
 import ProjectForm from './Components/AdminComponents/ProjectForm';
 import EducationForm from './Components/AdminComponents/EducationForm';
-import EducationPage from './Components/EducationPage';
+
 import ContactMe from './Components/AdminComponents/ContactMe';
 import AchievementForm from './Components/AdminComponents/AchievementForm';
+
+import Achievement from './Components/Achievement/Achievement';
 
 function App() {
   const [Loading, setLoading] = useState(true);
@@ -45,8 +47,9 @@ function App() {
               <Route path='Admin/EducationForm' element={<EducationForm/>} />
               <Route path='/Admin/AchievementsForm' element={<AchievementForm/>}/>
             </Route>  
-            <Route path="/EducationData" element={<EducationPage/>} />
-            <Route path='ContactMe' element={<ContactMe/>} />
+           
+            <Route path='/ContactMe' element={<ContactMe/>} />
+            <Route path='/Achievement' element={<Achievement/>} />
            
           </Routes> 
         </Router>

@@ -1,4 +1,4 @@
-import SectionCard from './AdminComponents/SectionCard';
+import SectionCard from './SectionCard';
 import './Admin.css';
 import { useState, useEffect } from 'react';
 

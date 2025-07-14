@@ -1,10 +1,11 @@
 import { useRef } from 'react';
 import Profile from './Profile';
-import Skills from './Skills';
-import Projects from './Projects';
-import EducationPage from './EducationPage';
+import Skills from './Skill/Skills';
+import Projects from './Project/Projects';
+import EducationPage from './Education/EducationPage';
+import Achievement from './Achievement/Achievement';
 import './Home.css';
-import DarkModeToggle from './DarkModeToggle';
+
 export default function Home() {
   const topRef = useRef(null);
 
@@ -22,12 +23,10 @@ export default function Home() {
       <div ref={topRef}></div>
        <div><Profile /></div>
        <EducationPage/>
- 
-      
-      
            <Skills />
-      <Projects />
-
+              <Achievement/>
+      <Projects/>
+   
       {/* Scroll Down Button */}
       <button className="arrow-button down-arrow" onClick={scrollDown}>
        <div className='arrow'></div>
@@ -38,6 +37,5 @@ export default function Home() {
         <div className='arrowdn'></div>
       </button>
     </div>
-    
   );
 }
