@@ -1,18 +1,59 @@
+/* Container for each card */
 .AchievementCardContainer {
   height: 85vh;
   width: 100%;
-  background-color: orange;
+  opacity: 0;
+  transition: all 2s ease-out;
+  
 }
 
+/* Slide in from left */
+.AchievementCardContainer.slide-left {
+  transform: translateX(0);
+  opacity: 1;
+  animation: slideInFromLeft 2s ease-out forwards;
+}
+
+/* Slide in from right */
+.AchievementCardContainer.slide-right {
+  transform: translateX(0);
+  opacity: 1;
+  animation: slideInFromRight 2s ease-out forwards;
+}
+
+/* Keyframe animations */
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-40vw);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(40vw);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Card styling */
 .AchievementCard {
-  width: 60vw;
-  height: 70vh;
+  width: 40vw;
+  height:60vh;
   background-color: var(--containerBackground);
   box-shadow:
-    5px 5px 0px #d8b4fe,        /* Soft lavender */
-    10px 10px 0px #c084fc,      /* Medium purple */
-    15px 15px 0px #9333ea,      /* Rich purple */
-    20px 20px 0px rgba(147, 51, 234, 0.5);  /* Faded rich purple */
+    5px 5px 0px #d8b4fe,
+    10px 10px 0px #c084fc,
+    15px 15px 0px #9333ea,
+    20px 20px 0px rgba(147, 51, 234, 0.5);
   color: var(--textColor);
   overflow: hidden;
   margin: 20px auto;
@@ -30,29 +71,24 @@
     10px 10px 24px #9333ea;
 }
 
+/* Image container */
 .img {
-  width: 100%;
-  height: 85%;
+  width:100%;
+  height: 70%;
   display: flex;
   justify-content: center;
   align-items: start;
   overflow: hidden;
 }
 
+/* Image itself */
 .img img {
   width: 100%;
   height: auto;
-  object-fit: cover;
-  max-height: 1vh;
-  opacity: 0;
-  transition: max-height 2s ease-out, opacity 2s ease-out;
+  object-fit: contain;
 }
 
-.AchievementCardContainer:hover .img img {
-  max-height: 100%;
-  opacity: 1;
-}
-
+/* Text content */
 p {
   margin: 10px 0;
   text-align: center;
@@ -62,7 +98,7 @@ b {
   margin-top: 10px;
 }
 
-/* Responsive for tablets and below */
+/* Responsive for tablets */
 @media (max-width: 768px) {
   .AchievementCard {
     width: 80vw;
