@@ -19,7 +19,7 @@ export default function Achievement() {
         <div className='AchievementComponent'>
             <hr />
             <div className='title'>
-                <h2>Achievement</h2>
+              
             </div>
 
             {achievements.map((achievement, index) => (
@@ -29,6 +29,7 @@ export default function Achievement() {
                     name={achievement.name}
                     Description={achievement.Description}
                     image={achievement.image}
+                    Date="17-05-2003"
                 />
             ))}
         </div>
