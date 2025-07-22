@@ -23,8 +23,8 @@ export default function Projects() {
     return(
         
             <div className="projects">
-                <hr/>
-       
+         <br/><br /><br />
+
               
 
                 <h2><b>Projects</b></h2>

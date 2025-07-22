@@ -1,14 +1,28 @@
 import './Nav.css';
 import { NavLink } from 'react-router-dom';
-
+import Cookies from 'js-cookie';
+import { useEffect } from 'react';
 function Nav() {
+      const token = Cookies.get('token');
+  useEffect(() => {
+
+    if (!token) {
+      const adminLink = document.getElementById('Admin');
+      if (adminLink) {
+        adminLink.style.display = 'none';
+      }
+    }
+  }, [token]);
+
   return (
+
+
     <nav className="navbar bg-body-tertiary fixed-top">
       <div className="container-fluid">
        <div id="NavLinks">
          <NavLink className="navbar-brand" to="/">Home</NavLink>
         <NavLink className="navbar-brand" to="/Login">Login</NavLink>
-        <NavLink className="navbar-brand" to="/Admin" >Admin</NavLink>
+        <NavLink className="navbar-brand" id="Admin" to="/Admin" >Admin</NavLink>
         <NavLink className="navbar-brand" to="/ContactMe">Contact Me</NavLink>
        </div>
         <button className="navbar-btn navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">

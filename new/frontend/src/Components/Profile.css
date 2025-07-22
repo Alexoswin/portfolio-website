@@ -153,21 +153,8 @@
   }
 }
 
-.btns{
-background: #8a4fff;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.336);
-  font-size: 1rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  align-items: center;
-  gap: 8px;
-}
+
 .btns:hover{
-   background: #7b3dff;
+   
   transform: translateY(-2px);
 }

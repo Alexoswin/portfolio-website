@@ -29,7 +29,7 @@ export default function AchievementForm() {
           title,
           description,
           date,
-          images: [base64Image]
+          image: [base64Image]
         },
         {
           headers: {

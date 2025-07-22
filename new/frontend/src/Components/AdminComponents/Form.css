@@ -57,7 +57,7 @@
 
 .form-card button {
   width: 100%;
-  background-color: #8a4fff;
+   background: linear-gradient(135deg, #7f5af0, #2cb67d);
   color: white;
   padding: 10px 15px;
   border: none;
