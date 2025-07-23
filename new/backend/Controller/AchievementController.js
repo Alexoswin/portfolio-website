@@ -22,8 +22,8 @@ const addAchievement = async (req, res) => {
 }    
 
 const deleteAchievement = async (req, res) => {
-    const { title } = req.body;
 
+ const { title } = req.params;
     try {
         const deletedAchievement = await Achievements.findOneAndDelete({ title });
         if (!deletedAchievement) {

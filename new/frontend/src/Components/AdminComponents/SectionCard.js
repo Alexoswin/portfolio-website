@@ -1,16 +1,18 @@
 import { useNavigate } from 'react-router-dom';
 
-export default function SectionCard({ title , path }) {
+export default function SectionCard({ title , addPath, deletePath }) {
   const navigate = useNavigate();
   const RedirectForm=()=>{
-      navigate(path)
+      navigate(addPath)
   }
-
+  const RedirectDelete=()=>{
+      navigate(deletePath)
+  }
   return (
     <div style={styles.card}>
       <h5 style={styles.heading}>{title}</h5>
       <button onClick={RedirectForm} className="btn btn-add">Add</button>
-      <button className="btn btn-delete">Delete</button>
+      <button onClick={RedirectDelete} className="btn btn-delete">Delete</button>
     </div>
   );
 }

@@ -34,7 +34,7 @@ const AddSkill = async (req, res) => {
 
 
 const deleteSkill = async (req, res) => {
-  const { name } = req.body;
+  const { name } = req.params;
 
   try {
     const deletedSkill = await Skills.findOneAndDelete({ name });
@@ -42,12 +42,10 @@ const deleteSkill = async (req, res) => {
       return res.status(404).json({ message: "Skill not found" });
     }
     res.status(200).json({ message: "Skill deleted successfully" });
-  } 
-  catch (error) {
-    console.error(error);
+  } catch (error) {
+    console.error('Error deleting skill:', error);
     res.status(500).json({ message: "Internal server error" });
   }
-
 };
 
 module.exports = { skilldata, AddSkill, deleteSkill };

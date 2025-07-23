@@ -17,6 +17,10 @@ import AchievementForm from './Components/AdminComponents/AchievementForm';
 
 import Achievement from './Components/Achievement/Achievement';
 
+
+import DeleteSkills from './Components/AdminComponents/deleteData/deleteSkills';
+import DeleteAchievement from './Components/AdminComponents/deleteData/deleteAchievement';
+
 function App() {
   const [Loading, setLoading] = useState(true);
 
@@ -46,6 +50,11 @@ function App() {
               <Route path='Admin/ProjectForm' element={<ProjectForm/>} />
               <Route path='Admin/EducationForm' element={<EducationForm/>} />
               <Route path='/Admin/AchievementsForm' element={<AchievementForm/>}/>
+
+
+              // DeleteRoute
+              <Route path='/Admin/deleteSkills' element={<DeleteSkills/>} />
+              <Route path='/Admin/deleteAchievements' element={<DeleteAchievement/>} />
             </Route>  
            
             <Route path='/ContactMe' element={<ContactMe/>} />

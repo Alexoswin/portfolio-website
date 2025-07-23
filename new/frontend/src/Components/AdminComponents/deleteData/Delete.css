@@ -1,0 +1,24 @@
+.page{
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  left: 0%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+;
+}
+.deleteitem{
+  background-color: var(--containerBackground);
+  color: red;
+  height: 30vh;
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  top: 20%;
+
+}
