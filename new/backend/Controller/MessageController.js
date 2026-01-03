@@ -1,33 +1,45 @@
-const Messages = require('./path/to/your/model');
+const Messages = require('../Database/Messages');
 
-const handleMessage = async (req, res) => {
-  const { name, email, Subject, newMessage } = req.body;
-
+exports.addMessage = async (req, res) => {
   try {
-    const existingUser = await Messages.findOne({ email });
+    const { name, email, subject, message } = req.body;
 
-    if (existingUser) {
-      // Push new message at the 0th index
-      existingUser.Message.unshift(newMessage);
-      existingUser.date = new Date(); // Update timestamp if needed
-      await existingUser.save();
+    // Ensure message is stored as an array of strings as per schema
+    const messageContent = Array.isArray(message) ? message : [message];
 
-      return res.status(200).json({ message: "Message added to existing user" });
-    } else {
-      // Create a new entry
-      const newEntry = new Messages({
-        name,
-        email,
-        Subject,
-        Message: [newMessage],
-        date: new Date()
-      });
+    const newMessage = new Messages({
+      name,
+      email,
+      Subject: subject,
+      Message: messageContent,
+      date: new Date()
+    });
 
-      await newEntry.save();
-      return res.status(201).json({ message: "New message entry created" });
-    }
-
+    await newMessage.save();
+    res.status(201).json({ message: "Message sent successfully" });
   } catch (error) {
-    return res.status(500).json({ error: "Server error", details: error.message });
+    console.error("Error sending message:", error);
+    res.status(500).json({ message: "Error sending message", error });
+  }
+};
+
+exports.getMessages = async (req, res) => {
+  try {
+    const messages = await Messages.find().sort({ date: -1 });
+    res.status(200).json(messages);
+  } catch (error) {
+    console.error("Error fetching messages:", error);
+    res.status(500).json({ message: "Error fetching messages", error });
+  }
+};
+
+exports.deleteMessage = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Messages.findByIdAndDelete(id);
+    res.status(200).json({ message: "Message deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting message:", error);
+    res.status(500).json({ message: "Error deleting message", error });
   }
 };

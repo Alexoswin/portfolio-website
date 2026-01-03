@@ -1,13 +1,11 @@
-.projects{
+.projects {
   min-height: 100vh;
-  
   text-align: center;
-  height: 100vh;
+  padding: 2rem 1rem;
   position: relative;
- 
-
 }
-.project-cards{
+
+.project-cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

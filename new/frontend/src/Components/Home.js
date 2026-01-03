@@ -19,17 +19,17 @@ export default function Home() {
 
   return (
     <div className="home">
-      
+
       <div ref={topRef}></div>
-       <div><Profile /></div>
-       <EducationPage/>
-           <Skills />
-              <Achievement/>
-      <Projects/>
-   
+      <div><Profile /></div>
+      <EducationPage />
+      <Skills />
+      <Achievement />
+      <Projects />
+
       {/* Scroll Down Button */}
       <button className="arrow-button down-arrow" onClick={scrollDown}>
-       <div className='arrow'></div>
+        <div className='arrow'></div>
       </button>
 
       {/* Scroll Up Button */}

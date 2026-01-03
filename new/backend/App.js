@@ -1,33 +1,34 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const  Login = require ('./Controller/LoginController');
-const Skill = require ('./Controller/SkillController');
-const Project = require ('./Controller/ProjectController');
-const Education = require ('./Controller/EducationController');
-const Achievement = require ('./Controller/AchievementController');
-const Certification = require ('./Controller/CertificationController');
+const Login = require('./Controller/LoginController');
+const Skill = require('./Controller/SkillController');
+const Project = require('./Controller/ProjectController');
+const Education = require('./Controller/EducationController');
+const Achievement = require('./Controller/AchievementController');
+const Certification = require('./Controller/CertificationController');
+const Messages = require('./Controller/MessageController');
 const authMiddleware = require('./Middleware/authMiddleware')
 
 app.use(cors());
 app.use(express.json({ limit: '15mb' }));
 app.use(express.urlencoded({ extended: true, limit: '15mb' }));
 
- 
+
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+  res.send('Hello World!');
 });
 
-app.post('/Login',  Login.loginController );
+app.post('/Login', Login.loginController);
 
 app.get('/Skill', Skill.skilldata);
 
-app.post('/AddSkill',authMiddleware, Skill.AddSkill);
+app.post('/AddSkill', authMiddleware, Skill.AddSkill);
 
 app.delete('/deleteskill/:name', Skill.deleteSkill);
 
 
-app.post('/addproject', authMiddleware , Project.addProjects)
+app.post('/addproject', authMiddleware, Project.addProjects)
 
 app.get('/projectdata', Project.projectData)
 
@@ -41,7 +42,7 @@ app.post('/deleteeducation', Education.deleteEducation);
 
 app.get('/achievementdata', Achievement.achievementData);
 
-app.post('/addachievement',authMiddleware, Achievement.addAchievement);
+app.post('/addachievement', authMiddleware, Achievement.addAchievement);
 
 app.delete('/deleteachievement/:title', Achievement.deleteAchievement);
 
@@ -50,12 +51,16 @@ app.get('/certificationdata', Certification.certificationData);
 app.post('/addcertification', Certification.addCertification);
 
 app.post('/deletecertification', Certification.deleteCertification);
+app.post('/sendmessage', Messages.addMessage);
+
+app.get('/messages', Messages.getMessages);
+
+app.delete('/deletemessage/:id', Messages.deleteMessage);
 
 app.post('/verify', authMiddleware, (req, res) => {
   res.status(200).json({ message: "Token is valid" });
 });
 
 app.listen(8000, () => {
-    console.log("Server running on http://localhost:8000");
-  });
-  
+  console.log("Server running on http://localhost:8000");
+});

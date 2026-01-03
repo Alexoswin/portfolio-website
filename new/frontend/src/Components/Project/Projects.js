@@ -20,23 +20,23 @@ export default function Projects() {
         fetchProjects();
     }, []);
 
-    return(
-        
-            <div className="projects">
-         <br/><br /><br />
+    return (
 
-              
+        <div className="projects">
+            <br /><br /><br />
 
-                <h2><b>Projects</b></h2>
-                
-          
+
+
+            <h2><b>Projectss</b></h2>
+
+
+            <div className="project-cards">
                 <div className="project-cards">
-                    <div className="project-cards">
                     {projects.map((project, index) => (
                         <ProjectCard key={index} title={project.title} description={project.description} image={project.image} githubUrl={project.githubLink} techStack={project.techStack} />
                     ))}
                 </div>
-                
+
             </div>
         </div>
     );

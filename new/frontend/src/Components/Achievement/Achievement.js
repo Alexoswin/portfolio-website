@@ -3,7 +3,7 @@ import Achievementcard from './Achivementcard';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 export default function Achievement() {
-    
+
     const [achievements, setAchievements] = useState([]);
     useEffect(() => {
         const fetchAchievements = async () => {
@@ -20,9 +20,9 @@ export default function Achievement() {
     }, []);
     return (
         <div className='AchievementComponent'>
-            
+
             <div className='title'>
-              
+                <h2>Achievements</h2>
             </div>
 
             {achievements.map((achievement, index) => (
@@ -35,8 +35,7 @@ export default function Achievement() {
                     Date={achievement.date}
                 />
             ))}
-            
+
         </div>
     );
 }
-    
