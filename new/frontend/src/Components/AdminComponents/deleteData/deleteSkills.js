@@ -10,7 +10,7 @@ export default function DeleteSkills() {
     useEffect(() => {
         const fetchSkills = async () => {
             try {
-                const res = await axios.get('http://localhost:8000/Skill');
+                const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/Skill`);
                 setSkills(res.data);
                 console.log('Skills fetched successfully:', res.data);
             } catch (error) {
@@ -27,7 +27,7 @@ export default function DeleteSkills() {
     const handleDelete = async () => {
         if (!selectedSkill) return;
         try {
-            await axios.delete(`http://localhost:8000/deleteskill/${selectedSkill.name}`);
+            await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/deleteskill/${selectedSkill.name}`);
             setSkills(skills.filter(skill => skill.name !== selectedSkill.name));
             setSelectedSkill(null);
         } catch (error) {

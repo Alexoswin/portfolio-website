@@ -15,7 +15,7 @@ export default function Login() {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8000/Login', {
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/Login`, {
                 email,
                 password
             });

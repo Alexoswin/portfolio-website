@@ -13,7 +13,7 @@ export default function Admin() {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/messages');
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/messages`);
         const formattedMessages = response.data.map(msg => ({
           id: msg._id,
           email: msg.email,

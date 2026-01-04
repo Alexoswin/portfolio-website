@@ -9,7 +9,7 @@ export default function Skills() {
     useEffect(() => {
         const fetchSkills = async () => {
             try {
-                const res = await axios.get('http://localhost:8000/Skill');
+                const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/Skill`);
                 setSkills(res.data);
                 console.log('Skills fetched successfully:', res.data);
             } catch (error) {
@@ -22,22 +22,22 @@ export default function Skills() {
 
     return (
         <>
-        <div className="container-skills">
-          <br/><br /><br />
-            
-            
-            <h2><b className="skills-title">Skills</b></h2>
-            <br /><br /><br />
-            <div className="skills-header">
-                {skills.map((skill, index) => (
-                    <SkillCard key={index} Name={skill.name} Image={skill.image} />
-                ))}
+            <div className="container-skills">
+                <br /><br /><br />
+
+
+                <h2><b className="skills-title">Skills</b></h2>
+                <br /><br /><br />
+                <div className="skills-header">
+                    {skills.map((skill, index) => (
+                        <SkillCard key={index} Name={skill.name} Image={skill.image} />
+                    ))}
+                </div>
+
+
             </div>
 
-           
-        </div>
-             
-      
+
         </>
     );
 }

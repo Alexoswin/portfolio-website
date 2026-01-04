@@ -18,7 +18,7 @@ export default function ProtectedRoutes() {
 
       try {
         const response = await axios.post(
-          'http://localhost:8000/verify', 
+          `${process.env.REACT_APP_BACKEND_URL}/verify`,
           {},
           {
             headers: {

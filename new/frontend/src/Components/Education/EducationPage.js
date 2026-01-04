@@ -12,8 +12,8 @@ export default function EducationPage() {
     const fetchEducationAndCertifications = async () => {
       try {
         const [eduRes, certRes] = await Promise.all([
-          axios.get('http://localhost:8000/educationdata'),
-          axios.get('http://localhost:8000/certificationdata'),
+          axios.get(`${process.env.REACT_APP_BACKEND_URL}/educationdata`),
+          axios.get(`${process.env.REACT_APP_BACKEND_URL}/certificationdata`),
         ]);
 
         const formattedCertifications = certRes.data.map(cert => ({
@@ -44,10 +44,10 @@ export default function EducationPage() {
 
   return (
     <>
-     
+
       <div className="education-page">
-       <br/>
-       
+        <br />
+
         <h2>Education and Certification</h2>
         {loading ? (
           <p>Loading...</p>

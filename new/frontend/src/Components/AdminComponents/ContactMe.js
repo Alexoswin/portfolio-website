@@ -20,7 +20,7 @@ export default function ContactMe() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8000/sendmessage', formData);
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/sendmessage`, formData);
       alert('Message sent successfully!');
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (error) {
