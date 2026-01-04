@@ -5,6 +5,7 @@ import Projects from './Project/Projects';
 import EducationPage from './Education/EducationPage';
 import Achievement from './Achievement/Achievement';
 import './Home.css';
+import { Helmet } from 'react-helmet-async';
 
 export default function Home() {
   const topRef = useRef(null);
@@ -19,6 +20,11 @@ export default function Home() {
 
   return (
     <div className="home">
+      <Helmet>
+        <title>Oswin Alex | Home - Software Developer Portfolio</title>
+        <meta name="description" content="Welcome to the portfolio of Oswin Alex. Explore my projects, skills, and professional experience in software development." />
+        <link rel="canonical" href="https://yourportfolio.site/" />
+      </Helmet>
 
       <div ref={topRef}></div>
       <div><Profile /></div>
