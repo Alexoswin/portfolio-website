@@ -5,7 +5,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Center vertically */
+  justify-content: center;
+  /* Center vertically */
   text-align: center;
   padding: 2rem;
 }
@@ -34,14 +35,12 @@
   width: 250px;
   height: 250px;
   border-radius: 50%;
-  background: conic-gradient(
-    from 0deg,
-    #ff00ff,
-    #ff77ff,
-    #00ffff,
-    #0066ff,
-    #fa15fa
-  );
+  background: conic-gradient(from 0deg,
+      #ff00ff,
+      #ff77ff,
+      #00ffff,
+      #0066ff,
+      #fa15fa);
   filter: blur(1.5px);
   animation: rotate 3s linear infinite;
   z-index: 0;
@@ -60,13 +59,18 @@
 }
 
 @keyframes rotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .profile-image:hover {
   transform: scale(1.03);
-  box-shadow: 
+  box-shadow:
     0 0 10px rgba(255, 0, 255, 0.4),
     0 0 15px rgba(0, 102, 255, 0.3);
 }
@@ -87,12 +91,19 @@
   display: inline-block;
   width: 10px;
   animation: blink 0.8s infinite;
-  
+
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
 
 /* Enhanced Arrow button with neon effect */
@@ -101,7 +112,7 @@
 
 /* Description text style */
 .Discription {
- 
+
   color: var(--containerTextColor);
   margin-top: 1rem;
 }
@@ -154,7 +165,7 @@
 }
 
 
-.btns:hover{
-   
+.btns:hover {
+
   transform: translateY(-2px);
 }

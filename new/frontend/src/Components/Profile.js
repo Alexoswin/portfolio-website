@@ -54,9 +54,9 @@ export default function Profile({ scrollToSkills }) {
           />
         </div>
 
-        <div className="typing-text">
+        <div className="typing-text ">
           <h1>{displayedText}</h1>
-          <span className="cursor">|</span>
+
         </div>
         <br />
         <h5 className='Discription'>
