@@ -20,6 +20,8 @@ import Achievement from './Components/Achievement/Achievement';
 
 import DeleteSkills from './Components/AdminComponents/deleteData/deleteSkills';
 import DeleteAchievement from './Components/AdminComponents/deleteData/deleteAchievement';
+import NotFound from './Components/NotFound';
+import Forbidden from './Components/Forbidden';
 
 function App() {
   const [Loading, setLoading] = useState(true);
@@ -50,13 +52,15 @@ function App() {
               <Route path='/Admin/AchievementsForm' element={<AchievementForm />} />
 
 
-              // DeleteRoute
+              {/* DeleteRoute */}
               <Route path='/Admin/deleteSkills' element={<DeleteSkills />} />
               <Route path='/Admin/deleteAchievements' element={<DeleteAchievement />} />
             </Route>
 
             <Route path='/ContactMe' element={<ContactMe />} />
             <Route path='/Achievement' element={<Achievement />} />
+            <Route path='/403' element={<Forbidden />} />
+            <Route path='*' element={<NotFound />} />
 
           </Routes>
         </Router>

@@ -1,0 +1,81 @@
+.error-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--body_background);
+  color: var(--body_color);
+  padding: 20px;
+  text-align: center;
+}
+
+.error-content {
+  max-width: 500px;
+  padding: 40px;
+  border-radius: 12px;
+  background-color: var(--secondary);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border_color);
+}
+
+.error-code {
+  font-size: 6rem;
+  font-weight: 800;
+  margin: 0;
+  color: var(--primary);
+  line-height: 1;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+.error-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 20px 0 10px;
+}
+
+.error-description {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  opacity: 0.8;
+}
+
+.error-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.error-home-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: var(--primary);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.error-home-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: white;
+}
+
+.login-btn {
+  background-color: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.login-btn:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
+/* Dark mode overrides if needed, assuming the app uses CSS variables like --body_background */
+[data-bs-theme="dark"] .error-content {
+  background-color: #212529;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}

@@ -50,5 +50,5 @@ export default function ProtectedRoutes() {
     return <div>Loading...</div>;
   }
 
-  return isVerified ? <Outlet /> : <Navigate to="/Login" replace />;
+  return isVerified ? <Outlet /> : <Navigate to="/403" replace />;
 }
