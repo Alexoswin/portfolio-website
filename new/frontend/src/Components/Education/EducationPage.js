@@ -1,6 +1,6 @@
 // EducationPage.js
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../../api/axiosConfig';
 import EducationCard from './EducationCard';
 import './EducationPage.css'; // Optional: styling
 
@@ -12,8 +12,8 @@ export default function EducationPage() {
     const fetchEducationAndCertifications = async () => {
       try {
         const [eduRes, certRes] = await Promise.all([
-          axios.get(`${process.env.REACT_APP_BACKEND_URL}/educationdata`),
-          axios.get(`${process.env.REACT_APP_BACKEND_URL}/certificationdata`),
+          api.get(`/educationdata`),
+          api.get(`/certificationdata`),
         ]);
 
         const formattedCertifications = certRes.data.map(cert => ({

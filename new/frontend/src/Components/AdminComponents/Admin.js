@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 
 
-import axios from 'axios';
+import api from '../../api/axiosConfig';
 
 export default function Admin() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -13,7 +13,7 @@ export default function Admin() {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/messages`);
+        const response = await api.get(`/messages`);
         const formattedMessages = response.data.map(msg => ({
           id: msg._id,
           email: msg.email,

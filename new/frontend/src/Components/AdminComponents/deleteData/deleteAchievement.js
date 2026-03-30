@@ -1,6 +1,6 @@
 import './Delete.css'
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../../../api/axiosConfig';
 import Achievementcard from '../../Achievement/Achivementcard';
 
 
@@ -10,7 +10,7 @@ export default function DeleteAchievement() {
     useEffect(() => {
         const fetchAchievements = async () => {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/achievementdata`);
+                const response = await api.get(`/achievementdata`);
                 setAchievements(response.data);
                 console.log('Achievements fetched successfully:', response.data);
             } catch (error) {
@@ -25,7 +25,7 @@ export default function DeleteAchievement() {
         if (!selectedAchievement) return;
 
         try {
-            await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/deleteachievement/${selectedAchievement.title}`);
+            await api.delete(`/deleteachievement/${selectedAchievement.title}`);
             setAchievements(achievements.filter(achievement => achievement.title !== selectedAchievement.title));
             console.log('Achievement deleted successfully:', selectedAchievement.title);
         } catch (error) {

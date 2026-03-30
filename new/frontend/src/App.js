@@ -23,49 +23,51 @@ import DeleteAchievement from './Components/AdminComponents/deleteData/deleteAch
 import NotFound from './Components/NotFound';
 import Forbidden from './Components/Forbidden';
 
-function App() {
-  const [Loading, setLoading] = useState(true);
+import { LoadingProvider, useLoading } from './Context/LoadingContext';
+import AxiosInterceptor from './Components/AxiosInterceptor';
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  }, []);
+function AppContent() {
+  const { isLoading } = useLoading();
 
   return (
     <>
-      {Loading ? (
-        <Loader />
-      ) : (
-        <Router>
-          <Nav />
-          <DarkModeToggle />
+      {isLoading && <Loader />}
+      <Router>
+        <Nav />
+        <DarkModeToggle />
 
-          <Routes>
-            <Route path="/Login" element={<Login />} />
-            <Route path="/" element={<Home />} />
-            <Route element={<ProtectedRoutes />}>
-              <Route path="/Admin" element={<Admin />} />
-              <Route path="Admin/SkillForm" element={<SkillsForm />} />
-              <Route path='Admin/ProjectForm' element={<ProjectForm />} />
-              <Route path='Admin/EducationForm' element={<EducationForm />} />
-              <Route path='/Admin/AchievementsForm' element={<AchievementForm />} />
+        <Routes>
+          <Route path="/Login" element={<Login />} />
+          <Route path="/" element={<Home />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/Admin" element={<Admin />} />
+            <Route path="Admin/SkillForm" element={<SkillsForm />} />
+            <Route path='Admin/ProjectForm' element={<ProjectForm />} />
+            <Route path='Admin/EducationForm' element={<EducationForm />} />
+            <Route path='/Admin/AchievementsForm' element={<AchievementForm />} />
 
+            {/* DeleteRoute */}
+            <Route path='/Admin/deleteSkills' element={<DeleteSkills />} />
+            <Route path='/Admin/deleteAchievements' element={<DeleteAchievement />} />
+          </Route>
 
-              {/* DeleteRoute */}
-              <Route path='/Admin/deleteSkills' element={<DeleteSkills />} />
-              <Route path='/Admin/deleteAchievements' element={<DeleteAchievement />} />
-            </Route>
-
-            <Route path='/ContactMe' element={<ContactMe />} />
-            <Route path='/Achievement' element={<Achievement />} />
-            <Route path='/403' element={<Forbidden />} />
-            <Route path='*' element={<NotFound />} />
-
-          </Routes>
-        </Router>
-      )}
+          <Route path='/ContactMe' element={<ContactMe />} />
+          <Route path='/Achievement' element={<Achievement />} />
+          <Route path='/403' element={<Forbidden />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </Router>
     </>
+  );
+}
+
+function App() {
+  return (
+    <LoadingProvider>
+      <AxiosInterceptor>
+        <AppContent />
+      </AxiosInterceptor>
+    </LoadingProvider>
   );
 }
 

@@ -1,14 +1,14 @@
 import './Achievement.css';
 import Achievementcard from './Achivementcard';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../../api/axiosConfig';
 export default function Achievement() {
 
     const [achievements, setAchievements] = useState([]);
     useEffect(() => {
         const fetchAchievements = async () => {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/achievementdata`);
+                const response = await api.get(`/achievementdata`);
                 setAchievements(response.data);
                 console.log('Achievements fetched successfully:', response.data);
             } catch (error) {

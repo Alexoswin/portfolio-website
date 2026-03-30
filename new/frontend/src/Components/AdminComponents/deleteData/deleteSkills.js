@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../../../api/axiosConfig';
 import './Delete.css';
 import SkillCard from '../../Skill/SkillCard';
 
@@ -10,7 +10,7 @@ export default function DeleteSkills() {
     useEffect(() => {
         const fetchSkills = async () => {
             try {
-                const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/Skill`);
+                const res = await api.get(`/Skill`);
                 setSkills(res.data);
                 console.log('Skills fetched successfully:', res.data);
             } catch (error) {
@@ -27,7 +27,7 @@ export default function DeleteSkills() {
     const handleDelete = async () => {
         if (!selectedSkill) return;
         try {
-            await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/deleteskill/${selectedSkill.name}`);
+            await api.delete(`/deleteskill/${selectedSkill.name}`);
             setSkills(skills.filter(skill => skill.name !== selectedSkill.name));
             setSelectedSkill(null);
         } catch (error) {

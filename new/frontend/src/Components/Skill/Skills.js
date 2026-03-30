@@ -1,7 +1,7 @@
 import './Skills.css';
 import SkillCard from './SkillCard';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../../api/axiosConfig';
 
 export default function Skills() {
     const [skills, setSkills] = useState([]);
@@ -9,7 +9,7 @@ export default function Skills() {
     useEffect(() => {
         const fetchSkills = async () => {
             try {
-                const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/Skill`);
+                const res = await api.get(`/Skill`);
                 setSkills(res.data);
                 console.log('Skills fetched successfully:', res.data);
             } catch (error) {

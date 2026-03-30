@@ -1,6 +1,6 @@
 import "./Projects.css";
 import ProjectCard from "./ProjectCard";
-import axios from "axios";
+import api from "../../api/axiosConfig";
 import { useEffect, useState } from "react"
 
 export default function Projects() {
@@ -10,7 +10,7 @@ export default function Projects() {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/projectData`);
+                const response = await api.get(`/projectData`);
                 setProjects(response.data);
             } catch (error) {
                 console.error("Error fetching projects:", error);
