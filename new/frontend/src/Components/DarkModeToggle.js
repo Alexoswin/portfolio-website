@@ -4,16 +4,36 @@ import { useEffect, useState } from "react";
 
 export default function DarkModeToggle() {
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("theme") || "light";
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) return savedTheme;
+
+    // Check OS preference
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    return prefersDark ? "dark" : "light";
   });
 
   useEffect(() => {
     document.body.className = theme;
-    localStorage.setItem("theme", theme);
   }, [theme]);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const handleChange = (e) => {
+      // Only follow OS theme if the user hasn't manually set a preference in localStorage
+      if (!localStorage.getItem("theme")) {
+        setTheme(e.matches ? "dark" : "light");
+      }
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
   const changeMode = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme); // Only set manually to "stick"
   };
 
   return (
