@@ -2,7 +2,6 @@ import './App.css';
 import Nav from './Components/Nav';
 import Login from './Components/Login';
 import Home from './Components/Home';
-import { useEffect, useState } from 'react';
 import Loader from './Components/Loader';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProtectedRoutes from './Components/ProtectedRouts';
