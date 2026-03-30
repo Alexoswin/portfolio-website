@@ -23,7 +23,7 @@ export default function Home() {
       <Helmet>
         <title>Oswin Alex | Home - Software Developer Portfolio</title>
         <meta name="description" content="Welcome to the portfolio of Oswin Alex. Explore my projects, skills, and professional experience in software development." />
-        <link rel="canonical" href="https://yourportfolio.site/" />
+        <link rel="canonical" href="https://www.oswinalex.site/" />
       </Helmet>
 
       <div ref={topRef}></div>

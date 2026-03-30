@@ -3,4 +3,4 @@ User-agent: *
 Disallow: /Admin
 Disallow: /Login
 
-Sitemap: https://yourportfolio.site/sitemap.xml
+Sitemap: https://www.oswinalex.site/sitemap.xml
