@@ -1,46 +1,188 @@
-/* Common Styling */
-.navbar, .offcanvas-body, .offcanvas-header {
-  background-color: var(--containerBackground) !important;
-  color: var(--containerTextColor) !important;
+.navbar-custom {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: all 0.4s var(--transition-base);
+  padding: 1.5rem 0;
 }
 
-.navbar a, 
-.navbar .nav-link, 
-.navbar .navbar-brand {
-  color: var(--textColor) !important;
+.navbar-custom.scrolled {
+  padding: 0.8rem 0;
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--shadow-lg);
+  border-bottom: var(--glass-border);
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-decoration: none;
+  color: var(--text-main);
+  letter-spacing: -0.05em;
+}
+
+.nav-logo span {
+  color: var(--accent);
+}
+
+.nav-links-desktop {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.nav-link-item {
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  position: relative;
+  opacity: 0.8;
+}
+
+.nav-link-item:hover, .nav-link-item.active {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.nav-link-item::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.nav-link-item:hover::after, .nav-link-item.active::after {
+  width: 100%;
+}
+
+/* Mobile Toggle Hamburger */
+.mobile-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1001;
+}
+
+.toggle-line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--text-main);
   transition: all 0.3s ease;
 }
-.navbar-brand{
-  color: var(--textColor) !important;
-}
-/* Hover effect */
-.navbar a:hover, 
-.navbar .nav-link:hover, 
-.navbar .navbar-brand:hover {
-  color: rgb(0, 119, 255) !important;
-  font-size: 1.1em;
+
+.toggle-line.short {
+  width: 18px;
+  margin-left: auto;
 }
 
-/* SVG Icon Styling */
-.bi {
-  color: var(--textColor) !important;
+@media (max-width: 991px) {
+  .nav-links-desktop {
+    display: none;
+  }
+  .mobile-toggle {
+    display: flex;
+  }
 }
 
-/* Contact Info */
-.contact {
-  color: var(--textColor) !important;
-  margin-top: 1vh;
-  white-space: pre-wrap;
+/* Custom Offcanvas Style */
+.custom-offcanvas {
+  background-color: var(--body-bg) !important;
+  border-left: var(--glass-border) !important;
+  width: 320px !important;
 }
 
-/* Toggler Button Icon */
-.navbar-toggler {
-  border-color: var(--textColor);               
-}
-.navbar-toggler-icon {
-  filter: invert(1); /* Light icon for dark theme */
+.offcanvas-header {
+  padding: 2rem;
+  border-bottom: var(--glass-border);
 }
 
-.navbar-brand { 
-  font-size: medium !important;
+.offcanvas-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.offcanvas-body {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.offcanvas-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.offcanvas-link {
+  font-size: 1.5rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--text-main);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.offcanvas-link:hover {
+  color: var(--accent);
+}
+
+.offcanvas-socials {
+  margin-top: auto;
+}
+
+.social-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+}
+
+.social-grid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.social-grid a {
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border: var(--glass-border);
+  border-radius: 8px;
+  background: var(--accent-soft);
+  transition: all 0.3s ease;
+}
+
+.social-grid a:hover {
+  background: var(--accent);
+  color: white;
+  transform: translateY(-2px);
 }
