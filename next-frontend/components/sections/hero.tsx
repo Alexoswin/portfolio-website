@@ -2,9 +2,10 @@
 
 import { motion } from "framer-motion";
 import { profile } from "@/lib/profile";
-import { Github, Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { FaGithub } from "react-icons/fa6";
 
 export function Hero() {
   return (
@@ -17,10 +18,10 @@ export function Hero() {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center rounded-full border bg-muted px-3 py-1 text-sm font-medium"
           >
-            <span className="flex h-2 w-2 rounded-full bg-primary mr-2 animate-pulse" />
+            <span className="flex h-2 w-2 rounded-full bg-primary mr-2 animate-pulse" />{" "}
             Available for new opportunities
           </motion.div>
-          
+
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -29,7 +30,7 @@ export function Hero() {
           >
             Hi, I'm <span className="text-gradient">{profile.name}</span>
           </motion.h1>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -38,14 +39,14 @@ export function Hero() {
           >
             {profile.summary}
           </motion.p>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-wrap items-center justify-center gap-4 py-8"
           >
-            <Link 
+            <Link
               href="#projects"
               className="inline-flex h-11 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
             >
@@ -57,21 +58,33 @@ export function Hero() {
               target="_blank"
               className="inline-flex h-11 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
             >
-              <Github className="mr-2 h-4 w-4" />
+              <FaGithub className="mr-2 h-4 w-4" />
               GitHub
             </Link>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-8"
           >
-            <ContactItem icon={<Mail className="h-4 w-4" />} text={profile.contact.email} />
-            <ContactItem icon={<Phone className="h-4 w-4" />} text={profile.contact.phone} />
-            <ContactItem icon={<Github className="h-4 w-4" />} text="Alexoswin" />
-            <ContactItem icon={<MapPin className="h-4 w-4" />} text={profile.contact.location} />
+            <ContactItem
+              icon={<Mail className="h-4 w-4" />}
+              text={profile.contact.email}
+            />
+            <ContactItem
+              icon={<Phone className="h-4 w-4" />}
+              text={profile.contact.phone}
+            />
+            <ContactItem
+              icon={<FaGithub className="h-4 w-4" />}
+              text="Alexoswin"
+            />
+            <ContactItem
+              icon={<MapPin className="h-4 w-4" />}
+              text={profile.contact.location}
+            />
           </motion.div>
         </div>
       </div>
@@ -79,12 +92,13 @@ export function Hero() {
   );
 }
 
-function ContactItem({ icon, text }: { icon: React.ReactNode; text: string }) {
+function ContactItem({
+  icon,
+  text,
+}: readonly { icon: React.ReactNode; text: string }) {
   return (
     <div className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-      <div className="p-2 rounded-lg bg-muted text-primary">
-        {icon}
-      </div>
+      <div className="p-2 rounded-lg bg-muted text-primary">{icon}</div>
       <span>{text}</span>
     </div>
   );

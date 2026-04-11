@@ -16,8 +16,8 @@ export function Experience() {
       </SectionHeading>
 
       <div className="mx-auto max-w-4xl flex flex-col gap-8">
-        {profile.experience.map((exp, index) => (
-          <Card key={index} className="flex flex-col gap-4">
+        {profile.experience.map((exp) => (
+          <Card key={`${exp.company}-${exp.role}`} className="flex flex-col gap-4">
             <div className="flex flex-col md:flex-row justify-between md:items-center gap-2">
               <div>
                 <h3 className="text-xl font-bold">{exp.role}</h3>
@@ -39,8 +39,8 @@ export function Experience() {
             </div>
 
             <ul className="grid gap-2 list-none">
-              {exp.achievements.map((item, i) => (
-                <li key={i} className="flex gap-3 text-muted-foreground">
+              {exp.achievements.map((item) => (
+                <li key={item} className="flex gap-3 text-muted-foreground">
                   <div className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                   {item}
                 </li>

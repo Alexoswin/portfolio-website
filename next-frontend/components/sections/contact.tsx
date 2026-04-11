@@ -6,7 +6,6 @@ import { Card } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import Link from "next/link";
-import { motion } from "framer-motion";
 
 export function Contact() {
   return (
@@ -131,12 +130,12 @@ function ContactLink({
   label,
   value,
   href,
-}: {
+}: Readonly<{
   icon: React.ReactNode;
   label: string;
   value: string;
   href?: string;
-}) {
+}>) {
   const Content = (
     <div className="flex items-center gap-4 group">
       <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all">
@@ -158,7 +157,13 @@ function ContactLink({
   return Content;
 }
 
-function SocialButton({ icon, href }: { icon: React.ReactNode; href: string }) {
+function SocialButton({
+  icon,
+  href,
+}: Readonly<{
+  icon: React.ReactNode;
+  href: string;
+}>) {
   return (
     <Link
       href={href}
