@@ -3,7 +3,8 @@
 import { profile } from "@/lib/profile";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Card } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Github, Linkedin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -11,7 +12,10 @@ export function Contact() {
   return (
     <section id="contact" className="container px-4 py-24 md:px-6">
       <div className="max-w-5xl mx-auto">
-        <SectionHeading subtitle="Let's connect and discuss potential collaborations." align="center">
+        <SectionHeading
+          subtitle="Let's connect and discuss potential collaborations."
+          align="center"
+        >
           Get In Touch
         </SectionHeading>
 
@@ -19,78 +23,95 @@ export function Contact() {
           <div className="flex flex-col gap-8">
             <h3 className="text-2xl font-bold">Contact Information</h3>
             <p className="text-muted-foreground">
-              I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.
+              I'm always open to discussing new projects, creative ideas or
+              opportunities to be part of your visions.
             </p>
-            
+
             <div className="flex flex-col gap-6">
-              <ContactLink 
-                icon={<Mail className="h-5 w-5" />} 
-                label="Email" 
-                value={profile.contact.email} 
-                href={`mailto:${profile.contact.email}`} 
+              <ContactLink
+                icon={<Mail className="h-5 w-5" />}
+                label="Email"
+                value={profile.contact.email}
+                href={`mailto:${profile.contact.email}`}
               />
-              <ContactLink 
-                icon={<Phone className="h-5 w-5" />} 
-                label="Phone" 
-                value={profile.contact.phone} 
-                href={`tel:${profile.contact.phone}`} 
+              <ContactLink
+                icon={<Phone className="h-5 w-5" />}
+                label="Phone"
+                value={profile.contact.phone}
+                href={`tel:${profile.contact.phone}`}
               />
-              <ContactLink 
-                icon={<MapPin className="h-5 w-5" />} 
-                label="Location" 
-                value={profile.contact.location} 
+              <ContactLink
+                icon={<MapPin className="h-5 w-5" />}
+                label="Location"
+                value={profile.contact.location}
               />
             </div>
 
             <div className="flex gap-4">
-              <SocialButton icon={<Github className="h-5 w-5" />} href={profile.contact.github} />
-              <SocialButton icon={<Linkedin className="h-5 w-5" />} href="#" />
+              <SocialButton
+                icon={<FaGithub className="h-5 w-5" />}
+                href={profile.contact.github}
+              />
+              <SocialButton
+                icon={<FaLinkedin className="h-5 w-5" />}
+                href="#"
+              />
             </div>
           </div>
 
           <Card className="flex flex-col gap-6">
             <div className="grid gap-2">
               <h3 className="text-xl font-bold">Send a Message</h3>
-              <p className="text-sm text-muted-foreground">I'll get back to you as soon as possible.</p>
+              <p className="text-sm text-muted-foreground">
+                I'll get back to you as soon as possible.
+              </p>
             </div>
-            
+
             <form className="grid gap-4" onSubmit={(e) => e.preventDefault()}>
               <div className="grid grid-cols-2 gap-4">
                 <div className="grid gap-1.5">
-                  <label htmlFor="name" className="text-sm font-medium">Name</label>
-                  <input 
-                    id="name" 
-                    placeholder="John Doe" 
+                  <label htmlFor="name" className="text-sm font-medium">
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    placeholder="John Doe"
                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   />
                 </div>
                 <div className="grid gap-1.5">
-                  <label htmlFor="email" className="text-sm font-medium">Email</label>
-                  <input 
-                    id="email" 
+                  <label htmlFor="email" className="text-sm font-medium">
+                    Email
+                  </label>
+                  <input
+                    id="email"
                     type="email"
-                    placeholder="john@example.com" 
+                    placeholder="john@example.com"
                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   />
                 </div>
               </div>
               <div className="grid gap-1.5">
-                <label htmlFor="subject" className="text-sm font-medium">Subject</label>
-                <input 
-                  id="subject" 
-                  placeholder="How can I help you?" 
+                <label htmlFor="subject" className="text-sm font-medium">
+                  Subject
+                </label>
+                <input
+                  id="subject"
+                  placeholder="How can I help you?"
                   className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 />
               </div>
               <div className="grid gap-1.5">
-                <label htmlFor="message" className="text-sm font-medium">Message</label>
-                <textarea 
-                  id="message" 
-                  placeholder="Your message here..." 
+                <label htmlFor="message" className="text-sm font-medium">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  placeholder="Your message here..."
                   className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 />
               </div>
-              <button 
+              <button
                 type="submit"
                 className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
               >
@@ -105,25 +126,33 @@ export function Contact() {
   );
 }
 
-function ContactLink({ icon, label, value, href }: { icon: React.ReactNode; label: string; value: string; href?: string }) {
+function ContactLink({
+  icon,
+  label,
+  value,
+  href,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  href?: string;
+}) {
   const Content = (
     <div className="flex items-center gap-4 group">
       <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all">
         {icon}
       </div>
       <div>
-        <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{label}</p>
+        <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+          {label}
+        </p>
         <p className="text-base font-semibold">{value}</p>
       </div>
     </div>
   );
 
   if (href) {
-    return (
-      <Link href={href}>
-        {Content}
-      </Link>
-    );
+    return <Link href={href}>{Content}</Link>;
   }
 
   return Content;
@@ -131,8 +160,8 @@ function ContactLink({ icon, label, value, href }: { icon: React.ReactNode; labe
 
 function SocialButton({ icon, href }: { icon: React.ReactNode; href: string }) {
   return (
-    <Link 
-      href={href} 
+    <Link
+      href={href}
       target="_blank"
       className="p-3 rounded-full border bg-card hover:bg-primary hover:text-primary-foreground transition-all"
     >
