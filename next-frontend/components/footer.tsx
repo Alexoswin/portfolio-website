@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import Link from "next/link";
 import { m } from "framer-motion";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
@@ -15,7 +16,11 @@ const navLinks = [
 ];
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
+  const [currentYear, setCurrentYear] = React.useState(2026);
+
+  React.useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
 
   return (
     <footer className="relative mt-24 border-t bg-muted/30 pt-16 pb-8 overflow-hidden">

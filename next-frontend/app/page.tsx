@@ -60,7 +60,9 @@ export default function Home() {
     <MotionProvider>
       <main className="relative min-h-screen">
         <AnimatedGradient />
-        <ScrollProgress />
+        <Suspense fallback={null}>
+          <ScrollProgress />
+        </Suspense>
 
         <Navbar />
 
@@ -90,7 +92,9 @@ export default function Home() {
           </div>
         </div>
 
-        <Footer />
+        <Suspense fallback={null}>
+          <Footer />
+        </Suspense>
       </main>
     </MotionProvider>
   );

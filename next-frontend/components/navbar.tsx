@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { m, AnimatePresence } from "framer-motion";
-import { Menu, X, Moon, Sun } from "lucide-react";
+import { Menu, X, Moon, Sun, FileText } from "lucide-react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { profile } from "@/lib/profile";
@@ -57,6 +57,14 @@ export function Navbar() {
               {item.name}
             </Link>
           ))}
+          <Link
+            href={profile.contact.resume}
+            target="_blank"
+            className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
+          >
+            <FileText className="h-4 w-4" />
+            Resume
+          </Link>
           <ThemeToggle />
         </nav>
 
@@ -92,6 +100,15 @@ export function Navbar() {
                   {item.name}
                 </Link>
               ))}
+              <Link
+                href={profile.contact.resume}
+                target="_blank"
+                onClick={() => setIsOpen(false)}
+                className="text-lg font-medium text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
+              >
+                <FileText className="h-5 w-5" />
+                Resume
+              </Link>
             </div>
           </m.div>
         )}

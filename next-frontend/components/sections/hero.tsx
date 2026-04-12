@@ -2,7 +2,7 @@
 
 import { m } from "framer-motion";
 import { profile } from "@/lib/profile";
-import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowRight, FileText } from "lucide-react";
 
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa6";
@@ -54,9 +54,17 @@ export function Hero() {
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
             <Link
-              href={profile.contact.github}
+              href={profile.contact.resume}
               target="_blank"
               className="inline-flex h-11 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+            >
+              <FileText className="mr-2 h-4 w-4" />
+              Resume
+            </Link>
+            <Link
+              href={profile.contact.github}
+              target="_blank"
+              className="inline-flex h-11 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground text-muted-foreground"
             >
               <FaGithub className="mr-2 h-4 w-4" />
               GitHub

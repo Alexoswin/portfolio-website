@@ -6,6 +6,7 @@ export const profile = {
     email: "oswinalex1@gmail.com",
     github: "https://github.com/Alexoswin",
     location: "Mumbai, India",
+    resume: "/constants/Oswin_Alex_Resume.pdf",
   },
   summary: "Software Engineer specializing in AI-powered platforms, backend APIs (Node/NestJS), and full-stack development. Experienced in building scalable roleplay workflows, analytics pipelines, and contributing to open-source frameworks.",
   experience: [
