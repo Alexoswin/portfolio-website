@@ -5,6 +5,7 @@ export const profile = {
     phone: "+91 9324498843",
     email: "oswinalex1@gmail.com",
     github: "https://github.com/Alexoswin",
+    linkedin: "https://www.linkedin.com/in/oswin-alex-727773260/",
     location: "Mumbai, India",
     resume: "/constants/Oswin_Alex_Resume.pdf",
   },

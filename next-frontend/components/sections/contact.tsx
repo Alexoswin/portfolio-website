@@ -89,7 +89,7 @@ export function Contact() {
               />
               <SocialButton
                 icon={<FaLinkedin className="h-5 w-5" />}
-                href="#"
+                href={profile.contact.linkedin}
               />
             </div>
           </div>

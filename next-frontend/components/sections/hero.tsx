@@ -5,7 +5,7 @@ import { profile } from "@/lib/profile";
 import { Mail, Phone, MapPin, ArrowRight, FileText } from "lucide-react";
 
 import Link from "next/link";
-import { FaGithub } from "react-icons/fa6";
+import { FaGithub, FaLinkedin } from "react-icons/fa6";
 
 export function Hero() {
   return (
@@ -69,6 +69,14 @@ export function Hero() {
               <FaGithub className="mr-2 h-4 w-4" />
               GitHub
             </Link>
+            <Link
+              href={profile.contact.linkedin}
+              target="_blank"
+              className="inline-flex h-11 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground text-muted-foreground"
+            >
+              <FaLinkedin className="mr-2 h-4 w-4" />
+              LinkedIn
+            </Link>
           </m.div>
 
           <m.div
@@ -88,6 +96,10 @@ export function Hero() {
             <ContactItem
               icon={<FaGithub className="h-4 w-4" />}
               text="Alexoswin"
+            />
+            <ContactItem
+              icon={<FaLinkedin className="h-4 w-4" />}
+              text="oswin-alex"
             />
             <ContactItem
               icon={<MapPin className="h-4 w-4" />}
