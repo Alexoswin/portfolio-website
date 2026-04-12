@@ -5,6 +5,7 @@ import { Hero } from "@/components/sections/hero";
 import { AnimatedGradient } from "@/components/ui/animated-gradient";
 import { MotionProvider } from "@/components/motion-provider";
 import { ScrollProgress } from "../components/ui/scroll-progress";
+import { Footer } from "@/components/footer";
 
 // Export unstable_instant for Next.js 16 performance optimizations
 // export const unstable_instant = { prefetch: "static" };
@@ -89,14 +90,7 @@ export default function Home() {
           </div>
         </div>
 
-        <footer className="border-t bg-muted/30 py-12">
-          <div className="container px-4 text-center">
-            <p className="text-sm text-muted-foreground">
-              © 2026 Oswin Alex. Built with Next.js, Tailwind CSS and Framer
-              Motion.
-            </p>
-          </div>
-        </footer>
+        <Footer />
       </main>
     </MotionProvider>
   );

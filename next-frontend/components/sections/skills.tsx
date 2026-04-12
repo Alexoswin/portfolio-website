@@ -11,6 +11,7 @@ export function Skills() {
     { name: "Mobile Development", skills: profile.skills.mobile },
     { name: "Databases", skills: profile.skills.databases },
     { name: "Cloud & DevOps", skills: profile.skills.cloudDevOps },
+    { name: "IoT & Embedded Systems", skills: profile.skills.iotEmbedded },
     { name: "Data Analysis", skills: profile.skills.dataAnalysis },
   ];
 

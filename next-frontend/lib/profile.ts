@@ -70,6 +70,15 @@ export const profile = {
   ],
   projects: [
     {
+      title: "IoT Based Live Tracking",
+      tech: ["ESP8266", "Neo 6M GPS", "SIM800L", "MERN Stack", "WebSockets"],
+      highlights: [
+        "Real-time location tracking system using ESP8266 and Neo 6M GPS module.",
+        "Integrated SIM800L module to transmit live coordinates to mobile devices.",
+        "Full-stack MERN application incorporating WebSockets for instantaneous location updates.",
+      ],
+    },
+    {
       title: "AI-Based Edema Score Assessment System",
       link: "https://edema.mple.ai/",
       tech: ["Next.js", "NestJS", "MongoDB", "Tailwind CSS"],
@@ -99,8 +108,9 @@ export const profile = {
   ],
   skills: {
     programming: ["Java", "Python", "JavaScript", "TypeScript"],
-    web: ["React.js", "Tailwind CSS", "Node.js", "Express.js", "NestJS", "Bootstrap"],
+    web: ["React.js", "Tailwind CSS", "Node.js", "Express.js", "NestJS", "WebSockets", "Bootstrap"],
     mobile: ["Flutter", "React Native"],
+    iotEmbedded: ["ESP8266", "GPS Modules", "SIM800L"],
     databases: ["MySQL", "MongoDB"],
     cloudDevOps: ["AWS", "Render", "Git", "Docker", "Jenkins"],
     dataAnalysis: ["Pandas", "NumPy", "Scikit-learn", "Matplotlib", "Power BI"],
