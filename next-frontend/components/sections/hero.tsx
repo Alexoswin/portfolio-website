@@ -83,7 +83,7 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-8"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 mt-8 "
           >
             <ContactItem
               icon={<Mail className="h-4 w-4" />}
