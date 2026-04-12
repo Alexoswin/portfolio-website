@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface SectionHeadingProps {
@@ -10,7 +10,7 @@ interface SectionHeadingProps {
   align?: "left" | "center" | "right";
 }
 
-export function SectionHeading({ children, subtitle, className, align = "left" }: SectionHeadingProps) {
+export function SectionHeading({ children, subtitle, className, align = "left" }: Readonly<SectionHeadingProps>) {
   const alignClasses = {
     left: "text-left",
     center: "text-center items-center",
@@ -18,7 +18,7 @@ export function SectionHeading({ children, subtitle, className, align = "left" }
   };
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -34,6 +34,6 @@ export function SectionHeading({ children, subtitle, className, align = "left" }
         </p>
       )}
       <div className="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mt-2" />
-    </motion.div>
+    </m.div>
   );
 }

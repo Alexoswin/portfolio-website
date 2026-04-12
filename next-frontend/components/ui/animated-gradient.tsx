@@ -1,11 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 export function AnimatedGradient() {
   return (
     <div className="fixed inset-0 -z-10 h-full w-full overflow-hidden bg-background">
-      <motion.div
+      <m.div
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3],
@@ -17,7 +17,7 @@ export function AnimatedGradient() {
         }}
         className="absolute -top-[10%] -left-[10%] h-[50%] w-[50%] rounded-full bg-primary/20 blur-[120px]"
       />
-      <motion.div
+      <m.div
         animate={{
           scale: [1.2, 1, 1.2],
           opacity: [0.4, 0.2, 0.4],

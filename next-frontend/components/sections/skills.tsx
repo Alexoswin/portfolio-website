@@ -2,7 +2,7 @@
 
 import { profile } from "@/lib/profile";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 export function Skills() {
   const skillCategories = [
@@ -25,8 +25,8 @@ export function Skills() {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {skillCategories.map((category, idx) => (
-          <motion.div
-            key={idx}
+          <m.div
+            key={category.name}
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -44,7 +44,7 @@ export function Skills() {
                 </span>
               ))}
             </div>
-          </motion.div>
+          </m.div>
         ))}
       </div>
     </section>

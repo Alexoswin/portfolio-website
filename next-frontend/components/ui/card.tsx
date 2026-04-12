@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface CardProps {
@@ -9,9 +9,9 @@ interface CardProps {
   delay?: number;
 }
 
-export function Card({ children, className, delay = 0 }: CardProps) {
+export function Card({ children, className, delay = 0 }: Readonly<CardProps>) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -24,6 +24,6 @@ export function Card({ children, className, delay = 0 }: CardProps) {
     >
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 transition-opacity group-hover:opacity-100" />
       {children}
-    </motion.div>
+    </m.div>
   );
 }

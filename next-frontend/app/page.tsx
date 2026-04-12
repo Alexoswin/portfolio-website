@@ -1,53 +1,103 @@
-"use client";
-
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/sections/hero";
-import { Experience } from "@/components/sections/experience";
-import { Projects } from "@/components/sections/projects";
-import { Skills } from "@/components/sections/skills";
-import { EducationAndAwards } from "@/components/sections/education";
-import { Contact } from "@/components/sections/contact";
 import { AnimatedGradient } from "@/components/ui/animated-gradient";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { MotionProvider } from "@/components/motion-provider";
+import { ScrollProgress } from "../components/ui/scroll-progress";
+
+// Export unstable_instant for Next.js 16 performance optimizations
+// export const unstable_instant = { prefetch: "static" };
+
+// Lazy load sections below the fold
+const Experience = dynamic(
+  () =>
+    import("@/components/sections/experience").then((mod) => mod.Experience),
+  {
+    loading: () => <div className="min-h-[400px]" />,
+    ssr: true,
+  },
+);
+
+const Projects = dynamic(
+  () => import("@/components/sections/projects").then((mod) => mod.Projects),
+  {
+    loading: () => <div className="min-h-[400px]" />,
+    ssr: true,
+  },
+);
+
+const Skills = dynamic(
+  () => import("@/components/sections/skills").then((mod) => mod.Skills),
+  {
+    loading: () => <div className="min-h-[300px]" />,
+    ssr: true,
+  },
+);
+
+const EducationAndAwards = dynamic(
+  () =>
+    import("@/components/sections/education").then(
+      (mod) => mod.EducationAndAwards,
+    ),
+  {
+    loading: () => <div className="min-h-[300px]" />,
+    ssr: true,
+  },
+);
+
+const Contact = dynamic(
+  () => import("@/components/sections/contact").then((mod) => mod.Contact),
+  {
+    loading: () => <div className="min-h-[300px]" />,
+    ssr: true,
+  },
+);
 
 export default function Home() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-
   return (
-    <main className="relative min-h-screen">
-      <AnimatedGradient />
-      
-      {/* Scroll Progress Bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-secondary z-[60] origin-left"
-        style={{ scaleX }}
-      />
-      
-      <Navbar />
-      
-      <div className="flex flex-col">
-        <Hero />
-        <div className="bg-gradient-to-b from-transparent via-background/50 to-background flex flex-col pt-20">
-          <Experience />
-          <Projects />
-          <Skills />
-          <EducationAndAwards />
-          <Contact />
-        </div>
-      </div>
+    <MotionProvider>
+      <main className="relative min-h-screen">
+        <AnimatedGradient />
+        <ScrollProgress />
 
-      <footer className="border-t bg-muted/30 py-12">
-        <div className="container px-4 text-center">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Oswin Alex. Built with Next.js, Tailwind CSS and Framer Motion.
-          </p>
+        <Navbar />
+
+        <div className="flex flex-col">
+          <Hero />
+
+          <div className="bg-gradient-to-b from-transparent via-background/50 to-background flex flex-col pt-20">
+            <Suspense fallback={<div className="min-h-[400px]" />}>
+              <Experience />
+            </Suspense>
+
+            <Suspense fallback={<div className="min-h-[400px]" />}>
+              <Projects />
+            </Suspense>
+
+            <Suspense fallback={<div className="min-h-[300px]" />}>
+              <Skills />
+            </Suspense>
+
+            <Suspense fallback={<div className="min-h-[300px]" />}>
+              <EducationAndAwards />
+            </Suspense>
+
+            <Suspense fallback={<div className="min-h-[300px]" />}>
+              <Contact />
+            </Suspense>
+          </div>
         </div>
-      </footer>
-    </main>
+
+        <footer className="border-t bg-muted/30 py-12">
+          <div className="container px-4 text-center">
+            <p className="text-sm text-muted-foreground">
+              © 2026 Oswin Alex. Built with Next.js, Tailwind CSS and Framer
+              Motion.
+            </p>
+          </div>
+        </footer>
+      </main>
+    </MotionProvider>
   );
 }

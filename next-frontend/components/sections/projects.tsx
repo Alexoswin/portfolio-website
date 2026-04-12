@@ -3,7 +3,7 @@
 import { profile } from "@/lib/profile";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Card } from "@/components/ui/card";
-import { ExternalLink, Github, Code2 } from "lucide-react";
+import { ExternalLink, Code2 } from "lucide-react";
 import Link from "next/link";
 
 export function Projects() {
@@ -18,7 +18,7 @@ export function Projects() {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {profile.projects.map((project, index) => (
-          <Card key={index} delay={index * 0.1} className="flex flex-col h-full">
+          <Card key={project.title} delay={index * 0.1} className="flex flex-col h-full">
             <div className="flex justify-between items-start mb-4">
               <div className="p-2 rounded-lg bg-primary/10 text-primary">
                 <Code2 className="h-6 w-6" />
@@ -52,8 +52,8 @@ export function Projects() {
             </div>
             
             <ul className="grid gap-2 mb-6 flex-grow">
-              {project.highlights.map((item, i) => (
-                <li key={i} className="text-sm text-muted-foreground flex gap-2">
+              {project.highlights.map((item) => (
+                <li key={item} className="text-sm text-muted-foreground flex gap-2">
                   <span className="text-primary">•</span>
                   {item}
                 </li>
@@ -69,8 +69,8 @@ export function Projects() {
             Open Source
           </SectionHeading>
           <div className="grid gap-6 max-w-4xl mx-auto">
-            {profile.openSource.map((os, index) => (
-              <Card key={index} className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            {profile.openSource.map((os) => (
+              <Card key={os.project} className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
                   <h4 className="text-lg font-bold">{os.project} — {os.contribution}</h4>
                   <p className="text-muted-foreground text-sm mt-1">{os.details}</p>

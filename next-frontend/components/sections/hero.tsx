@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { profile } from "@/lib/profile";
 import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
 
@@ -12,7 +12,7 @@ export function Hero() {
     <section className="relative flex min-h-screen flex-col items-center justify-center pt-20 overflow-hidden">
       <div className="container px-4 md:px-6 z-10">
         <div className="flex flex-col items-center gap-4 text-center">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
@@ -20,27 +20,27 @@ export function Hero() {
           >
             <span className="flex h-2 w-2 rounded-full bg-primary mr-2 animate-pulse" />{" "}
             Available for new opportunities
-          </motion.div>
+          </m.div>
 
-          <motion.h1
+          <m.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl"
           >
             Hi, I'm <span className="text-gradient">{profile.name}</span>
-          </motion.h1>
+          </m.h1>
 
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="max-w-[700px] text-muted-foreground text-lg md:text-xl"
           >
             {profile.summary}
-          </motion.p>
+          </m.p>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
@@ -61,9 +61,9 @@ export function Hero() {
               <FaGithub className="mr-2 h-4 w-4" />
               GitHub
             </Link>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
@@ -85,7 +85,7 @@ export function Hero() {
               icon={<MapPin className="h-4 w-4" />}
               text={profile.contact.location}
             />
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>
@@ -95,7 +95,7 @@ export function Hero() {
 function ContactItem({
   icon,
   text,
-}: readonly { icon: React.ReactNode; text: string }) {
+}: Readonly<{ icon: React.ReactNode; text: string }>) {
   return (
     <div className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
       <div className="p-2 rounded-lg bg-muted text-primary">{icon}</div>

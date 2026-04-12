@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Moon, Sun, Laptop } from "lucide-react";
+import { m, AnimatePresence } from "framer-motion";
+import { Menu, X, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { profile } from "@/lib/profile";
@@ -19,8 +19,6 @@ const navItems = [
 export function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
-  const { theme, setTheme } = useTheme();
-
   React.useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
@@ -36,13 +34,13 @@ export function Navbar() {
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
-          <motion.div
+          <m.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold"
           >
             {profile.name.charAt(0)}
-          </motion.div>
+          </m.div>
           <span className="text-xl font-bold tracking-tight hidden sm:inline-block">
             {profile.name}
           </span>
@@ -77,11 +75,11 @@ export function Navbar() {
       {/* Mobile Nav */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-b bg-background"
+            className="md:hidden border-b bg-background overflow-hidden"
           >
             <div className="container mx-auto flex flex-col gap-4 p-4">
               {navItems.map((item) => (
@@ -95,7 +93,7 @@ export function Navbar() {
                 </Link>
               ))}
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </header>
