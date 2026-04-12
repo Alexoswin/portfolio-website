@@ -23,11 +23,14 @@ export function Contact() {
     setLoading(true);
     setStatus("");
     try {
-      const res = await fetch("http://localhost:8000/getintouch", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        "https://smart-blind-stick-4.onrender.com/getintouch",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        },
+      );
       if (res.ok) {
         setStatus("success");
         setFormData({ name: "", email: "", subject: "", message: "" });
