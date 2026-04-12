@@ -17,7 +17,15 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: `${profile.name} | ${profile.title}`,
   description: profile.summary,
-  keywords: ["Software Engineer", "Portfolio", profile.name, "Full Stack Developer", "NestJS", "React", "Next.js"],
+  keywords: [
+    "Software Engineer",
+    "Portfolio",
+    profile.name,
+    "Full Stack Developer",
+    "NestJS",
+    "React",
+    "Next.js",
+  ],
   authors: [{ name: profile.name }],
   openGraph: {
     title: `${profile.name} | Portfolio`,
@@ -27,6 +35,8 @@ export const metadata: Metadata = {
   },
 };
 
+import Script from "next/script";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -34,7 +44,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <ThemeProvider
           attribute="data-theme"
           defaultTheme="dark"
@@ -43,6 +55,20 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
+
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-V9Y5HK436Y"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-V9Y5HK436Y');
+          `}
+        </Script>
       </body>
     </html>
   );
