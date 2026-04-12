@@ -52,6 +52,7 @@ app.post('/addcertification', Certification.addCertification);
 
 app.post('/deletecertification', Certification.deleteCertification);
 app.post('/sendmessage', Messages.addMessage);
+app.post('/getintouch', Messages.addMessage);
 
 app.get('/messages', Messages.getMessages);
 

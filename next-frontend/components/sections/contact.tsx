@@ -6,8 +6,41 @@ import { Card } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import Link from "next/link";
+import { useState } from "react";
 
 export function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<"success" | "error" | "">("");
+
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus("");
+    try {
+      const res = await fetch("http://localhost:8000/getintouch", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+    }
+    setLoading(false);
+  };
+
   return (
     <section id="contact" className="container px-4 py-24 md:px-6">
       <div className="max-w-5xl mx-auto">
@@ -66,7 +99,7 @@ export function Contact() {
               </p>
             </div>
 
-            <form className="grid gap-4" onSubmit={(e) => e.preventDefault()}>
+            <form className="grid gap-4" onSubmit={handleSubmit}>
               <div className="grid grid-cols-2 gap-4">
                 <div className="grid gap-1.5">
                   <label htmlFor="name" className="text-sm font-medium">
@@ -74,6 +107,11 @@ export function Contact() {
                   </label>
                   <input
                     id="name"
+                    required
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
                     placeholder="John Doe"
                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   />
@@ -85,6 +123,11 @@ export function Contact() {
                   <input
                     id="email"
                     type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
                     placeholder="john@example.com"
                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   />
@@ -96,6 +139,11 @@ export function Contact() {
                 </label>
                 <input
                   id="subject"
+                  required
+                  value={formData.subject}
+                  onChange={(e) =>
+                    setFormData({ ...formData, subject: e.target.value })
+                  }
                   placeholder="How can I help you?"
                   className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 />
@@ -106,15 +154,33 @@ export function Contact() {
                 </label>
                 <textarea
                   id="message"
+                  required
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
                   placeholder="Your message here..."
                   className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 />
               </div>
+
+              {status === "success" && (
+                <p className="text-sm text-green-500">
+                  Message sent successfully!
+                </p>
+              )}
+              {status === "error" && (
+                <p className="text-sm text-red-500">
+                  Failed to send message. Please try again.
+                </p>
+              )}
+
               <button
                 type="submit"
-                className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
+                disabled={loading}
+                className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 disabled:opacity-50"
               >
-                Send Message
+                {loading ? "Sending..." : "Send Message"}
                 <Send className="ml-2 h-4 w-4" />
               </button>
             </form>
