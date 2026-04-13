@@ -1,0 +1,73 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="160" y1="80" x2="1440" y2="820" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#E0F2FE"/>
+    </linearGradient>
+    <linearGradient id="cardA" x1="300" y1="230" x2="760" y2="300" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F766E"/>
+      <stop offset="1" stop-color="#2DD4BF"/>
+    </linearGradient>
+    <linearGradient id="cardB" x1="840" y1="230" x2="1300" y2="300" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0L12 6L0 12V0Z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="900" rx="40" fill="url(#bg)"/>
+
+  <text x="120" y="140" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700">
+    RSA Key Generation Flow
+  </text>
+  <text x="120" y="185" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="24">
+    The secret structure is created first, then split into one public key and one private key.
+  </text>
+
+  <rect x="180" y="240" width="290" height="112" rx="26" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="220" y="287" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">1. Generate primes</text>
+  <text x="238" y="320" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="20">Choose random p and q</text>
+
+  <rect x="555" y="240" width="250" height="112" rx="26" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="606" y="287" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">2. Multiply</text>
+  <text x="601" y="320" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="20">n = p x q</text>
+
+  <rect x="890" y="240" width="260" height="112" rx="26" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="933" y="287" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">3. Totient</text>
+  <text x="933" y="320" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="20">phi(n) = (p - 1)(q - 1)</text>
+
+  <rect x="1235" y="240" width="190" height="112" rx="26" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="1279" y="287" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">4. Choose e</text>
+  <text x="1269" y="320" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="20">gcd(e, phi) = 1</text>
+
+  <line x1="470" y1="296" x2="555" y2="296" stroke="#64748B" stroke-width="8" marker-end="url(#arrow)"/>
+  <line x1="805" y1="296" x2="890" y2="296" stroke="#64748B" stroke-width="8" marker-end="url(#arrow)"/>
+  <line x1="1150" y1="296" x2="1235" y2="296" stroke="#64748B" stroke-width="8" marker-end="url(#arrow)"/>
+
+  <rect x="610" y="430" width="380" height="126" rx="30" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2"/>
+  <text x="683" y="480" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">5. Compute d</text>
+  <text x="678" y="515" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="22">d = e^-1 mod phi(n)</text>
+
+  <line x1="1330" y1="352" x2="1330" y2="400" stroke="#64748B" stroke-width="8"/>
+  <line x1="1330" y1="400" x2="800" y2="400" stroke="#64748B" stroke-width="8"/>
+  <line x1="800" y1="400" x2="800" y2="430" stroke="#64748B" stroke-width="8" marker-end="url(#arrow)"/>
+
+  <rect x="210" y="630" width="470" height="150" rx="34" fill="url(#cardA)"/>
+  <text x="272" y="686" fill="#F0FDFA" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">Public key</text>
+  <text x="270" y="730" fill="#CCFBF1" font-family="Arial, Helvetica, sans-serif" font-size="26">(n, e)</text>
+  <text x="270" y="765" fill="#CCFBF1" font-family="Arial, Helvetica, sans-serif" font-size="22">
+    Safe to publish, embed in certificates, or share openly
+  </text>
+
+  <rect x="920" y="630" width="470" height="150" rx="34" fill="url(#cardB)"/>
+  <text x="988" y="686" fill="#EEF2FF" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">Private key</text>
+  <text x="983" y="730" fill="#DBEAFE" font-family="Arial, Helvetica, sans-serif" font-size="26">(n, d) plus CRT values</text>
+  <text x="983" y="765" fill="#DBEAFE" font-family="Arial, Helvetica, sans-serif" font-size="22">
+    Must stay secret because it reverses the public operation
+  </text>
+
+  <line x1="760" y1="556" x2="465" y2="630" stroke="#0F766E" stroke-width="8" marker-end="url(#arrow)"/>
+  <line x1="840" y1="556" x2="1155" y2="630" stroke="#2563EB" stroke-width="8" marker-end="url(#arrow)"/>
+</svg>

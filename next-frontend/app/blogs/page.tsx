@@ -6,12 +6,27 @@ import Image from "next/image";
 
 const blogs = [
   {
+    slug: "asymmetric-cryptography",
+    title: "Asymmetric Cryptography Explained",
+    excerpt:
+      "A detailed guide to public and private keys, how key pairs are created, and a full RSA walkthrough with encryption and signature examples.",
+    date: "April 13, 2026",
+    isoDate: "2026-04-13",
+    readTime: "14 min read",
+    image: "/blogs/asymmetric-key-flow-diagram.svg",
+    imageClassName:
+      "object-contain p-3 transition-transform duration-500 group-hover:scale-105",
+  },
+  {
     slug: "aes-encryption",
     title: "Understanding AES Encryption",
     excerpt: "A deep dive into the Advanced Encryption Standard, symmetric key cryptography, and how the algorithm transforms data through its core phases.",
     date: "April 13, 2026",
+    isoDate: "2026-04-13",
     readTime: "8 min read",
     image: "/blogs/aes_encryption_diagram.png",
+    imageClassName:
+      "object-cover transition-transform duration-500 group-hover:scale-105",
   },
 ];
 
@@ -45,12 +60,12 @@ export default function BlogsPage() {
                       src={blog.image}
                       alt={blog.title}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className={blog.imageClassName}
                     />
                   </div>
                   <div className="p-6 flex flex-col flex-grow">
                     <div className="flex items-center justify-between text-xs text-muted-foreground mb-3">
-                      <time dateTime={blog.date}>{blog.date}</time>
+                      <time dateTime={blog.isoDate}>{blog.date}</time>
                       <span>{blog.readTime}</span>
                     </div>
                     <h2 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">

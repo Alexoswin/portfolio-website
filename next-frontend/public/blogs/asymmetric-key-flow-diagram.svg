@@ -1,0 +1,107 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="60" x2="1480" y2="840" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <linearGradient id="accentA" x1="220" y1="200" x2="740" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F766E"/>
+      <stop offset="1" stop-color="#14B8A6"/>
+    </linearGradient>
+    <linearGradient id="accentB" x1="860" y1="200" x2="1380" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1D4ED8"/>
+      <stop offset="1" stop-color="#60A5FA"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="1600" height="900" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="24" stdDeviation="24" flood-color="#0F172A" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrowBlue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0L12 6L0 12V0Z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrowTeal" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0L12 6L0 12V0Z" fill="#0F766E"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="900" rx="40" fill="url(#bg)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="90" y="90" width="1420" height="720" rx="36" fill="#FFFFFF" fill-opacity="0.92"/>
+  </g>
+
+  <text x="120" y="155" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700">
+    Asymmetric Cryptography: Two Main Workflows
+  </text>
+  <text x="120" y="198" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="24">
+    Public keys are shared. Private keys stay secret. The direction of use depends on the goal.
+  </text>
+
+  <rect x="120" y="250" width="620" height="490" rx="28" fill="url(#accentA)" fill-opacity="0.11" stroke="#14B8A6" stroke-width="2"/>
+  <rect x="860" y="250" width="620" height="490" rx="28" fill="url(#accentB)" fill-opacity="0.11" stroke="#60A5FA" stroke-width="2"/>
+
+  <text x="150" y="305" fill="#134E4A" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">
+    Confidentiality
+  </text>
+  <text x="150" y="338" fill="#134E4A" font-family="Arial, Helvetica, sans-serif" font-size="22">
+    Encrypt with the receiver's public key
+  </text>
+
+  <rect x="160" y="385" width="170" height="120" rx="24" fill="#FFFFFF"/>
+  <text x="192" y="435" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Alice</text>
+  <text x="191" y="468" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="19">Sender</text>
+
+  <rect x="355" y="385" width="160" height="120" rx="24" fill="#CCFBF1"/>
+  <text x="384" y="432" fill="#115E59" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">Bob's</text>
+  <text x="381" y="464" fill="#115E59" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">Public Key</text>
+
+  <rect x="540" y="385" width="170" height="120" rx="24" fill="#FFFFFF"/>
+  <text x="566" y="432" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">Ciphertext</text>
+  <text x="570" y="464" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="19">sent openly</text>
+
+  <line x1="330" y1="445" x2="355" y2="445" stroke="#0F766E" stroke-width="8" marker-end="url(#arrowTeal)"/>
+  <line x1="515" y1="445" x2="540" y2="445" stroke="#0F766E" stroke-width="8" marker-end="url(#arrowTeal)"/>
+
+  <rect x="355" y="565" width="170" height="120" rx="24" fill="#0F766E"/>
+  <text x="390" y="613" fill="#ECFEFF" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">Bob's</text>
+  <text x="382" y="645" fill="#ECFEFF" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">Private Key</text>
+
+  <rect x="540" y="565" width="170" height="120" rx="24" fill="#FFFFFF"/>
+  <text x="583" y="612" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700">Plaintext</text>
+  <text x="584" y="645" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="19">only Bob reads</text>
+
+  <line x1="625" y1="505" x2="625" y2="565" stroke="#0F766E" stroke-width="8" marker-end="url(#arrowTeal)"/>
+  <line x1="525" y1="625" x2="540" y2="625" stroke="#0F766E" stroke-width="8" marker-end="url(#arrowTeal)"/>
+
+  <text x="890" y="305" fill="#1E3A8A" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">
+    Authenticity
+  </text>
+  <text x="890" y="338" fill="#1E3A8A" font-family="Arial, Helvetica, sans-serif" font-size="22">
+    Sign with the sender's private key
+  </text>
+
+  <rect x="900" y="385" width="170" height="120" rx="24" fill="#FFFFFF"/>
+  <text x="943" y="432" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Bob</text>
+  <text x="935" y="465" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="19">Signer</text>
+
+  <rect x="1095" y="385" width="160" height="120" rx="24" fill="#DBEAFE"/>
+  <text x="1124" y="432" fill="#1D4ED8" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">Bob's</text>
+  <text x="1123" y="464" fill="#1D4ED8" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">Private Key</text>
+
+  <rect x="1280" y="385" width="170" height="120" rx="24" fill="#FFFFFF"/>
+  <text x="1319" y="432" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700">Signature</text>
+  <text x="1325" y="464" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="19">with message</text>
+
+  <line x1="1070" y1="445" x2="1095" y2="445" stroke="#2563EB" stroke-width="8" marker-end="url(#arrowBlue)"/>
+  <line x1="1255" y1="445" x2="1280" y2="445" stroke="#2563EB" stroke-width="8" marker-end="url(#arrowBlue)"/>
+
+  <rect x="1095" y="565" width="160" height="120" rx="24" fill="#60A5FA"/>
+  <text x="1123" y="612" fill="#EFF6FF" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">Bob's</text>
+  <text x="1124" y="645" fill="#EFF6FF" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">Public Key</text>
+
+  <rect x="1280" y="565" width="170" height="120" rx="24" fill="#FFFFFF"/>
+  <text x="1315" y="612" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">Verified</text>
+  <text x="1305" y="645" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="19">by anyone</text>
+
+  <line x1="1365" y1="505" x2="1365" y2="565" stroke="#2563EB" stroke-width="8" marker-end="url(#arrowBlue)"/>
+  <line x1="1255" y1="625" x2="1280" y2="625" stroke="#2563EB" stroke-width="8" marker-end="url(#arrowBlue)"/>
+</svg>
