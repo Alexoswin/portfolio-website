@@ -28,7 +28,7 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl"
           >
-            Hi, I'm <span className="text-gradient">{profile.name}</span>
+            Hi, I&apos;m <span className="text-gradient">{profile.name}</span>
           </m.h1>
 
           <m.p

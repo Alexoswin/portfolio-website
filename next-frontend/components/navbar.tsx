@@ -9,11 +9,12 @@ import { cn } from "@/lib/utils";
 import { profile } from "@/lib/profile";
 
 const navItems = [
-  { name: "Experience", href: "#experience" },
-  { name: "Projects", href: "#projects" },
-  { name: "Skills", href: "#skills" },
-  { name: "Education", href: "#education" },
-  { name: "Contact", href: "#contact" },
+  { name: "Experience", href: "/#experience" },
+  { name: "Projects", href: "/#projects" },
+  { name: "Skills", href: "/#skills" },
+  { name: "Education", href: "/#education" },
+  { name: "Blogs", href: "/blogs" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export function Navbar() {

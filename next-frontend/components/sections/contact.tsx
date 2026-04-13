@@ -58,7 +58,7 @@ export function Contact() {
           <div className="flex flex-col gap-8">
             <h3 className="text-2xl font-bold">Contact Information</h3>
             <p className="text-muted-foreground">
-              I'm always open to discussing new projects, creative ideas or
+              I&apos;m always open to discussing new projects, creative ideas or
               opportunities to be part of your visions.
             </p>
 
@@ -98,7 +98,7 @@ export function Contact() {
             <div className="grid gap-2">
               <h3 className="text-xl font-bold">Send a Message</h3>
               <p className="text-sm text-muted-foreground">
-                I'll get back to you as soon as possible.
+                I&apos;ll get back to you as soon as possible.
               </p>
             </div>
 
