@@ -4,6 +4,7 @@ import { profile } from "@/lib/profile";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Card } from "@/components/ui/card";
 import { Award, GraduationCap, Trophy } from "lucide-react";
+import { m } from "framer-motion";
 
 export function EducationAndAwards() {
   return (
@@ -15,7 +16,7 @@ export function EducationAndAwards() {
           </SectionHeading>
           <div className="grid gap-6 mt-8">
             {profile.education.map((edu, index) => (
-              <Card key={index} className="flex gap-4 items-start">
+              <Card key={index} delay={index * 0.1} className="flex gap-4 items-start">
                 <div className="p-2 rounded-lg bg-primary/10 text-primary mt-1">
                   <GraduationCap className="h-6 w-6" />
                 </div>
@@ -34,7 +35,7 @@ export function EducationAndAwards() {
             </SectionHeading>
             <div className="grid gap-4 mt-8">
               {profile.certifications.map((cert, index) => (
-                <Card key={index} className="flex gap-4 items-start">
+                <Card key={index} delay={index * 0.1} className="flex gap-4 items-start">
                   <div className="p-2 rounded-lg bg-accent/10 text-accent mt-1">
                     <Award className="h-6 w-6" />
                   </div>

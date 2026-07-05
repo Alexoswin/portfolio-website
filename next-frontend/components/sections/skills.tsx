@@ -28,10 +28,10 @@ export function Skills() {
         {skillCategories.map((category, idx) => (
           <m.div
             key={category.name}
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: idx * 0.1 }}
+            transition={{ duration: 0.6, delay: idx * 0.1 }}
             className="flex flex-col gap-4 p-6 rounded-2xl border bg-card/50 backdrop-blur-sm"
           >
             <h3 className="text-xl font-bold text-primary">{category.name}</h3>

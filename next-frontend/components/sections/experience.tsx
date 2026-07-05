@@ -16,8 +16,8 @@ export function Experience() {
       </SectionHeading>
 
       <div className="mx-auto max-w-4xl flex flex-col gap-8">
-        {profile.experience.map((exp) => (
-          <Card key={`${exp.company}-${exp.role}`} className="flex flex-col gap-4">
+        {profile.experience.map((exp, index) => (
+          <Card key={`${exp.company}-${exp.role}`} delay={index * 0.1} className="flex flex-col gap-4">
             <div className="flex flex-col md:flex-row justify-between md:items-center gap-2">
               <div>
                 <h3 className="text-xl font-bold">{exp.role}</h3>

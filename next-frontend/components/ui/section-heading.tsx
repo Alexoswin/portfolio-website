@@ -19,10 +19,10 @@ export function SectionHeading({ children, subtitle, className, align = "left" }
 
   return (
     <m.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.6 }}
       className={cn("flex flex-col gap-2 mb-12", alignClasses[align], className)}
     >
       <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gradient">

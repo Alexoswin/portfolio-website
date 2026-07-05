@@ -7,6 +7,7 @@ import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import Link from "next/link";
 import { useState } from "react";
+import { m } from "framer-motion";
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -55,7 +56,13 @@ export function Contact() {
         </SectionHeading>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12">
-          <div className="flex flex-col gap-8">
+          <m.div
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="flex flex-col gap-8"
+          >
             <h3 className="text-2xl font-bold">Contact Information</h3>
             <p className="text-muted-foreground">
               I&apos;m always open to discussing new projects, creative ideas or
@@ -92,8 +99,14 @@ export function Contact() {
                 href={profile.contact.linkedin}
               />
             </div>
-          </div>
+          </m.div>
 
+          <m.div
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
           <Card className="flex flex-col gap-6">
             <div className="grid gap-2">
               <h3 className="text-xl font-bold">Send a Message</h3>
@@ -188,6 +201,7 @@ export function Contact() {
               </button>
             </form>
           </Card>
+          </m.div>
         </div>
       </div>
     </section>

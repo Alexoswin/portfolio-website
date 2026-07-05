@@ -12,10 +12,10 @@ interface CardProps {
 export function Card({ children, className, delay = 0 }: Readonly<CardProps>) {
   return (
     <m.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay }}
+      transition={{ duration: 0.6, delay }}
       whileHover={{ y: -5 }}
       className={cn(
         "group relative overflow-hidden rounded-2xl border bg-card p-6 transition-all hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/50",
