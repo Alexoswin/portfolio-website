@@ -1,214 +1,90 @@
-"use client";
-
+import { Mail, MapPin, Phone } from "lucide-react";
 import { profile } from "@/lib/profile";
+import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Card } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa6";
-import Link from "next/link";
-import { useState } from "react";
-import { m } from "framer-motion";
+import { Reveal } from "@/components/effects/reveal";
+import { GitHubIcon, LinkedInIcon } from "@/components/ui/icons";
+import { ContactForm } from "@/components/sections/contact-form";
 
 export function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-  const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState<"success" | "error" | "">("");
-
-  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    setStatus("");
-    try {
-      const res = await fetch(
-        "https://smart-blind-stick-4.onrender.com/getintouch",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        },
-      );
-      if (res.ok) {
-        setStatus("success");
-        setFormData({ name: "", email: "", subject: "", message: "" });
-      } else {
-        setStatus("error");
-      }
-    } catch (err) {
-      console.error(err);
-      setStatus("error");
-    }
-    setLoading(false);
-  };
-
   return (
-    <section id="contact" className="container px-4 py-24 md:px-6">
-      <div className="max-w-5xl mx-auto">
-        <SectionHeading
-          subtitle="Let's connect and discuss potential collaborations."
-          align="center"
-        >
-          Get In Touch
-        </SectionHeading>
+    <Section id="contact">
+      <SectionHeading
+        id="contact-heading"
+        eyebrow="Contact"
+        title="Get In Touch"
+        subtitle="Let's connect and discuss potential collaborations."
+      />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12">
-          <m.div
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col gap-8"
-          >
-            <h3 className="text-2xl font-bold">Contact Information</h3>
-            <p className="text-muted-foreground">
-              I&apos;m always open to discussing new projects, creative ideas or
-              opportunities to be part of your visions.
-            </p>
+      <div className="mx-auto grid max-w-5xl grid-cols-1 gap-10 lg:grid-cols-[5fr_6fr] lg:gap-14">
+        <Reveal className="flex flex-col gap-8">
+          <p className="text-base leading-relaxed text-muted-foreground">
+            I&apos;m always open to discussing new projects, creative ideas or
+            opportunities to be part of your visions.
+          </p>
 
-            <div className="flex flex-col gap-6">
-              <ContactLink
-                icon={<Mail className="h-5 w-5" />}
-                label="Email"
-                value={profile.contact.email}
-                href={`mailto:${profile.contact.email}`}
-              />
-              <ContactLink
-                icon={<Phone className="h-5 w-5" />}
-                label="Phone"
-                value={profile.contact.phone}
-                href={`tel:${profile.contact.phone}`}
-              />
-              <ContactLink
-                icon={<MapPin className="h-5 w-5" />}
-                label="Location"
-                value={profile.contact.location}
-              />
-            </div>
+          <ul className="flex flex-col gap-5">
+            <ContactDetail
+              icon={<Mail className="h-5 w-5" aria-hidden="true" />}
+              label="Email"
+              value={profile.contact.email}
+              href={`mailto:${profile.contact.email}`}
+            />
+            <ContactDetail
+              icon={<Phone className="h-5 w-5" aria-hidden="true" />}
+              label="Phone"
+              value={profile.contact.phone}
+              href={`tel:${profile.contact.phone.replace(/\s/g, "")}`}
+            />
+            <ContactDetail
+              icon={<MapPin className="h-5 w-5" aria-hidden="true" />}
+              label="Location"
+              value={profile.contact.location}
+            />
+          </ul>
 
-            <div className="flex gap-4">
-              <SocialButton
-                icon={<FaGithub className="h-5 w-5" />}
-                href={profile.contact.github}
-              />
-              <SocialButton
-                icon={<FaLinkedin className="h-5 w-5" />}
-                href={profile.contact.linkedin}
-              />
-            </div>
-          </m.div>
+          <div className="flex gap-3">
+            <a
+              href={profile.contact.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub profile"
+              className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-card/60 text-muted-foreground transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary"
+            >
+              <GitHubIcon className="h-5 w-5" />
+            </a>
+            <a
+              href={profile.contact.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn profile"
+              className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-card/60 text-muted-foreground transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary"
+            >
+              <LinkedInIcon className="h-5 w-5" />
+            </a>
+          </div>
+        </Reveal>
 
-          <m.div
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-          <Card className="flex flex-col gap-6">
-            <div className="grid gap-2">
-              <h3 className="text-xl font-bold">Send a Message</h3>
+        <Reveal delay={0.1}>
+          <Card className="flex flex-col gap-6 sm:p-8">
+            <div className="flex flex-col gap-1.5">
+              <h3 className="text-xl font-semibold tracking-tight">
+                Send a Message
+              </h3>
               <p className="text-sm text-muted-foreground">
                 I&apos;ll get back to you as soon as possible.
               </p>
             </div>
-
-            <form className="grid gap-4" onSubmit={handleSubmit}>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="grid gap-1.5">
-                  <label htmlFor="name" className="text-sm font-medium">
-                    Name
-                  </label>
-                  <input
-                    id="name"
-                    required
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    placeholder="John Doe"
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  />
-                </div>
-                <div className="grid gap-1.5">
-                  <label htmlFor="email" className="text-sm font-medium">
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    placeholder="john@example.com"
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  />
-                </div>
-              </div>
-              <div className="grid gap-1.5">
-                <label htmlFor="subject" className="text-sm font-medium">
-                  Subject
-                </label>
-                <input
-                  id="subject"
-                  required
-                  value={formData.subject}
-                  onChange={(e) =>
-                    setFormData({ ...formData, subject: e.target.value })
-                  }
-                  placeholder="How can I help you?"
-                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                />
-              </div>
-              <div className="grid gap-1.5">
-                <label htmlFor="message" className="text-sm font-medium">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  required
-                  value={formData.message}
-                  onChange={(e) =>
-                    setFormData({ ...formData, message: e.target.value })
-                  }
-                  placeholder="Your message here..."
-                  className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                />
-              </div>
-
-              {status === "success" && (
-                <p className="text-sm text-green-500">
-                  Message sent successfully!
-                </p>
-              )}
-              {status === "error" && (
-                <p className="text-sm text-red-500">
-                  Failed to send message. Please try again.
-                </p>
-              )}
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 disabled:opacity-50"
-              >
-                {loading ? "Sending..." : "Send Message"}
-                <Send className="ml-2 h-4 w-4" />
-              </button>
-            </form>
+            <ContactForm />
           </Card>
-          </m.div>
-        </div>
+        </Reveal>
       </div>
-    </section>
+    </Section>
   );
 }
 
-function ContactLink({
+function ContactDetail({
   icon,
   label,
   value,
@@ -219,41 +95,21 @@ function ContactLink({
   value: string;
   href?: string;
 }>) {
-  const Content = (
-    <div className="flex items-center gap-4 group">
-      <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+  const content = (
+    <span className="group flex items-center gap-4">
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
         {icon}
-      </div>
-      <div>
-        <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+      </span>
+      <span className="flex flex-col">
+        <span className="font-mono text-[11px] tracking-[0.18em] text-muted-foreground uppercase">
           {label}
-        </p>
-        <p className="text-base font-semibold">{value}</p>
-      </div>
-    </div>
+        </span>
+        <span className="text-[15px] font-medium">{value}</span>
+      </span>
+    </span>
   );
 
-  if (href) {
-    return <Link href={href}>{Content}</Link>;
-  }
-
-  return Content;
-}
-
-function SocialButton({
-  icon,
-  href,
-}: Readonly<{
-  icon: React.ReactNode;
-  href: string;
-}>) {
   return (
-    <Link
-      href={href}
-      target="_blank"
-      className="p-3 rounded-full border bg-card hover:bg-primary hover:text-primary-foreground transition-all"
-    >
-      {icon}
-    </Link>
+    <li>{href ? <a href={href} className="block w-fit">{content}</a> : content}</li>
   );
 }

@@ -1,9 +1,23 @@
-"use client";
-
-import { m } from "framer-motion";
+import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArticleHeader } from "@/components/blog/article-header";
+
+const description =
+  "A detailed guide to public and private keys, how key pairs are created, and a full RSA walkthrough with encryption and signature examples.";
+
+export const metadata: Metadata = {
+  title: "Asymmetric Cryptography Explained",
+  description,
+  alternates: { canonical: "/blogs/asymmetric-cryptography" },
+  openGraph: {
+    type: "article",
+    title: "Asymmetric Cryptography Explained",
+    description,
+    url: "/blogs/asymmetric-cryptography",
+    publishedTime: "2026-04-13",
+    images: ["/blogs/asymmetric-key-flow-diagram.svg"],
+  },
+};
 
 const algorithmSteps = [
   {
@@ -88,44 +102,24 @@ const rsaOperations = [
 
 export default function AsymmetricCryptographyBlog() {
   return (
-    <article className="max-w-4xl mx-auto mt-10 pb-20">
-      <m.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+    <article className="mx-auto max-w-4xl">
+      <ArticleHeader
+        slug="asymmetric-cryptography"
+        title="Asymmetric Cryptography Explained: Public Keys, Private Keys, and RSA"
+        description={description}
+        date="April 13, 2026"
+        isoDate="2026-04-13"
+        readTime="14 min read"
+        tag="Cryptography"
+        image="/blogs/asymmetric-key-flow-diagram.svg"
+        imageAlt="Diagram showing how public and private keys are used for confidentiality and digital signatures"
+        imageFit="contain"
+      />
+
+      <div
+        className="animate-fade-up text-lg leading-relaxed"
+        style={{ animationDelay: "0.15s" }}
       >
-        <Link
-          href="/blogs"
-          className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors mb-8"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to blogs
-        </Link>
-
-        <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground mb-4">
-          <time dateTime="2026-04-13">April 13, 2026</time>
-          <span>•</span>
-          <span>14 min read</span>
-          <span className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">
-            Cryptography
-          </span>
-        </div>
-
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-8 leading-tight">
-          Asymmetric Cryptography Explained: Public Keys, Private Keys, and RSA
-        </h1>
-
-        <div className="relative w-full aspect-video rounded-2xl overflow-hidden mb-16 border bg-muted shadow-2xl">
-          <Image
-            src="/blogs/asymmetric-key-flow-diagram.svg"
-            alt="Diagram showing how public and private keys are used for confidentiality and digital signatures"
-            fill
-            className="object-contain"
-            priority
-          />
-        </div>
-
-        <div className="prose prose-neutral dark:prose-invert max-w-none text-lg leading-relaxed">
           <p className="lead text-xl text-muted-foreground mb-8">
             Asymmetric cryptography solves one of the hardest problems in
             security: how two parties can communicate securely without first
@@ -503,8 +497,7 @@ export default function AsymmetricCryptographyBlog() {
             for secret ones. Once that foundation clicks, the rest of modern
             cryptography becomes much easier to reason about.
           </p>
-        </div>
-      </m.div>
+      </div>
     </article>
   );
 }

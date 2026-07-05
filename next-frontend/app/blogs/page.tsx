@@ -1,92 +1,88 @@
-"use client";
-
-import Link from "next/link";
-import { m } from "framer-motion";
+import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { blogPosts } from "@/lib/blogs";
+import { Badge } from "@/components/ui/badge";
+import { Reveal } from "@/components/effects/reveal";
+import { cn } from "@/lib/utils";
 
-const blogs = [
-  {
-    slug: "asymmetric-cryptography",
-    title: "Asymmetric Cryptography Explained",
-    excerpt:
-      "A detailed guide to public and private keys, how key pairs are created, and a full RSA walkthrough with encryption and signature examples.",
-    date: "April 13, 2026",
-    isoDate: "2026-04-13",
-    readTime: "14 min read",
-    image: "/blogs/asymmetric-key-flow-diagram.svg",
-    imageClassName:
-      "object-contain p-3 transition-transform duration-500 group-hover:scale-105",
+export const metadata: Metadata = {
+  title: "Blog",
+  description:
+    "Thoughts, tutorials, and insights on software engineering and security.",
+  alternates: { canonical: "/blogs" },
+  openGraph: {
+    title: "Blog",
+    description:
+      "Thoughts, tutorials, and insights on software engineering and security.",
+    url: "/blogs",
   },
-  {
-    slug: "aes-encryption",
-    title: "Understanding AES Encryption",
-    excerpt: "A deep dive into the Advanced Encryption Standard, symmetric key cryptography, and how the algorithm transforms data through its core phases.",
-    date: "April 13, 2026",
-    isoDate: "2026-04-13",
-    readTime: "8 min read",
-    image: "/blogs/aes_encryption_diagram.png",
-    imageClassName:
-      "object-cover transition-transform duration-500 group-hover:scale-105",
-  },
-];
+};
 
 export default function BlogsPage() {
   return (
-    <div className="max-w-4xl mx-auto mt-10">
-      <m.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-          Latest <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Writings</span>
+    <div className="mx-auto max-w-4xl">
+      <header className="animate-fade-up mb-12 flex flex-col gap-3">
+        <p className="eyebrow">Writing</p>
+        <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">
+          Latest <span className="text-gradient">Writings</span>
         </h1>
-        <p className="text-lg text-muted-foreground mb-12">
-          Thoughts, tutorials, and insights on software engineering and security.
+        <p className="max-w-2xl text-lg text-muted-foreground">
+          Thoughts, tutorials, and insights on software engineering and
+          security.
         </p>
+      </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {blogs.map((blog, index) => (
-            <m.div
-              key={blog.slug}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {blogPosts.map((post, index) => (
+          <Reveal key={post.slug} delay={index * 0.08} className="h-full">
+            <Link
+              href={`/blogs/${post.slug}`}
+              className="group block h-full rounded-2xl focus-visible:outline-2"
             >
-              <Link href={`/blogs/${blog.slug}`} className="group block h-full">
-                <article className="h-full flex flex-col bg-background/50 backdrop-blur-sm border rounded-2xl overflow-hidden hover:border-primary/50 transition-colors">
-                  <div className="relative w-full h-48 overflow-hidden bg-muted">
-                    <Image
-                      src={blog.image}
-                      alt={blog.title}
-                      fill
-                      className={blog.imageClassName}
+              <article className="flex h-full flex-col overflow-hidden rounded-2xl border bg-card shadow-card transition-[border-color,box-shadow,transform] duration-300 group-hover:-translate-y-0.5 group-hover:border-primary/40 group-hover:shadow-lg group-hover:shadow-primary/5 dark:shadow-card-dark">
+                <div className="relative h-48 w-full overflow-hidden bg-muted">
+                  <Image
+                    src={post.image}
+                    alt=""
+                    fill
+                    sizes="(max-width: 768px) 100vw, 430px"
+                    className={cn(
+                      "transition-transform duration-500 group-hover:scale-105",
+                      post.imageFit === "contain"
+                        ? "object-contain p-3"
+                        : "object-cover",
+                    )}
+                  />
+                </div>
+                <div className="flex grow flex-col p-6">
+                  <div className="mb-3 flex items-center justify-between text-xs text-muted-foreground">
+                    <time dateTime={post.isoDate}>{post.date}</time>
+                    <span className="flex items-center gap-2">
+                      <Badge variant="primary">{post.tag}</Badge>
+                      {post.readTime}
+                    </span>
+                  </div>
+                  <h2 className="mb-2 text-xl font-semibold tracking-tight transition-colors group-hover:text-primary">
+                    {post.title}
+                  </h2>
+                  <p className="grow text-sm leading-relaxed text-muted-foreground">
+                    {post.excerpt}
+                  </p>
+                  <span className="mt-6 flex items-center gap-1 text-sm font-medium text-primary">
+                    Read article
+                    <ArrowRight
+                      className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+                      aria-hidden="true"
                     />
-                  </div>
-                  <div className="p-6 flex flex-col flex-grow">
-                    <div className="flex items-center justify-between text-xs text-muted-foreground mb-3">
-                      <time dateTime={blog.isoDate}>{blog.date}</time>
-                      <span>{blog.readTime}</span>
-                    </div>
-                    <h2 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                      {blog.title}
-                    </h2>
-                    <p className="text-muted-foreground text-sm flex-grow">
-                      {blog.excerpt}
-                    </p>
-                    <div className="mt-6 text-sm font-medium text-primary flex items-center">
-                      Read Article
-                      <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
-                  </div>
-                </article>
-              </Link>
-            </m.div>
-          ))}
-        </div>
-      </m.div>
+                  </span>
+                </div>
+              </article>
+            </Link>
+          </Reveal>
+        ))}
+      </div>
     </div>
   );
 }

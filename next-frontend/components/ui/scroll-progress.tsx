@@ -1,25 +1,41 @@
 "use client";
 
-import * as React from "react";
-import { m, useScroll, useSpring } from "framer-motion";
+import { useEffect, useRef } from "react";
 
+/** Thin page-progress bar under the navbar. Transform-only updates via rAF. */
 export function ScrollProgress() {
-  const [mounted, setMounted] = React.useState(false);
-  React.useEffect(() => setMounted(true), []);
+  const barRef = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-  
-  if (!mounted) return null;
+  useEffect(() => {
+    const bar = barRef.current;
+    if (!bar) return;
+
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = max > 0 ? window.scrollY / max : 0;
+      bar.style.transform = `scaleX(${Math.min(Math.max(progress, 0), 1)})`;
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
 
   return (
-    <m.div
-      className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-secondary z-[60] origin-left"
-      style={{ scaleX }}
+    <div
+      ref={barRef}
+      aria-hidden="true"
+      className="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left scale-x-0 bg-gradient-to-r from-(--glow-1) via-(--glow-2) to-(--glow-3) will-change-transform"
     />
   );
 }

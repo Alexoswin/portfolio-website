@@ -1,39 +1,45 @@
-"use client";
-
-import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/effects/reveal";
 
 interface SectionHeadingProps {
-  children: React.ReactNode;
+  /** Small mono label rendered above the title. */
+  eyebrow: string;
+  title: string;
   subtitle?: string;
+  align?: "left" | "center";
   className?: string;
-  align?: "left" | "center" | "right";
+  /** Heading id — sections reference it via aria-labelledby. */
+  id?: string;
 }
 
-export function SectionHeading({ children, subtitle, className, align = "left" }: Readonly<SectionHeadingProps>) {
-  const alignClasses = {
-    left: "text-left",
-    center: "text-center items-center",
-    right: "text-right items-end",
-  };
-
+export function SectionHeading({
+  eyebrow,
+  title,
+  subtitle,
+  align = "center",
+  className,
+  id,
+}: SectionHeadingProps) {
   return (
-    <m.div
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className={cn("flex flex-col gap-2 mb-12", alignClasses[align], className)}
+    <Reveal
+      className={cn(
+        "mb-14 flex max-w-2xl flex-col gap-3",
+        align === "center" ? "mx-auto items-center text-center" : "items-start",
+        className,
+      )}
     >
-      <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gradient">
-        {children}
+      <span className="eyebrow">{eyebrow}</span>
+      <h2
+        id={id}
+        className="text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
+      >
+        {title}
       </h2>
       {subtitle && (
-        <p className="text-muted-foreground text-lg max-w-2xl">
+        <p className="text-base text-muted-foreground text-pretty sm:text-lg">
           {subtitle}
         </p>
       )}
-      <div className="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mt-2" />
-    </m.div>
+    </Reveal>
   );
 }

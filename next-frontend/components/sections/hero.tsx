@@ -1,125 +1,136 @@
-"use client";
-
-import { m } from "framer-motion";
+import { ArrowRight, ChevronDown, FileText, Mail, MapPin, Phone } from "lucide-react";
 import { profile } from "@/lib/profile";
-import { Mail, Phone, MapPin, ArrowRight, FileText } from "lucide-react";
+import { Container } from "@/components/ui/container";
+import { ButtonLink } from "@/components/ui/button";
+import { GitHubIcon, LinkedInIcon } from "@/components/ui/icons";
+import { ParticleField } from "@/components/effects/particle-field";
 
-import Link from "next/link";
-import { FaGithub, FaLinkedin } from "react-icons/fa6";
+/** Staggered entrance — pure CSS keyframes, so nothing waits for hydration. */
+function entrance(step: number): React.CSSProperties {
+  return { animationDelay: `${step * 0.12}s` };
+}
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-center pt-20 overflow-hidden">
-      <div className="container px-4 md:px-6 z-10">
-        <div className="flex flex-col items-center gap-4 text-center">
-          <m.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center rounded-full border bg-muted px-3 py-1 text-sm font-medium"
-          >
-            <span className="flex h-2 w-2 rounded-full bg-primary mr-2 animate-pulse" />{" "}
-            Available for new opportunities
-          </m.div>
+    <section
+      aria-label="Introduction"
+      className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden pt-16"
+    >
+      <ParticleField className="absolute inset-0 h-full w-full" quantity={90} />
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-background/60 to-transparent"
+      />
 
-          <m.h1
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl"
-          >
-            Hi, I&apos;m <span className="text-gradient">{profile.name}</span>
-          </m.h1>
+      <Container className="relative z-10 flex flex-col items-center gap-6 py-20 text-center">
+        <p
+          className="animate-fade-up inline-flex items-center gap-2.5 rounded-full border border-border bg-card/60 py-1.5 pr-4 pl-3 text-sm font-medium text-muted-foreground backdrop-blur-sm"
+          style={entrance(0)}
+        >
+          <span
+            className="animate-pulse-dot h-2 w-2 rounded-full bg-success"
+            aria-hidden="true"
+          />
+          Available for new opportunities
+        </p>
 
-          <m.p
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-[700px] text-muted-foreground text-lg md:text-xl"
-          >
-            {profile.summary}
-          </m.p>
+        <div className="animate-fade-up flex flex-col gap-4" style={entrance(1)}>
+          <p className="eyebrow">
+            {profile.title} · {profile.contact.location}
+          </p>
+          <h1 className="text-5xl font-semibold tracking-tighter text-balance sm:text-6xl md:text-7xl lg:text-8xl">
+            Hi, I&apos;m{" "}
+            <span className="text-gradient-animated">{profile.name}</span>
+          </h1>
+        </div>
 
-          <m.div
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-wrap items-center justify-center gap-4 py-8"
+        <p
+          className="animate-fade-up max-w-2xl text-base leading-relaxed text-muted-foreground text-pretty sm:text-lg md:text-xl"
+          style={entrance(2)}
+        >
+          {profile.summary}
+        </p>
+
+        <div
+          className="animate-fade-up mt-4 flex flex-wrap items-center justify-center gap-3"
+          style={entrance(3)}
+        >
+          <ButtonLink href="/#projects" size="lg">
+            View Projects
+            <ArrowRight
+              className="h-4 w-4 transition-transform duration-200 group-hover/btn:translate-x-0.5"
+              aria-hidden="true"
+            />
+          </ButtonLink>
+          <ButtonLink
+            href={profile.contact.resume}
+            variant="outline"
+            size="lg"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <Link
-              href="#projects"
-              className="inline-flex h-11 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-            >
-              View Projects
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-            <Link
-              href={profile.contact.resume}
-              target="_blank"
-              className="inline-flex h-11 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
-            >
-              <FileText className="mr-2 h-4 w-4" />
-              Resume
-            </Link>
-            <Link
+            <FileText className="h-4 w-4" aria-hidden="true" />
+            Resume
+          </ButtonLink>
+          <div className="flex gap-2">
+            <a
               href={profile.contact.github}
               target="_blank"
-              className="inline-flex h-11 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground text-muted-foreground"
+              rel="noopener noreferrer"
+              aria-label="GitHub profile"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-card/60 text-muted-foreground backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary"
             >
-              <FaGithub className="mr-2 h-4 w-4" />
-              GitHub
-            </Link>
-            <Link
+              <GitHubIcon className="h-5 w-5" />
+            </a>
+            <a
               href={profile.contact.linkedin}
               target="_blank"
-              className="inline-flex h-11 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground text-muted-foreground"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn profile"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-card/60 text-muted-foreground backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary"
             >
-              <FaLinkedin className="mr-2 h-4 w-4" />
-              LinkedIn
-            </Link>
-          </m.div>
-
-          <m.div
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 mt-8 "
-          >
-            <ContactItem
-              icon={<Mail className="h-4 w-4" />}
-              text={profile.contact.email}
-            />
-            <ContactItem
-              icon={<Phone className="h-4 w-4" />}
-              text={profile.contact.phone}
-            />
-            <ContactItem
-              icon={<FaGithub className="h-4 w-4" />}
-              text="Alexoswin"
-            />
-            <ContactItem
-              icon={<FaLinkedin className="h-4 w-4" />}
-              text="oswin-alex"
-            />
-            <ContactItem
-              icon={<MapPin className="h-4 w-4" />}
-              text={profile.contact.location}
-            />
-          </m.div>
+              <LinkedInIcon className="h-5 w-5" />
+            </a>
+          </div>
         </div>
-      </div>
-    </section>
-  );
-}
 
-function ContactItem({
-  icon,
-  text,
-}: Readonly<{ icon: React.ReactNode; text: string }>) {
-  return (
-    <div className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-      <div className="p-2 rounded-lg bg-muted text-primary">{icon}</div>
-      <span>{text}</span>
-    </div>
+        <ul
+          className="animate-fade-up mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-mono text-xs text-muted-foreground sm:text-sm"
+          style={entrance(4)}
+        >
+          <li>
+            <a
+              href={`mailto:${profile.contact.email}`}
+              className="flex items-center gap-2 transition-colors hover:text-primary"
+            >
+              <Mail className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
+              {profile.contact.email}
+            </a>
+          </li>
+          <li>
+            <a
+              href={`tel:${profile.contact.phone.replace(/\s/g, "")}`}
+              className="flex items-center gap-2 transition-colors hover:text-primary"
+            >
+              <Phone className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
+              {profile.contact.phone}
+            </a>
+          </li>
+          <li className="flex items-center gap-2">
+            <MapPin className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
+            {profile.contact.location}
+          </li>
+        </ul>
+      </Container>
+
+      <a
+        href="/#experience"
+        aria-label="Scroll to experience"
+        className="animate-fade-in absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground transition-colors hover:text-primary"
+        style={{ animationDelay: "1.2s" }}
+      >
+        <ChevronDown className="animate-float h-5 w-5" aria-hidden="true" />
+      </a>
+    </section>
   );
 }

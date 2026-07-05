@@ -1,45 +1,44 @@
-"use client";
-
-import { m } from "framer-motion";
+import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArticleHeader } from "@/components/blog/article-header";
+
+const description =
+  "A deep dive into the Advanced Encryption Standard, symmetric key cryptography, and how the algorithm transforms data through its core phases.";
+
+export const metadata: Metadata = {
+  title: "Understanding AES Encryption",
+  description,
+  alternates: { canonical: "/blogs/aes-encryption" },
+  openGraph: {
+    type: "article",
+    title: "Understanding AES Encryption",
+    description,
+    url: "/blogs/aes-encryption",
+    publishedTime: "2026-04-13",
+    images: ["/blogs/aes_encryption_diagram.png"],
+  },
+};
 
 export default function AesEncryptionBlog() {
   return (
-    <article className="max-w-4xl mx-auto mt-10 pb-20">
-      <m.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+    <article className="mx-auto max-w-4xl">
+      <ArticleHeader
+        slug="aes-encryption"
+        title="Understanding AES Encryption: A Deep Technical Dive"
+        description={description}
+        date="April 13, 2026"
+        isoDate="2026-04-13"
+        readTime="12 min read"
+        tag="Cryptography"
+        image="/blogs/aes_encryption_diagram.png"
+        imageAlt="AES Encryption Architecture Overview"
+        imageFit="cover"
+      />
+
+      <div
+        className="animate-fade-up text-lg leading-relaxed"
+        style={{ animationDelay: "0.15s" }}
       >
-        <Link href="/blogs" className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors mb-8">
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to blogs
-        </Link>
-
-        <div className="flex items-center space-x-4 text-sm text-muted-foreground mb-4">
-          <time dateTime="2026-04-13">April 13, 2026</time>
-          <span>•</span>
-          <span>12 min read</span>
-          <span className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">Cryptography</span>
-        </div>
-
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-8 leading-tight">
-          Understanding AES Encryption: A Deep Technical Dive
-        </h1>
-
-        <div className="relative w-full aspect-video rounded-2xl overflow-hidden mb-16 border bg-muted shadow-2xl">
-          <Image
-            src="/blogs/aes_encryption_diagram.png"
-            alt="AES Encryption Architecture Overview"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-
-        <div className="prose prose-neutral dark:prose-invert max-w-none text-lg leading-relaxed">
           <p className="lead text-xl text-muted-foreground mb-8">
             The Advanced Encryption Standard (AES), established by the U.S. National Institute of Standards and Technology (NIST) in 2001, is a symmetric block cipher chosen to protect classified information. Let&apos;s explore the mathematically elegant mechanics of how it secures the digital world—from WhatsApp messages to banking infrastructure.
           </p>
@@ -149,8 +148,7 @@ export default function AesEncryptionBlog() {
           <p className="mb-6">
             The architectural brilliance of AES lies in its elegant simplicity and mathematical rigor. The continuous loops of diffusion (via ShiftRows and MixColumns) combined with non-linear confusion (via SubBytes) ensure that after just a few rounds, the ciphertext appears entirely random. When implemented correctly with secure block modes (like GCM), AES remains unbreakable by any known practical attack, solidifying its place as the bedrock of modern digital security.
           </p>
-        </div>
-      </m.div>
+      </div>
     </article>
   );
 }
