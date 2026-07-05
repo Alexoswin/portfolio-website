@@ -2,7 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
-  /* other config options here */
+  turbopack: {
+    root: __dirname,
+  },
 };
 
 export default nextConfig;

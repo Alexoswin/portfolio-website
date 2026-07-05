@@ -44,7 +44,7 @@ export function ParticleField({ className, quantity = 90 }: ParticleFieldProps) 
 
     const readThemeColor = () => {
       const value = getComputedStyle(document.documentElement)
-        .getPropertyValue("--glow-1")
+        .getPropertyValue("--particle")
         .trim();
       if (value) dotColor = value;
     };
@@ -114,7 +114,7 @@ export function ParticleField({ className, quantity = 90 }: ParticleFieldProps) 
           const dy = ay - (b.y + parallaxY * 24 * b.z);
           const dist = Math.hypot(dx, dy);
           if (dist < LINK_DISTANCE) {
-            ctx.globalAlpha = (1 - dist / LINK_DISTANCE) * 0.14;
+            ctx.globalAlpha = (1 - dist / LINK_DISTANCE) * 0.16;
             ctx.beginPath();
             ctx.moveTo(ax, ay);
             ctx.lineTo(b.x + parallaxX * 24 * b.z, b.y + parallaxY * 24 * b.z);
@@ -122,7 +122,7 @@ export function ParticleField({ className, quantity = 90 }: ParticleFieldProps) 
           }
         }
 
-        ctx.globalAlpha = 0.25 + a.z * 0.45;
+        ctx.globalAlpha = 0.3 + a.z * 0.45;
         ctx.beginPath();
         ctx.arc(ax, ay, 0.8 + a.z * 1.4, 0, Math.PI * 2);
         ctx.fill();

@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { blogPosts } from "@/lib/blogs";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/effects/reveal";
+import { Spotlight } from "@/components/effects/spotlight";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -41,7 +42,11 @@ export default function BlogsPage() {
               href={`/blogs/${post.slug}`}
               className="group block h-full rounded-2xl focus-visible:outline-2"
             >
-              <article className="flex h-full flex-col overflow-hidden rounded-2xl border bg-card shadow-card transition-[border-color,box-shadow,transform] duration-300 group-hover:-translate-y-0.5 group-hover:border-primary/40 group-hover:shadow-lg group-hover:shadow-primary/5 dark:shadow-card-dark">
+              <Spotlight
+                tilt
+                className="h-full rounded-2xl transition-transform duration-300"
+              >
+                <article className="flex h-full flex-col overflow-hidden rounded-2xl border bg-card shadow-card transition-[border-color,box-shadow] duration-300 group-hover:border-primary/40 group-hover:shadow-lg group-hover:shadow-primary/5 dark:shadow-card-dark">
                 <div className="relative h-48 w-full overflow-hidden bg-muted">
                   <Image
                     src={post.image}
@@ -78,7 +83,8 @@ export default function BlogsPage() {
                     />
                   </span>
                 </div>
-              </article>
+                </article>
+              </Spotlight>
             </Link>
           </Reveal>
         ))}

@@ -41,7 +41,7 @@ export function Projects() {
           <div className="mx-auto flex max-w-3xl flex-col gap-5">
             {profile.openSource.map((os) => (
               <Reveal key={os.project}>
-                <Card className="flex flex-col justify-between gap-5 md:flex-row md:items-center">
+                <Card tilt className="flex flex-col justify-between gap-5 md:flex-row md:items-center">
                   <div className="flex items-start gap-4">
                     <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-secondary/10 text-secondary">
                       <GitPullRequest className="h-5 w-5" aria-hidden="true" />
@@ -85,6 +85,7 @@ function ProjectCard({
 }: Readonly<{ project: ProjectEntry; featured?: boolean }>) {
   return (
     <Card
+      tilt
       className={cn(
         "flex h-full flex-col gap-4",
         featured && "md:p-8 lg:flex-row lg:items-start lg:gap-10",

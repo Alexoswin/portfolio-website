@@ -1,9 +1,12 @@
+import Link from "next/link";
 import { ArrowRight, ChevronDown, FileText, Mail, MapPin, Phone } from "lucide-react";
 import { profile } from "@/lib/profile";
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/icons";
 import { ParticleField } from "@/components/effects/particle-field";
+import { MouseParallax } from "@/components/effects/mouse-parallax";
+import { FloatingShapes } from "@/components/effects/floating-shapes";
 
 /** Staggered entrance — pure CSS keyframes, so nothing waits for hydration. */
 function entrance(step: number): React.CSSProperties {
@@ -17,6 +20,9 @@ export function Hero() {
       className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden pt-16"
     >
       <ParticleField className="absolute inset-0 h-full w-full" quantity={90} />
+      <MouseParallax className="absolute inset-0">
+        <FloatingShapes />
+      </MouseParallax>
       <div
         aria-hidden="true"
         className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-background/60 to-transparent"
@@ -123,14 +129,14 @@ export function Hero() {
         </ul>
       </Container>
 
-      <a
+      <Link
         href="/#experience"
         aria-label="Scroll to experience"
         className="animate-fade-in absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground transition-colors hover:text-primary"
         style={{ animationDelay: "1.2s" }}
       >
         <ChevronDown className="animate-float h-5 w-5" aria-hidden="true" />
-      </a>
+      </Link>
     </section>
   );
 }

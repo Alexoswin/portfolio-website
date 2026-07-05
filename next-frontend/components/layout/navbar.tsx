@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { flushSync } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
@@ -179,15 +180,64 @@ export function Navbar() {
 
 /**
  * Renders both icons and lets CSS pick one based on `data-theme`, so there is
- * no mounted-state flash and no hydration mismatch.
+ * no mounted-state flash and no hydration mismatch. Switching themes plays a
+ * circular reveal from the button via the View Transitions API, falling back
+ * to an instant swap on unsupported browsers or reduced motion.
  */
 function ThemeToggle({ className }: { className?: string }) {
   const { resolvedTheme, setTheme } = useTheme();
+  const buttonRef = React.useRef<HTMLButtonElement>(null);
+
+  const toggleTheme = () => {
+    const next = resolvedTheme === "dark" ? "light" : "dark";
+    const button = buttonRef.current;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (!document.startViewTransition || prefersReducedMotion || !button) {
+      setTheme(next);
+      return;
+    }
+
+    const rect = button.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    const radius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y),
+    );
+
+    const transition = document.startViewTransition(() => {
+      flushSync(() => setTheme(next));
+    });
+
+    transition.ready
+      .then(() => {
+        document.documentElement.animate(
+          {
+            clipPath: [
+              `circle(0px at ${x}px ${y}px)`,
+              `circle(${radius}px at ${x}px ${y}px)`,
+            ],
+          },
+          {
+            duration: 550,
+            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+            pseudoElement: "::view-transition-new(root)",
+          },
+        );
+      })
+      .catch(() => {
+        // Transition was skipped (e.g. rapid toggling) — theme still applied.
+      });
+  };
 
   return (
     <button
+      ref={buttonRef}
       type="button"
-      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+      onClick={toggleTheme}
       aria-label="Toggle theme"
       className={cn(
         "rounded-lg p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground",

@@ -30,12 +30,15 @@
   --shadow-card-dark: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 12px 32px -16px rgb(0 0 0 / 0.6);
 
   --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-up-3d: fade-up-3d 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-fade-in: fade-in 0.8s ease-out both;
   --animate-scale-in: scale-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-float: float 7s ease-in-out infinite;
   --animate-aurora: aurora 24s ease-in-out infinite alternate;
   --animate-gradient-pan: gradient-pan 8s linear infinite;
   --animate-pulse-dot: pulse-dot 2.4s ease-in-out infinite;
+  --animate-spin-ring: spin-ring 18s linear infinite;
+  --animate-spin-cube: spin-cube 26s linear infinite;
 
   @keyframes fade-up {
     from {
@@ -45,6 +48,21 @@
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+  /* First-render entrance: content rises toward the viewer in perspective. */
+  @keyframes fade-up-3d {
+    from {
+      opacity: 0;
+      transform: perspective(1000px) translateY(38px) translateZ(-90px)
+        rotateX(14deg) scale(0.97);
+      filter: blur(8px);
+    }
+    to {
+      opacity: 1;
+      transform: perspective(1000px) translateY(0) translateZ(0) rotateX(0)
+        scale(1);
+      filter: blur(0);
     }
   }
   @keyframes fade-in {
@@ -104,6 +122,22 @@
       box-shadow: 0 0 0 5px transparent;
     }
   }
+  @keyframes spin-ring {
+    from {
+      transform: rotateX(68deg) rotateZ(0deg);
+    }
+    to {
+      transform: rotateX(68deg) rotateZ(360deg);
+    }
+  }
+  @keyframes spin-cube {
+    from {
+      transform: rotateX(0deg) rotateY(0deg);
+    }
+    to {
+      transform: rotateX(360deg) rotateY(360deg);
+    }
+  }
 }
 
 :root {
@@ -130,6 +164,8 @@
   --glow-2: oklch(0.62 0.19 278);
   --glow-3: oklch(0.7 0.17 330);
   --aurora-opacity: 0.16;
+  /* Particle constellation — needs more contrast than the glow colors in light mode. */
+  --particle: oklch(0.45 0.13 252);
 }
 
 [data-theme="dark"] {
@@ -155,6 +191,7 @@
   --glow-2: oklch(0.66 0.17 278);
   --glow-3: oklch(0.72 0.16 330);
   --aurora-opacity: 0.22;
+  --particle: oklch(0.78 0.12 230);
 }
 
 @layer base {
@@ -187,11 +224,15 @@
     border-radius: 4px;
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    ::view-transition-old(root),
-    ::view-transition-new(root) {
-      animation-duration: 0.25s;
-    }
+  /*
+   * Theme switching uses the View Transitions API with a circular reveal
+   * driven from the toggle button (see ThemeToggle). Default crossfade off —
+   * the clip-path animation owns the show.
+   */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
   }
 }
 
@@ -268,16 +309,20 @@
 @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
   [data-reveal] {
     opacity: 0;
-    transform: translateY(26px);
+    transform: perspective(900px) translateY(28px) rotateX(7deg);
+    transform-origin: center bottom;
+    filter: blur(6px);
     transition:
       opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: var(--reveal-delay, 0s);
   }
 
   [data-reveal="in"] {
     opacity: 1;
     transform: none;
+    filter: none;
   }
 }
 
