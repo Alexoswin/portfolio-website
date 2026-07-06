@@ -10,14 +10,14 @@ import { FloatingShapes } from "@/components/effects/floating-shapes";
 
 /** Staggered entrance — pure CSS keyframes, so nothing waits for hydration. */
 function entrance(step: number): React.CSSProperties {
-  return { animationDelay: `${step * 0.12}s` };
+  return { animationDelay: `${0.12 + step * 0.12}s` };
 }
 
 export function Hero() {
   return (
     <section
       aria-label="Introduction"
-      className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden pt-16"
+      className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden pt-16 [perspective:1400px]"
     >
       <ParticleField className="absolute inset-0 h-full w-full" quantity={90} />
       <MouseParallax className="absolute inset-0">
@@ -28,9 +28,9 @@ export function Hero() {
         className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-background/60 to-transparent"
       />
 
-      <Container className="relative z-10 flex flex-col items-center gap-6 py-20 text-center">
+      <Container className="animate-scene-arrive relative z-10 flex flex-col items-center gap-6 py-20 text-center [transform-style:preserve-3d]">
         <p
-          className="animate-fade-up inline-flex items-center gap-2.5 rounded-full border border-border bg-card/60 py-1.5 pr-4 pl-3 text-sm font-medium text-muted-foreground backdrop-blur-sm"
+          className="animate-fade-up-3d origin-bottom inline-flex items-center gap-2.5 rounded-full border border-border bg-card/60 py-1.5 pr-4 pl-3 text-sm font-medium text-muted-foreground backdrop-blur-sm will-change-transform"
           style={entrance(0)}
         >
           <span
@@ -40,7 +40,10 @@ export function Hero() {
           Available for new opportunities
         </p>
 
-        <div className="animate-fade-up flex flex-col gap-4" style={entrance(1)}>
+        <div
+          className="animate-fade-up-3d origin-bottom flex flex-col gap-4 will-change-transform"
+          style={entrance(1)}
+        >
           <p className="eyebrow">
             {profile.title} · {profile.contact.location}
           </p>
@@ -51,14 +54,14 @@ export function Hero() {
         </div>
 
         <p
-          className="animate-fade-up max-w-2xl text-base leading-relaxed text-muted-foreground text-pretty sm:text-lg md:text-xl"
+          className="animate-fade-up-3d origin-bottom max-w-2xl text-base leading-relaxed text-muted-foreground text-pretty will-change-transform sm:text-lg md:text-xl"
           style={entrance(2)}
         >
           {profile.summary}
         </p>
 
         <div
-          className="animate-fade-up mt-4 flex flex-wrap items-center justify-center gap-3"
+          className="animate-fade-up-3d origin-bottom mt-4 flex flex-wrap items-center justify-center gap-3 will-change-transform"
           style={entrance(3)}
         >
           <ButtonLink href="/#projects" size="lg">
@@ -101,7 +104,7 @@ export function Hero() {
         </div>
 
         <ul
-          className="animate-fade-up mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-mono text-xs text-muted-foreground sm:text-sm"
+          className="animate-fade-up-3d origin-bottom mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-mono text-xs text-muted-foreground will-change-transform sm:text-sm"
           style={entrance(4)}
         >
           <li>
