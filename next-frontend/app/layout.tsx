@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { IntroProvider } from "@/components/intro/intro-context";
+import { IntroScript } from "@/components/intro/intro-script";
 import { SkipLink } from "@/components/layout/skip-link";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
@@ -123,18 +125,22 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
+        {/* Must run before first paint — arms the intro cover on first visits. */}
+        <IntroScript />
         <ThemeProvider
           attribute="data-theme"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <SkipLink />
-          <Aurora />
-          <ScrollProgress />
-          <Navbar />
-          {children}
-          <Footer />
+          <IntroProvider>
+            <SkipLink />
+            <Aurora />
+            <ScrollProgress />
+            <Navbar />
+            {children}
+            <Footer />
+          </IntroProvider>
         </ThemeProvider>
 
         <script

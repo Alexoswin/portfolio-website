@@ -397,3 +397,495 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/*
+ * ============================== Cinematic intro ==============================
+ * First-visit loader (components/intro/). All timings, colors and easings are
+ * CSS custom properties set on `.intro-overlay` from intro-config.ts — the
+ * rules below contain no timeline numbers of their own. Every animation
+ * touches only transform / opacity / filter (plus SVG dash offsets), so the
+ * whole sequence stays on the compositor.
+ *
+ * Timeline recap (see INTRO_TIMELINE):
+ *   phase 1  ambient   glow + particles breathe in from black
+ *   phase 2  beam      center beam ignites, streak field flows upward
+ *   phase 3  logo      streaks converge, monogram draws itself in strokes
+ *   phase 4  pulse     bloom pulse, particles orbit, name tracks in
+ *   phase 5  exit      overlay zooms/fades out, page entrance replays below
+ */
+
+/*
+ * While the intro owns the screen, the portfolio's one-shot entrance
+ * animations are switched off (animation-name loses to nothing, elements sit
+ * in their natural, fully-visible state). The moment the `data-intro`
+ * attribute is removed — as the overlay's exit fade begins — the shorthand
+ * utilities reapply and every entrance replays, so the hero flies in just as
+ * it is revealed. If JS ever failed mid-flight, content is simply visible.
+ */
+html[data-intro]
+  :is(
+    .animate-scene-arrive,
+    .animate-fade-up-3d,
+    .animate-depth-pop,
+    .animate-scale-in,
+    .animate-fade-up,
+    .animate-fade-in
+  ) {
+  animation-name: none;
+}
+
+/*
+ * Pre-hydration cover. The inline IntroScript sets data-intro="pending"
+ * before first paint; this plain-CSS black sheet keeps the page hidden until
+ * React mounts the real overlay (which flips the attribute to "playing" in
+ * the same frame). The delayed failsafe animation reveals the page even if
+ * hydration never completes.
+ */
+html[data-intro="pending"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: #000;
+  pointer-events: none;
+  animation: intro-cover-failsafe 0.6s ease 6s forwards;
+}
+
+@keyframes intro-cover-failsafe {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* ------------------------------ Overlay root ------------------------------ */
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  background: #000;
+  /* Phase 5 — the camera passes through the lockup as everything fades. */
+  animation: intro-exit var(--intro-exit-dur) var(--intro-ease-inout)
+    var(--intro-exit-at) both;
+}
+
+@keyframes intro-exit {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.045);
+  }
+}
+
+/* Skip / Escape / reduced-motion exit: a plain opacity fade, right now. */
+.intro-overlay[data-leaving] {
+  animation: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--intro-skip-dur) ease-out;
+}
+
+/* Slow push-in across the whole timeline — the "camera". */
+.intro-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: 50% 45%;
+  animation: intro-camera var(--intro-total) var(--intro-ease-quart) both;
+}
+
+@keyframes intro-camera {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* --------------------------- Phase 1 — ambient ---------------------------- */
+
+.intro-ambient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      42vmax 42vmax at 50% 44%,
+      color-mix(in srgb, var(--intro-c1) 13%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      64vmax 52vmax at 62% 62%,
+      color-mix(in srgb, var(--intro-c3) 8%, transparent),
+      transparent 72%
+    );
+  animation: intro-ambient-in var(--intro-ambient-dur) var(--intro-ease-out)
+    var(--intro-ambient-at) both;
+}
+
+@keyframes intro-ambient-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ------------------------ Phase 2 — beam & streaks ------------------------ */
+
+.intro-beam {
+  width: 3px;
+  height: min(72vh, 640px);
+  border-radius: 999px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--intro-c1) 18%,
+    color-mix(in srgb, white 75%, var(--intro-c1)) 50%,
+    var(--intro-c1) 82%,
+    transparent
+  );
+  filter: drop-shadow(0 0 12px var(--intro-c1))
+    drop-shadow(0 0 36px color-mix(in srgb, var(--intro-c1) 55%, transparent));
+  /*
+   * Two chained animations: ignition (fill: both) owns the element until the
+   * collapse (fill: forwards) becomes active at the logo phase and wins.
+   */
+  animation:
+    intro-beam-in var(--intro-beam-dur) var(--intro-ease-inout)
+      var(--intro-beam-at) both,
+    intro-beam-out 0.6s var(--intro-ease-inout) var(--intro-logo-at) forwards;
+}
+
+@keyframes intro-beam-in {
+  from {
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0) scaleY(0.02);
+  }
+  55% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(-50%, -50%, 0) scaleY(1);
+  }
+}
+
+@keyframes intro-beam-out {
+  from {
+    opacity: 1;
+    transform: translate3d(-50%, -50%, 0) scaleY(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0) scaleY(0.1);
+  }
+}
+
+/* Streak field funnels into the logo when phase 3 begins. */
+.intro-streaks {
+  transform-origin: 50% 50%;
+  animation: intro-converge 0.7s var(--intro-ease-inout) var(--intro-logo-at)
+    forwards;
+}
+
+@keyframes intro-converge {
+  from {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  to {
+    opacity: 0;
+    transform: scaleX(0.05);
+  }
+}
+
+/*
+ * One flowing light streak. Position, length, blur, color, peak opacity and
+ * cycle count arrive as --streak-* variables from light-streaks.tsx; the
+ * heavier the blur the further "away" the streak reads.
+ */
+.intro-streak {
+  position: absolute;
+  top: 50%;
+  width: 2px;
+  height: var(--streak-h);
+  border-radius: 999px;
+  opacity: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--streak-color) 30%,
+    color-mix(in srgb, white 55%, var(--streak-color)) 50%,
+    var(--streak-color) 70%,
+    transparent
+  );
+  filter: blur(var(--streak-blur));
+  will-change: transform, opacity;
+  animation: intro-streak-rise var(--streak-dur) var(--intro-ease-inout)
+    calc(var(--intro-streaks-at) + var(--streak-delay)) var(--streak-cycles);
+}
+
+@keyframes intro-streak-rise {
+  0% {
+    opacity: 0;
+    transform: translate3d(-50%, 32vh, 0) scaleY(0.6);
+  }
+  25% {
+    opacity: var(--streak-peak);
+  }
+  75% {
+    opacity: var(--streak-peak);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-50%, calc(-1 * var(--streak-h) - 45vh), 0)
+      scaleY(1.1);
+  }
+}
+
+/* --------------------------- Phases 3–4 — lockup --------------------------- */
+
+.intro-lockup {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.25rem, 4vh, 2rem);
+  padding: 0 1.5rem;
+}
+
+.intro-logo {
+  width: clamp(96px, 22vw, 150px);
+  height: auto;
+}
+
+/*
+ * Phase 4 in a single transform track: bloom pulse (0 → 42%), then the mark
+ * rises and shrinks to crown the name (42% → 100%). One animation, so the
+ * two movements can never fight over `transform`.
+ */
+.intro-logo-wrap {
+  animation: intro-logo-crown
+    calc(var(--intro-name-at) + var(--intro-name-dur) - var(--intro-pulse-at))
+    var(--intro-ease-inout) var(--intro-pulse-at) both;
+}
+
+@keyframes intro-logo-crown {
+  0% {
+    transform: scale(1);
+  }
+  18% {
+    transform: scale(1.07);
+  }
+  42% {
+    transform: scale(1);
+  }
+  100% {
+    transform: translate3d(0, -12px, 0) scale(0.86);
+  }
+}
+
+/* Line-drawing strokes — pathLength=1 normalizes every dash to 0..1. */
+.intro-logo-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: intro-draw var(--draw-dur) var(--intro-ease-inout)
+    calc(var(--intro-logo-at) + var(--draw-delay)) forwards;
+}
+
+@keyframes intro-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Blurred duplicate underneath the crisp strokes = bloom; pulses in phase 4. */
+.intro-logo-glow {
+  opacity: 0.55;
+  animation: intro-glow-pulse var(--intro-pulse-dur) var(--intro-ease-inout)
+    var(--intro-pulse-at) both;
+}
+
+@keyframes intro-glow-pulse {
+  0% {
+    opacity: 0.55;
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+/* Circuit nodes pop onto the hexagon vertices once the strokes complete. */
+.intro-logo-node {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: intro-node-in var(--draw-dur) var(--intro-ease-out)
+    calc(var(--intro-logo-at) + var(--draw-delay)) both;
+}
+
+@keyframes intro-node-in {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ------------------------- Phase 4 — name & role -------------------------- */
+
+.intro-name {
+  display: flex;
+  gap: 0.14em;
+  font-size: clamp(1.7rem, 6vw, 3.1rem);
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 0 28px color-mix(in srgb, var(--intro-c1) 40%, transparent);
+}
+
+.intro-name-gap {
+  width: 0.55em;
+}
+
+.intro-letter {
+  display: inline-block;
+  will-change: transform, opacity;
+  /* Per-letter animation-delay is set inline (stagger from the center out). */
+  animation: intro-letter-in var(--intro-letter-dur) var(--intro-ease-out) both;
+}
+
+@keyframes intro-letter-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.45em, 0);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+.intro-role {
+  font-family: var(--font-mono);
+  font-size: clamp(0.68rem, 1.8vw, 0.85rem);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--intro-c1) 72%, white);
+  animation: intro-tracking-in 0.9s var(--intro-ease-out) var(--intro-role-at)
+    both;
+}
+
+@keyframes intro-tracking-in {
+  from {
+    opacity: 0;
+    letter-spacing: 0.6em;
+  }
+  to {
+    opacity: 1;
+    letter-spacing: 0.28em;
+  }
+}
+
+/* ------------------------------- Chrome ------------------------------------ */
+
+/* Edge falloff — cheap depth so the center reads brighter. */
+.intro-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    120vmax 90vmax at 50% 50%,
+    transparent 55%,
+    rgb(0 0 0 / 0.55) 100%
+  );
+}
+
+.intro-skip {
+  position: absolute;
+  right: max(1.5rem, env(safe-area-inset-right));
+  bottom: max(1.5rem, env(safe-area-inset-bottom));
+  padding: 0.5rem 0.9rem;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.04);
+  backdrop-filter: blur(8px);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: rgb(255 255 255 / 0.45);
+  cursor: pointer;
+  transition:
+    color 0.3s ease,
+    border-color 0.3s ease;
+  animation: intro-soft-in 0.8s var(--intro-ease-out) var(--intro-skip-at) both;
+}
+
+.intro-skip:hover,
+.intro-skip:focus-visible {
+  color: rgb(255 255 255 / 0.9);
+  border-color: rgb(255 255 255 / 0.35);
+}
+
+.intro-skip kbd {
+  margin-left: 0.4em;
+  padding: 0.1em 0.45em;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+@keyframes intro-soft-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ------------------------- Reduced-motion variant -------------------------- */
+
+/*
+ * The overlay renders a static lockup (no particles/streaks mounted) that
+ * holds briefly and fades. Timeline animations are disabled outright —
+ * the global reduced-motion rule truncates durations but keeps delays, so
+ * without this the name would never appear before the overlay unmounts.
+ */
+.intro-overlay[data-reduced],
+.intro-overlay[data-reduced] .intro-stage,
+.intro-overlay[data-reduced] .intro-stage * {
+  animation: none !important;
+}
+
+.intro-overlay[data-reduced] .intro-logo-draw {
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /*
+   * Deliberate exception to the global 0.01ms clamp above: the intro's exit
+   * is a static, opacity-only fade — no movement — which reduced-motion
+   * users can safely see. Higher specificity than the `*` clamp, so it wins.
+   */
+  .intro-overlay {
+    transition-duration: var(--intro-skip-dur) !important;
+  }
+}
