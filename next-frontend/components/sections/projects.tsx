@@ -173,6 +173,7 @@ function ProjectCard({
           </li>
         ))}
       </ul>
+      </div>
     </Card>
   );
 }
