@@ -119,61 +119,61 @@ function ProjectCard({
           featured && "lg:flex-row lg:items-start lg:gap-10",
         )}
       >
-      <div className={cn("flex flex-col gap-4", featured && "lg:flex-1")}>
-        <div className="flex items-start justify-between gap-4">
-          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
-            {featured ? (
-              <Sparkles className="h-5 w-5" aria-hidden="true" />
-            ) : (
-              <Code2 className="h-5 w-5" aria-hidden="true" />
+        <div className={cn("flex flex-col gap-4", featured && "lg:flex-1")}>
+          <div className="flex items-start justify-between gap-4">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              {featured ? (
+                <Sparkles className="h-5 w-5" aria-hidden="true" />
+              ) : (
+                <Code2 className="h-5 w-5" aria-hidden="true" />
+              )}
+            </span>
+            {project.link && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open ${project.title} (live site)`}
+                className="flex items-center gap-1.5 rounded-full border border-border bg-background/60 px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
+              >
+                Live
+                <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+              </a>
             )}
-          </span>
-          {project.link && (
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Open ${project.title} (live site)`}
-              className="flex items-center gap-1.5 rounded-full border border-border bg-background/60 px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
-            >
-              Live
-              <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-            </a>
-          )}
-        </div>
+          </div>
 
-        <h3
-          className={cn(
-            "font-semibold tracking-tight transition-colors group-hover:text-primary",
-            featured ? "text-2xl" : "text-xl",
-          )}
-        >
-          {project.title}
-        </h3>
-
-        <div className="flex flex-wrap gap-2">
-          {project.tech.map((tech) => (
-            <Badge key={tech} variant="secondary">
-              {tech}
-            </Badge>
-          ))}
-        </div>
-      </div>
-
-      <ul className={cn("flex flex-col gap-2.5", featured && "lg:flex-1 lg:pt-2")}>
-        {project.highlights.map((item) => (
-          <li
-            key={item}
-            className="flex gap-3 text-sm leading-relaxed text-muted-foreground"
+          <h3
+            className={cn(
+              "font-semibold tracking-tight transition-colors group-hover:text-primary",
+              featured ? "text-2xl" : "text-xl",
+            )}
           >
-            <span
-              aria-hidden="true"
-              className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br from-(--glow-1) to-(--glow-2)"
-            />
-            {item}
-          </li>
-        ))}
-      </ul>
+            {project.title}
+          </h3>
+
+          <div className="flex flex-wrap gap-2">
+            {project.tech.map((tech) => (
+              <Badge key={tech} variant="secondary">
+                {tech}
+              </Badge>
+            ))}
+          </div>
+        </div>
+
+        <ul className={cn("flex flex-col gap-2.5", featured && "lg:flex-1 lg:pt-2")}>
+          {project.highlights.map((item) => (
+            <li
+              key={item}
+              className="flex gap-3 text-sm leading-relaxed text-muted-foreground"
+            >
+              <span
+                aria-hidden="true"
+                className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br from-(--glow-1) to-(--glow-2)"
+              />
+              {item}
+            </li>
+          ))}
+        </ul>
       </div>
     </Card>
   );
