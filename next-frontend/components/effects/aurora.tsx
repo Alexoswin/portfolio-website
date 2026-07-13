@@ -1,5 +1,5 @@
 /**
- * Ambient page background: drifting aurora glows over a masked grid.
+ * Ambient page background: drifting aurora glows over a masked hex lattice.
  * Pure CSS (transform-only keyframes, GPU-composited) — ships zero JS.
  */
 export function Aurora() {
@@ -8,7 +8,11 @@ export function Aurora() {
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
     >
-      <div className="bg-grid mask-fade-edges absolute inset-0" />
+      {/* Nested: the hex pattern is itself a mask, so the edge fade must
+          live on a wrapper — both on one element would override each other. */}
+      <div className="mask-fade-edges absolute inset-0">
+        <div className="bg-hex-grid absolute inset-0" />
+      </div>
 
       <div
         className="animate-aurora absolute -top-[20%] left-[8%] h-[55vh] w-[42vw] min-w-80 rounded-full opacity-(--aurora-opacity) blur-[110px] will-change-transform"
