@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, ChevronDown, FileText, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, ChevronDown, FileText } from "lucide-react";
 import { profile } from "@/lib/profile";
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
@@ -19,7 +19,8 @@ export function Hero() {
       aria-label="Introduction"
       className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden pt-16 [perspective:1400px]"
     >
-      <ParticleField className="absolute inset-0 h-full w-full" quantity={90} />
+      {/* Kept deliberately lean: particles + aurora carry the ambience. */}
+      <ParticleField className="absolute inset-0 h-full w-full" quantity={70} />
       <MouseParallax className="absolute inset-0">
         <FloatingShapes />
       </MouseParallax>
@@ -103,33 +104,6 @@ export function Hero() {
           </div>
         </div>
 
-        <ul
-          className="animate-fade-up-3d origin-bottom mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-mono text-xs text-muted-foreground will-change-transform sm:text-sm"
-          style={entrance(4)}
-        >
-          <li>
-            <a
-              href={`mailto:${profile.contact.email}`}
-              className="flex items-center gap-2 transition-colors hover:text-primary"
-            >
-              <Mail className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-              {profile.contact.email}
-            </a>
-          </li>
-          <li>
-            <a
-              href={`tel:${profile.contact.phone.replace(/\s/g, "")}`}
-              className="flex items-center gap-2 transition-colors hover:text-primary"
-            >
-              <Phone className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-              {profile.contact.phone}
-            </a>
-          </li>
-          <li className="flex items-center gap-2">
-            <MapPin className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-            {profile.contact.location}
-          </li>
-        </ul>
       </Container>
 
       <Link
