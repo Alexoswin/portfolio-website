@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { ViewTransition } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
@@ -138,7 +139,11 @@ export default function RootLayout({
             <Aurora />
             <ScrollProgress />
             <Navbar />
-            {children}
+            {/* Route navigations crossfade page content; the chrome above
+                stays put. The root snapshot is animation-disabled in
+                globals.css (the theme toggle owns it), so only this named
+                group animates. */}
+            <ViewTransition>{children}</ViewTransition>
             <Footer />
           </IntroProvider>
         </ThemeProvider>
