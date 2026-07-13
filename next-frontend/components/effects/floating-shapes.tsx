@@ -1,13 +1,4 @@
-const CUBE_SIZE = 56;
-
-const cubeFaces = [
-  `translateZ(${CUBE_SIZE / 2}px)`,
-  `rotateY(180deg) translateZ(${CUBE_SIZE / 2}px)`,
-  `rotateY(90deg) translateZ(${CUBE_SIZE / 2}px)`,
-  `rotateY(-90deg) translateZ(${CUBE_SIZE / 2}px)`,
-  `rotateX(90deg) translateZ(${CUBE_SIZE / 2}px)`,
-  `rotateX(-90deg) translateZ(${CUBE_SIZE / 2}px)`,
-];
+import { BRAND_PATHS } from "@/components/ui/brand-mark";
 
 /** Depth-layer wrapper: shifts with the pointer via --mpx/--mpy from <MouseParallax>. */
 function ParallaxLayer({
@@ -79,26 +70,23 @@ export function FloatingShapes() {
         </DepthEntrance>
       </ParallaxLayer>
 
-      {/* Rotating cube */}
+      {/* Tumbling wireframe hexagon — the brand mark's silhouette in 3D. */}
       <ParallaxLayer depth={42} className="absolute bottom-[22%] left-[9%]">
         <DepthEntrance delay="0.16s">
           <div className="animate-float" style={{ animationDelay: "-3s" }}>
-            <div
-              className="animate-spin-cube relative"
-              style={{
-                width: CUBE_SIZE,
-                height: CUBE_SIZE,
-                transformStyle: "preserve-3d",
-              }}
+            <svg
+              className="animate-spin-cube h-16 w-16"
+              viewBox="0 0 120 120"
+              style={{ transformStyle: "preserve-3d" }}
             >
-              {cubeFaces.map((transform) => (
-                <div
-                  key={transform}
-                  className="absolute inset-0 border border-secondary/40 bg-secondary/5 backdrop-blur-[1px]"
-                  style={{ transform }}
-                />
-              ))}
-            </div>
+              <path
+                d={BRAND_PATHS.hexagon}
+                fill="color-mix(in oklch, var(--secondary) 5%, transparent)"
+                stroke="color-mix(in oklch, var(--secondary) 40%, transparent)"
+                strokeWidth={3}
+                strokeLinejoin="round"
+              />
+            </svg>
           </div>
         </DepthEntrance>
       </ParallaxLayer>
