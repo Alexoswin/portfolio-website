@@ -61,15 +61,20 @@ export const INTRO_SKIP_EXIT_S = 0.45;
 /** Reduced motion: how long the static name card holds before fading. */
 export const INTRO_REDUCED_HOLD_S = 1.1;
 
-/** Intro palette — independent of the site theme; the intro is always dark. */
+/**
+ * Intro palette. The intro always plays over black, so these are the
+ * *dark-theme* glow tokens from globals.css (`[data-theme="dark"]
+ * --glow-1/2/3`), fixed here as literals — keep the two in sync so the
+ * overlay's exit hands off seamlessly into the aurora-lit page.
+ */
 export const INTRO_COLORS = {
   background: "#000000",
-  /** Primary — neon cyan. */
-  c1: "#00e5ff",
-  /** Secondary — soft indigo. */
-  c2: "#6c63ff",
-  /** Accent — deep violet. */
-  c3: "#8a2be2",
+  /** Primary — neon cyan (--glow-1). */
+  c1: "oklch(0.75 0.13 233)",
+  /** Secondary — soft indigo (--glow-2). */
+  c2: "oklch(0.66 0.17 278)",
+  /** Accent — magenta-violet (--glow-3). */
+  c3: "oklch(0.72 0.16 330)",
 } as const;
 
 /** Premium easing curves shared by every intro animation. */

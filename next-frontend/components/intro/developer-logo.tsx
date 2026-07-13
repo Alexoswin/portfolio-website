@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import { BRAND_HEX_VERTICES, BRAND_PATHS } from "@/components/ui/brand-mark";
 
 /**
  * Per-stroke draw schedule, in seconds after the logo phase begins.
@@ -11,10 +12,6 @@ const DRAW = {
   slash: { delay: 0.55, dur: 0.7 },
   nodes: { delay: 1.0, dur: 0.3 },
 } as const;
-
-/** Flat-top hexagon, radius 46 around (60,60) in the 120×120 viewBox. */
-const HEXAGON_PATH =
-  "M106 60 L83 99.8 L37 99.8 L14 60 L37 20.2 L83 20.2 Z";
 
 const drawVars = (t: { delay: number; dur: number }) =>
   ({
@@ -34,7 +31,7 @@ function LogoStrokes({ className }: { className?: string }) {
       <path
         className="intro-logo-draw"
         style={drawVars(DRAW.hexagon)}
-        d={HEXAGON_PATH}
+        d={BRAND_PATHS.hexagon}
         pathLength={1}
         stroke="url(#intro-logo-hex)"
         strokeWidth={2.5}
@@ -42,7 +39,7 @@ function LogoStrokes({ className }: { className?: string }) {
       <path
         className="intro-logo-draw"
         style={drawVars(DRAW.brackets)}
-        d="M47 46 L33 60 L47 74"
+        d={BRAND_PATHS.bracketLeft}
         pathLength={1}
         stroke="var(--intro-c1)"
         strokeWidth={3.5}
@@ -50,7 +47,7 @@ function LogoStrokes({ className }: { className?: string }) {
       <path
         className="intro-logo-draw"
         style={drawVars(DRAW.brackets)}
-        d="M73 46 L87 60 L73 74"
+        d={BRAND_PATHS.bracketRight}
         pathLength={1}
         stroke="var(--intro-c1)"
         strokeWidth={3.5}
@@ -58,7 +55,7 @@ function LogoStrokes({ className }: { className?: string }) {
       <path
         className="intro-logo-draw"
         style={drawVars(DRAW.slash)}
-        d="M66 42 L54 78"
+        d={BRAND_PATHS.slash}
         pathLength={1}
         stroke="url(#intro-logo-slash)"
         strokeWidth={3.5}
@@ -106,14 +103,7 @@ export function DeveloperLogo() {
 
       {/* Circuit nodes on the hexagon vertices. */}
       <g fill="var(--intro-c1)">
-        {[
-          [106, 60],
-          [83, 99.8],
-          [37, 99.8],
-          [14, 60],
-          [37, 20.2],
-          [83, 20.2],
-        ].map(([cx, cy]) => (
+        {BRAND_HEX_VERTICES.map(([cx, cy]) => (
           <circle
             key={`${cx}-${cy}`}
             className="intro-logo-node"

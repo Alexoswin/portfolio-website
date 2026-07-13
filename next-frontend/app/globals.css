@@ -471,23 +471,34 @@ html[data-intro="pending"] body::after {
     var(--intro-exit-at) both;
 }
 
+/*
+ * The background warms toward the theme's page color as the opacity drops,
+ * so light-theme visitors get a gentle luminance ramp instead of a hard
+ * black→white snap. (background-color isn't compositor-driven, but this is
+ * one fullscreen element for a single second.)
+ */
 @keyframes intro-exit {
   from {
     opacity: 1;
     transform: scale(1);
+    background-color: #000;
   }
   to {
     opacity: 0;
     transform: scale(1.045);
+    background-color: var(--background);
   }
 }
 
-/* Skip / Escape / reduced-motion exit: a plain opacity fade, right now. */
+/* Skip / Escape / reduced-motion exit: a plain fade, right now. */
 .intro-overlay[data-leaving] {
   animation: none;
   opacity: 0;
+  background-color: var(--background);
   pointer-events: none;
-  transition: opacity var(--intro-skip-dur) ease-out;
+  transition:
+    opacity var(--intro-skip-dur) ease-out,
+    background-color var(--intro-skip-dur) ease-out;
 }
 
 /* Slow push-in across the whole timeline — the "camera". */

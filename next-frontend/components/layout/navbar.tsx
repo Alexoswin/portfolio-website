@@ -9,6 +9,7 @@ import { FileText, Menu, Moon, Sun, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { profile } from "@/lib/profile";
 import { siteConfig } from "@/lib/site";
+import { BrandMark } from "@/components/ui/brand-mark";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -74,9 +75,10 @@ export function Navbar() {
           className="group flex items-center gap-2.5"
           aria-label={`${profile.name} — home`}
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-(--glow-1) to-(--glow-2) font-mono text-sm font-bold text-white shadow-sm transition-transform duration-300 group-hover:rotate-6">
-            {profile.name.charAt(0)}
-          </span>
+          <BrandMark
+            id="brand-nav"
+            className="h-8 w-8 transition-transform duration-300 group-hover:rotate-6"
+          />
           <span className="hidden text-[15px] font-semibold tracking-tight sm:inline">
             {profile.name}
           </span>
