@@ -3,12 +3,14 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { profile } from "@/lib/profile";
 import {
+  getIntroColors,
   INTRO_HTML_ATTR,
   INTRO_LETTER_STAGGER_S,
   INTRO_REDUCED_HOLD_S,
   INTRO_SKIP_EXIT_S,
   INTRO_TIMELINE,
   introCssVars,
+  type IntroTheme,
 } from "./intro-config";
 import { DeveloperLogo } from "./developer-logo";
 import { LightStreaks } from "./light-streaks";
@@ -37,6 +39,14 @@ interface DeveloperIntroProps {
 export function DeveloperIntro({ reduced, onFinish }: DeveloperIntroProps) {
   const [leaving, setLeaving] = useState(false);
   const leavingRef = useRef(false);
+  // next-themes' blocking pre-paint script has already set this by the time
+  // the overlay mounts (it only ever mounts client-side, after hydration).
+  const [theme] = useState<IntroTheme>(() =>
+    document.documentElement.getAttribute("data-theme") === "light"
+      ? "light"
+      : "dark",
+  );
+  const colors = getIntroColors(theme);
 
   /** Fast exit shared by skip, Escape and the reduced-motion path. */
   const beginLeave = useCallback(
@@ -100,7 +110,7 @@ export function DeveloperIntro({ reduced, onFinish }: DeveloperIntroProps) {
   return (
     <div
       className="intro-overlay"
-      style={introCssVars()}
+      style={introCssVars(theme)}
       data-leaving={leaving || undefined}
       data-reduced={reduced || undefined}
     >
@@ -110,9 +120,9 @@ export function DeveloperIntro({ reduced, onFinish }: DeveloperIntroProps) {
           <>
             {/* Phase 1 — ambient glow + dust. */}
             <div className="intro-ambient" />
-            <Particles />
+            <Particles colors={colors} />
             {/* Phase 2 — beam and streak field. */}
-            <LightStreaks />
+            <LightStreaks colors={colors} />
           </>
         )}
 

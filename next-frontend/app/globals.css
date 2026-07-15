@@ -193,13 +193,20 @@
   --success: oklch(0.62 0.17 152);
   --danger: oklch(0.6 0.21 22);
 
-  /* Decorative gradient stops shared by glows, text gradients and rules. */
-  --glow-1: oklch(0.72 0.14 235);
-  --glow-2: oklch(0.62 0.19 278);
-  --glow-3: oklch(0.7 0.17 330);
-  --aurora-opacity: 0.16;
+  /*
+   * Decorative gradient stops shared by glows, text gradients and rules.
+   * Light mode: honeycomb palette — golden honey, amber, deep caramel —
+   * carries the honey-bee motif through the aurora, brand mark, particle
+   * field and hex lattice without touching interactive UI colors.
+   */
+  --glow-1: oklch(0.8 0.15 85);
+  --glow-2: oklch(0.7 0.18 55);
+  --glow-3: oklch(0.56 0.15 38);
+  --aurora-opacity: 0.2;
   /* Particle constellation — needs more contrast than the glow colors in light mode. */
-  --particle: oklch(0.45 0.13 252);
+  --particle: oklch(0.46 0.13 48);
+  /* Hex lattice line tint — warm honeycomb wire in light mode. */
+  --hex-tint: color-mix(in oklch, var(--glow-2) 20%, transparent);
 }
 
 [data-theme="dark"] {
@@ -226,6 +233,8 @@
   --glow-3: oklch(0.72 0.16 330);
   --aurora-opacity: 0.22;
   --particle: oklch(0.78 0.12 230);
+  /* Hex lattice line tint — neutral wire in dark mode (unchanged). */
+  --hex-tint: color-mix(in oklch, var(--foreground) 7%, transparent);
 }
 
 @layer base {
@@ -313,7 +322,7 @@
    * 44px wide, 76.2px (= 3 × side) tall — and repeats seamlessly.
    */
   .bg-hex-grid {
-    background-color: color-mix(in oklch, var(--foreground) 7%, transparent);
+    background-color: var(--hex-tint);
     mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='76.2' viewBox='0 0 44 76.2'%3E%3Cpath d='M22 0 44 12.7v25.4L22 50.8 0 38.1V12.7Zm0 50.8v25.4' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E");
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='76.2' viewBox='0 0 44 76.2'%3E%3Cpath d='M22 0 44 12.7v25.4L22 50.8 0 38.1V12.7Zm0 50.8v25.4' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E");
     mask-size: 44px 76.2px;

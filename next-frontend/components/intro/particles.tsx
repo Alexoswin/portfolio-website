@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { INTRO_COLORS, INTRO_TIMELINE } from "./intro-config";
+import { INTRO_TIMELINE, type IntroColors } from "./intro-config";
+
+interface ParticlesProps {
+  colors: IntroColors;
+}
 
 interface IntroParticle {
   x: number;
@@ -33,7 +37,7 @@ const smoothstep = (edge0: number, edge1: number, x: number) => {
  * ≤ 2 — transform/alpha work only, no layout. The parent overlay fades the
  * whole canvas out, so no exit logic is needed here.
  */
-export function Particles() {
+export function Particles({ colors }: ParticlesProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -62,9 +66,8 @@ export function Particles() {
         z: 0.25 + Math.random() * 0.75,
         vx: (Math.random() - 0.5) * 0.22,
         vy: -0.1 - Math.random() * 0.28, // gentle upward drift
-        // Mostly cyan dust with indigo/violet strays for depth.
-        color:
-          i % 5 === 0 ? INTRO_COLORS.c2 : i % 11 === 0 ? INTRO_COLORS.c3 : INTRO_COLORS.c1,
+        // Mostly primary dust with the two accent colors as strays for depth.
+        color: i % 5 === 0 ? colors.c2 : i % 11 === 0 ? colors.c3 : colors.c1,
       }));
     };
 
@@ -132,7 +135,7 @@ export function Particles() {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
     };
-  }, []);
+  }, [colors]);
 
   return (
     <canvas

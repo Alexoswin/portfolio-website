@@ -61,21 +61,40 @@ export const INTRO_SKIP_EXIT_S = 0.45;
 /** Reduced motion: how long the static name card holds before fading. */
 export const INTRO_REDUCED_HOLD_S = 1.1;
 
+export type IntroTheme = "light" | "dark";
+
 /**
- * Intro palette. The intro always plays over black, so these are the
- * *dark-theme* glow tokens from globals.css (`[data-theme="dark"]
- * --glow-1/2/3`), fixed here as literals — keep the two in sync so the
- * overlay's exit hands off seamlessly into the aurora-lit page.
+ * Intro palette. The intro always plays over black, so these literals mirror
+ * globals.css's `--glow-1/2/3` for each theme — keep the two in sync so the
+ * overlay's exit hands off seamlessly into the aurora-lit page underneath.
  */
-export const INTRO_COLORS = {
-  background: "#000000",
-  /** Primary — neon cyan (--glow-1). */
-  c1: "oklch(0.75 0.13 233)",
-  /** Secondary — soft indigo (--glow-2). */
-  c2: "oklch(0.66 0.17 278)",
-  /** Accent — magenta-violet (--glow-3). */
-  c3: "oklch(0.72 0.16 330)",
-} as const;
+const INTRO_COLORS_BY_THEME = {
+  dark: {
+    background: "#000000",
+    /** Primary — neon cyan (dark `--glow-1`). */
+    c1: "oklch(0.75 0.13 233)",
+    /** Secondary — soft indigo (dark `--glow-2`). */
+    c2: "oklch(0.66 0.17 278)",
+    /** Accent — magenta-violet (dark `--glow-3`). */
+    c3: "oklch(0.72 0.16 330)",
+  },
+  light: {
+    background: "#000000",
+    /** Primary — golden honey (light `--glow-1`). */
+    c1: "oklch(0.8 0.15 85)",
+    /** Secondary — amber (light `--glow-2`). */
+    c2: "oklch(0.7 0.18 55)",
+    /** Accent — deep caramel (light `--glow-3`). */
+    c3: "oklch(0.56 0.15 38)",
+  },
+} as const satisfies Record<IntroTheme, { background: string; c1: string; c2: string; c3: string }>;
+
+export type IntroColors = (typeof INTRO_COLORS_BY_THEME)[IntroTheme];
+
+/** Resolve the intro's palette for the page's active theme. */
+export function getIntroColors(theme: IntroTheme): IntroColors {
+  return INTRO_COLORS_BY_THEME[theme];
+}
 
 /** Premium easing curves shared by every intro animation. */
 export const INTRO_EASING = {
@@ -91,12 +110,13 @@ export const INTRO_EASING = {
  * Expose the timeline/palette to the stylesheet. Applied on the overlay
  * root so every `intro-*` rule in globals.css reads the same clock.
  */
-export function introCssVars(): CSSProperties {
+export function introCssVars(theme: IntroTheme): CSSProperties {
   const t = INTRO_TIMELINE;
+  const colors = getIntroColors(theme);
   return {
-    "--intro-c1": INTRO_COLORS.c1,
-    "--intro-c2": INTRO_COLORS.c2,
-    "--intro-c3": INTRO_COLORS.c3,
+    "--intro-c1": colors.c1,
+    "--intro-c2": colors.c2,
+    "--intro-c3": colors.c3,
     "--intro-ease-out": INTRO_EASING.out,
     "--intro-ease-inout": INTRO_EASING.inOut,
     "--intro-ease-quart": INTRO_EASING.outQuart,

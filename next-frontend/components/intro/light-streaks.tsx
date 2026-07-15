@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { INTRO_COLORS } from "./intro-config";
+import type { IntroColors } from "./intro-config";
 
 interface StreakSpec {
   /** Horizontal offset from screen center, in vw. */
@@ -19,14 +19,16 @@ interface StreakSpec {
   cycles: 1 | 2;
 }
 
-const { c1, c2, c3 } = INTRO_COLORS;
+interface LightStreaksProps {
+  colors: IntroColors;
+}
 
 /**
  * Hand-tuned streak field, mirrored around the center beam. Delays grow
  * with distance from center so the energy visibly expands outward from the
  * beam; edge streaks are dimmer, softer and slower — cheap depth of field.
  */
-const STREAKS: StreakSpec[] = [
+const buildStreaks = ({ c1, c2, c3 }: IntroColors): StreakSpec[] => [
   { x: -3.5, delay: 0.0, duration: 0.85, height: 62, blur: 1, peak: 0.95, color: c1, cycles: 2 },
   { x: 3.5, delay: 0.06, duration: 0.9, height: 58, blur: 1, peak: 0.9, color: c1, cycles: 2 },
   { x: -7, delay: 0.1, duration: 0.95, height: 52, blur: 1.5, peak: 0.8, color: c2, cycles: 2 },
@@ -50,12 +52,13 @@ const STREAKS: StreakSpec[] = [
  * CSS: every element animates transform/opacity only; timings come from the
  * `--intro-*` custom properties set by the overlay root.
  */
-export function LightStreaks() {
+export function LightStreaks({ colors }: LightStreaksProps) {
+  const streaks = buildStreaks(colors);
   return (
     <div aria-hidden="true">
       {/* Streak field — converges into the logo via .intro-streaks. */}
       <div className="intro-streaks absolute inset-0">
-        {STREAKS.map((s, i) => (
+        {streaks.map((s, i) => (
           <span
             key={i}
             className="intro-streak"
