@@ -268,9 +268,10 @@
   }
 
   /*
-   * Theme switching uses the View Transitions API with a circular reveal
-   * driven from the toggle button (see ThemeToggle). Default crossfade off —
-   * the clip-path animation owns the show.
+   * Route navigations crossfade via the named ViewTransition group in the
+   * layout; the root snapshot's default crossfade is disabled so page chrome
+   * stays put. (Theme switching is handled by the celestial overlay in
+   * ThemeToggle, not view transitions.)
    */
   ::view-transition-old(root),
   ::view-transition-new(root) {
@@ -525,7 +526,10 @@
 }
 
 @keyframes celestial-hold-fade {
-  0%,
+  0% {
+    opacity: 0;
+  }
+  10%,
   72% {
     opacity: 1;
   }

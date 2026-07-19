@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { createPortal, flushSync } from "react-dom";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
@@ -197,14 +197,14 @@ const CELESTIAL_STARS = [
 /**
  * Renders both icons and lets CSS pick one based on `data-theme`, so there is
  * no mounted-state flash and no hydration mismatch. Switching themes plays a
- * circular reveal from the button via the View Transitions API — with a
- * celestial pass layered on top: a sun rises for light mode, a moon and stars
- * for dark. Falls back to an instant swap on unsupported browsers or reduced
- * motion.
+ * celestial pass: an opaque sky overlay fades in over the page, a sun (light)
+ * or crescent moon with stars (dark) rises across it, and the sky fades out
+ * to reveal the retinted page. The theme itself flips in the same React
+ * commit that mounts the overlay, so the swap is never seen directly.
+ * Reduced motion gets an instant swap.
  */
 function ThemeToggle({ className }: { className?: string }) {
   const { resolvedTheme, setTheme } = useTheme();
-  const buttonRef = React.useRef<HTMLButtonElement>(null);
   const [celestial, setCelestial] = React.useState<{
     kind: "sun" | "moon";
     id: number;
@@ -212,58 +212,19 @@ function ThemeToggle({ className }: { className?: string }) {
 
   const toggleTheme = () => {
     const next = resolvedTheme === "dark" ? "light" : "dark";
-    const button = buttonRef.current;
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
     if (!prefersReducedMotion) {
-      // Mounted by the flushSync below, inside the new view snapshot.
       setCelestial({ kind: next === "light" ? "sun" : "moon", id: Date.now() });
     }
-
-    if (!document.startViewTransition || prefersReducedMotion || !button) {
-      setTheme(next);
-      return;
-    }
-
-    const rect = button.getBoundingClientRect();
-    const x = rect.left + rect.width / 2;
-    const y = rect.top + rect.height / 2;
-    const radius = Math.hypot(
-      Math.max(x, window.innerWidth - x),
-      Math.max(y, window.innerHeight - y),
-    );
-
-    const transition = document.startViewTransition(() => {
-      flushSync(() => setTheme(next));
-    });
-
-    transition.ready
-      .then(() => {
-        document.documentElement.animate(
-          {
-            clipPath: [
-              `circle(0px at ${x}px ${y}px)`,
-              `circle(${radius}px at ${x}px ${y}px)`,
-            ],
-          },
-          {
-            duration: 550,
-            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
-            pseudoElement: "::view-transition-new(root)",
-          },
-        );
-      })
-      .catch(() => {
-        // Transition was skipped (e.g. rapid toggling) — theme still applied.
-      });
+    setTheme(next);
   };
 
   return (
     <>
       <button
-        ref={buttonRef}
         type="button"
         onClick={toggleTheme}
         aria-label="Toggle theme"
@@ -299,7 +260,7 @@ function ThemeToggle({ className }: { className?: string }) {
                 <defs>
                   <mask id="celestial-crescent">
                     <circle cx="50" cy="50" r="44" fill="#fff" />
-                    <circle cx="30" cy="42" r="40" fill="#000" />
+                    <circle cx="70" cy="42" r="40" fill="#000" />
                   </mask>
                 </defs>
                 <circle
