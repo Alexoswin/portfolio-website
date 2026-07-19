@@ -16,11 +16,14 @@ export function Experience() {
       />
 
       <div className="relative mx-auto max-w-3xl">
-        {/* Timeline rail */}
+        {/* Timeline rail — the colored line grows with scroll where
+            scroll-driven animations are supported; static gradient elsewhere. */}
         <div
           aria-hidden="true"
-          className="absolute top-2 bottom-2 left-[7px] w-px bg-gradient-to-b from-primary/60 via-border to-transparent sm:left-[9px]"
-        />
+          className="absolute top-2 bottom-2 left-[7px] w-px bg-border/70 sm:left-[9px]"
+        >
+          <div className="timeline-progress absolute inset-0 origin-top bg-gradient-to-b from-primary/70 via-(--glow-2) to-transparent" />
+        </div>
 
         <ol className="flex flex-col gap-10">
           {profile.experience.map((exp, index) => (

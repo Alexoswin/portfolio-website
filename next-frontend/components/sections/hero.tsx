@@ -4,6 +4,8 @@ import { profile } from "@/lib/profile";
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/icons";
+import { RotatingText } from "@/components/ui/rotating-text";
+import { Magnetic } from "@/components/effects/magnetic";
 import { ParticleField } from "@/components/effects/particle-field";
 import { MouseParallax } from "@/components/effects/mouse-parallax";
 import { FloatingShapes } from "@/components/effects/floating-shapes";
@@ -46,7 +48,8 @@ export function Hero() {
           style={entrance(1)}
         >
           <p className="eyebrow">
-            {profile.title} · {profile.contact.location}
+            <span className="sr-only">{profile.title}</span>
+            <RotatingText items={profile.roles} /> · {profile.contact.location}
           </p>
           <h1 className="text-5xl font-semibold tracking-tighter text-balance sm:text-6xl md:text-7xl lg:text-8xl">
             Hi, I&apos;m{" "}
@@ -65,42 +68,50 @@ export function Hero() {
           className="animate-fade-up-3d origin-bottom mt-4 flex flex-wrap items-center justify-center gap-3 will-change-transform"
           style={entrance(3)}
         >
-          <ButtonLink href="/#projects" size="lg">
-            View Projects
-            <ArrowRight
-              className="h-4 w-4 transition-transform duration-200 group-hover/btn:translate-x-0.5"
-              aria-hidden="true"
-            />
-          </ButtonLink>
-          <ButtonLink
-            href={profile.contact.resume}
-            variant="outline"
-            size="lg"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FileText className="h-4 w-4" aria-hidden="true" />
-            Resume
-          </ButtonLink>
+          <Magnetic>
+            <ButtonLink href="/#projects" size="lg">
+              View Projects
+              <ArrowRight
+                className="h-4 w-4 transition-transform duration-200 group-hover/btn:translate-x-0.5"
+                aria-hidden="true"
+              />
+            </ButtonLink>
+          </Magnetic>
+          <Magnetic>
+            <ButtonLink
+              href={profile.contact.resume}
+              variant="outline"
+              size="lg"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FileText className="h-4 w-4" aria-hidden="true" />
+              Resume
+            </ButtonLink>
+          </Magnetic>
           <div className="flex gap-2">
-            <a
-              href={profile.contact.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub profile"
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-card/60 text-muted-foreground backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary"
-            >
-              <GitHubIcon className="h-5 w-5" />
-            </a>
-            <a
-              href={profile.contact.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn profile"
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-card/60 text-muted-foreground backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary"
-            >
-              <LinkedInIcon className="h-5 w-5" />
-            </a>
+            <Magnetic strength={6}>
+              <a
+                href={profile.contact.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub profile"
+                className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-card/60 text-muted-foreground backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary"
+              >
+                <GitHubIcon className="h-5 w-5" />
+              </a>
+            </Magnetic>
+            <Magnetic strength={6}>
+              <a
+                href={profile.contact.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn profile"
+                className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-card/60 text-muted-foreground backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary"
+              >
+                <LinkedInIcon className="h-5 w-5" />
+              </a>
+            </Magnetic>
           </div>
         </div>
 

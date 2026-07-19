@@ -46,6 +46,8 @@ export interface CertificationEntry {
 export interface Profile {
   name: string;
   title: string;
+  /** Rotating role titles shown in the hero eyebrow. */
+  roles: string[];
   contact: {
     phone: string;
     email: string;
@@ -69,6 +71,12 @@ export interface Profile {
 export const profile: Profile = {
   name: "Oswin Alex",
   title: "Software Engineer",
+  roles: [
+    "Software Engineer",
+    "Full-Stack Developer",
+    "Backend Engineer",
+    "Open Source Contributor",
+  ],
   contact: {
     phone: "+91 9324498843",
     email: "oswinalex1@gmail.com",
@@ -80,7 +88,7 @@ export const profile: Profile = {
     resume: "/constants/Oswin_Alex_Resume.pdf",
   },
   summary:
-    "Software Engineer specializing in AI-powered platforms, backend APIs (Node/NestJS), and full-stack development. Experienced in building scalable roleplay workflows, analytics pipelines, and contributing to open-source frameworks.",
+    "Software Engineer at mple.ai building AI-powered sales training and agentic learning platforms — working across NestJS APIs, MongoDB aggregation pipelines, real-time WebSockets, and React/Next.js frontends, with a focus on performance, observability, and shipping features end to end.",
   experience: [
     {
       company: "MIDGENIE AI LABS PRIVATE LIMITED — mple.ai",
@@ -88,12 +96,13 @@ export const profile: Profile = {
       period: "Sept. 2025 – Present",
       location: "Mumbai, India",
       achievements: [
-        "Working on mple.ai, an AI-powered sales training and agentic learning platform.",
-        "Built robust error tracking mechanisms with contextual error codes, improving observability.",
-        "Developed and optimized backend APIs using Node.js and NestJS for scalable roleplay workflows.",
-        "Created dashboard analytics using MongoDB aggregation pipelines and charts.",
-        "Implemented persona customization for dynamic control over AI avatar behavior.",
-        "Optimized real-time communication using WebSockets for live AI interactions.",
+        "Building mple.ai, an AI-powered sales training and agentic learning platform delivering realistic customer service and sales roleplay simulations.",
+        "Built robust error tracking with contextual error codes, improving observability and cutting time-to-resolution for production issues.",
+        "Optimized backend APIs and MongoDB aggregation pipelines in Node.js/NestJS, improving query performance and reducing response latency across core services.",
+        "Shipped dashboard analytics with MongoDB aggregations and charts, surfacing user engagement, roleplay performance, and system health.",
+        "Implemented persona customization, enabling dynamic control over AI avatar behavior, tone, and background across training scenarios.",
+        "Improved reliability and synchronization of live AI avatar interactions over WebSockets.",
+        "Delivered product features end to end — from requirements to deployment — across React.js frontends and backend services.",
       ],
     },
   ],
@@ -156,12 +165,20 @@ export const profile: Profile = {
       ],
     },
     {
-      title: "IoT Based Live Tracking",
-      tech: ["ESP8266", "Neo 6M GPS", "SIM800L", "MERN Stack", "WebSockets"],
+      title: "OutReach — AI-Powered Signal-Based Outreach Platform",
+      tech: [
+        "Next.js",
+        "NestJS",
+        "MongoDB",
+        "Redis",
+        "Twilio",
+        "Google Gemini",
+        "AWS SES",
+      ],
       highlights: [
-        "Real-time location tracking system using ESP8266 and Neo 6M GPS module.",
-        "Integrated SIM800L module to transmit live coordinates to mobile devices.",
-        "Full-stack MERN application incorporating WebSockets for instantaneous location updates.",
+        "Full-stack outreach workspace managing contacts, personalized email campaigns, and AI voice calling campaigns.",
+        "NestJS backend with modules for auth, contacts, templates, email campaigns, calling bots, signals, and a campaign scheduler.",
+        "Bulk email sender for high-volume, templated, personalized dispatch with delivery tracking and provider failover over AWS SES.",
       ],
     },
     {
@@ -180,31 +197,20 @@ export const profile: Profile = {
         "Secured sensitive data using Blowfish encryption.",
       ],
     },
-    {
-      title: "Data Analysis and Prediction on Drug Addicts",
-      tech: ["Pandas", "NumPy", "Scikit-learn", "Matplotlib"],
-      highlights: [
-        "Exploratory data analysis and ML models to predict recovery duration.",
-        "Identified demographic trends impacting addiction recovery.",
-      ],
-    },
   ],
   skills: {
-    Programming: ["Java", "Python", "JavaScript", "TypeScript"],
-    "Web Development": [
-      "React.js",
-      "Tailwind CSS",
-      "Node.js",
-      "Express.js",
-      "NestJS",
-      "WebSockets",
-      "Bootstrap",
+    Languages: ["TypeScript", "JavaScript", "Python"],
+    Backend: ["Node.js", "NestJS", "Express.js", "WebSockets"],
+    Frontend: ["Next.js", "React.js", "React Native", "Tailwind CSS", "WebView"],
+    Databases: ["MongoDB", "Redis"],
+    "Cloud & Infra": [
+      "AWS S3",
+      "AWS SES",
+      "AWS CloudFront",
+      "Google Cloud Run",
+      "Google Cloud VM",
+      "Google Cloud Scheduler",
     ],
-    "Mobile Development": ["Flutter", "React Native"],
-    Databases: ["MySQL", "MongoDB"],
-    "Cloud & DevOps": ["AWS", "Render", "Git", "Docker", "Jenkins"],
-    "IoT & Embedded": ["ESP8266", "GPS Modules", "SIM800L"],
-    "Data Analysis": ["Pandas", "NumPy", "Scikit-learn", "Matplotlib", "Power BI"],
   },
   certifications: [
     {

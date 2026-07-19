@@ -344,6 +344,24 @@
   }
 }
 
+/* Hero rotating role — each swap remounts the span and replays this rise-in. */
+.rotating-text-item {
+  animation: role-swap 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes role-swap {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
 /*
  * Scroll reveal — driven by a tiny IntersectionObserver in <Reveal>.
  * The hidden state only applies when scripting is available, so content
@@ -369,6 +387,103 @@
   }
 }
 
+/*
+ * Aurora depth — the glow layer drifts upward and swells slightly as the
+ * page scrolls, adding parallax depth behind the content. Static without
+ * scroll-driven animation support.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .aurora-parallax {
+      animation: aurora-depth linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+}
+
+@keyframes aurora-depth {
+  from {
+    transform: translateY(0) scale(1);
+  }
+  to {
+    transform: translateY(-12vh) scale(1.08);
+  }
+}
+
+/*
+ * Experience timeline — where scroll-driven animations are supported, the
+ * colored rail grows as the timeline moves through the viewport. Browsers
+ * without support simply show the full gradient.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .timeline-progress {
+      animation: timeline-grow linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 70%;
+    }
+  }
+}
+
+@keyframes timeline-grow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+/*
+ * Animated card border glow — a conic highlight sweeps the border while the
+ * card is hovered or focused. The mask keeps only a 1px rim visible. Without
+ * @property support the sweep stays put and simply fades in — still fine.
+ */
+@property --card-glow-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.card-glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--card-glow-angle),
+    transparent,
+    var(--glow-1) 12%,
+    var(--glow-2) 22%,
+    transparent 34%
+  );
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  animation: card-glow-spin 3.5s linear infinite paused;
+}
+
+.card-glow:hover::after,
+.card-glow:focus-within::after {
+  opacity: 1;
+  animation-play-state: running;
+}
+
+@keyframes card-glow-spin {
+  to {
+    --card-glow-angle: 360deg;
+  }
+}
+
 /* Spotlight cards — --spot-x/--spot-y are set from a pointermove listener. */
 .spotlight {
   position: relative;
@@ -391,6 +506,154 @@
 
 .spotlight:hover::before {
   opacity: 1;
+}
+
+/*
+ * Theme-switch celestial pass (see ThemeToggle). The overlay mounts in the
+ * same flush as the theme change, so the sun/moon rises inside the expanding
+ * view-transition circle, then the whole pass fades and unmounts on
+ * animationend. Never rendered under reduced motion.
+ */
+.celestial-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  pointer-events: none;
+  overflow: hidden;
+  /* Opaque sky holds until the rise completes, then fades to the page. */
+  animation: celestial-hold-fade 1.5s ease-in both;
+}
+
+@keyframes celestial-hold-fade {
+  0%,
+  72% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Plain dawn sky for the sunrise pass — dusky enough for the sun to pop. */
+.celestial-sun {
+  background: linear-gradient(
+    to bottom,
+    oklch(0.82 0.03 255),
+    oklch(0.78 0.09 60)
+  );
+}
+
+/* Sky wash behind the rising body — warm dawn or cool dusk. */
+.celestial-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.celestial-sun::before {
+  background: radial-gradient(
+    120% 85% at 50% 100%,
+    color-mix(in oklch, oklch(0.85 0.15 75) 30%, transparent),
+    transparent 62%
+  );
+}
+
+.celestial-moon::before {
+  background: radial-gradient(
+    120% 85% at 50% 100%,
+    color-mix(in oklch, oklch(0.55 0.12 275) 30%, transparent),
+    transparent 62%
+  );
+}
+
+/* Plain night sky for the sunset pass. */
+.celestial-moon {
+  background: linear-gradient(
+    to bottom,
+    oklch(0.09 0.018 268),
+    oklch(0.16 0.032 266)
+  );
+}
+
+.celestial-body {
+  position: absolute;
+  bottom: -96px;
+  left: 50%;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  will-change: transform;
+  animation: celestial-rise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Slight diagonal arc — bodies rise at an angle, as they do. */
+@keyframes celestial-rise {
+  from {
+    transform: translate(calc(-50% - 44px), 0) scale(0.7);
+  }
+  to {
+    transform: translate(-50%, calc(-38vh - 96px)) scale(1);
+  }
+}
+
+
+.celestial-sun .celestial-body {
+  background: radial-gradient(
+    circle at 42% 40%,
+    oklch(0.99 0.06 100),
+    oklch(0.9 0.17 85) 58%,
+    oklch(0.82 0.17 65)
+  );
+  box-shadow:
+    0 0 12px 2px oklch(0.95 0.12 90),
+    0 0 56px 20px color-mix(in oklch, oklch(0.88 0.16 80) 60%, transparent),
+    0 0 170px 80px color-mix(in oklch, oklch(0.8 0.15 70) 30%, transparent);
+}
+
+/* Crescent moon — SVG in the markup; glow hugs the crescent's alpha. */
+.celestial-moon-disc {
+  fill: oklch(0.94 0.015 260);
+}
+
+.celestial-moon .celestial-body {
+  filter: drop-shadow(
+      0 0 10px color-mix(in oklch, oklch(0.85 0.04 262) 55%, transparent)
+    )
+    drop-shadow(0 0 44px color-mix(in oklch, oklch(0.7 0.08 275) 32%, transparent));
+}
+
+.celestial-star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 8px 1px rgb(255 255 255 / 0.55);
+  /* Pop in, then shimmer for the rest of the night pass. */
+  animation:
+    celestial-star-in 0.5s ease-out both,
+    celestial-twinkle 1.1s ease-in-out infinite;
+}
+
+@keyframes celestial-star-in {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+}
+
+@keyframes celestial-twinkle {
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.45;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

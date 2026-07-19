@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { flushSync } from "react-dom";
+import { createPortal, flushSync } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
@@ -180,15 +180,35 @@ export function Navbar() {
   );
 }
 
+/** Star field for the sunset pass — position, entrance delay and size. */
+const CELESTIAL_STARS = [
+  { top: "8%", left: "55%", delay: 0.05, size: 3 },
+  { top: "12%", left: "18%", delay: 0.15, size: 2 },
+  { top: "16%", left: "88%", delay: 0.2, size: 3.5 },
+  { top: "22%", left: "72%", delay: 0.3, size: 2 },
+  { top: "6%", left: "30%", delay: 0.35, size: 2.5 },
+  { top: "30%", left: "38%", delay: 0.4, size: 3 },
+  { top: "38%", left: "10%", delay: 0.5, size: 2 },
+  { top: "10%", left: "70%", delay: 0.45, size: 2 },
+  { top: "26%", left: "8%", delay: 0.25, size: 3 },
+  { top: "34%", left: "90%", delay: 0.55, size: 2.5 },
+];
+
 /**
  * Renders both icons and lets CSS pick one based on `data-theme`, so there is
  * no mounted-state flash and no hydration mismatch. Switching themes plays a
- * circular reveal from the button via the View Transitions API, falling back
- * to an instant swap on unsupported browsers or reduced motion.
+ * circular reveal from the button via the View Transitions API — with a
+ * celestial pass layered on top: a sun rises for light mode, a moon and stars
+ * for dark. Falls back to an instant swap on unsupported browsers or reduced
+ * motion.
  */
 function ThemeToggle({ className }: { className?: string }) {
   const { resolvedTheme, setTheme } = useTheme();
   const buttonRef = React.useRef<HTMLButtonElement>(null);
+  const [celestial, setCelestial] = React.useState<{
+    kind: "sun" | "moon";
+    id: number;
+  } | null>(null);
 
   const toggleTheme = () => {
     const next = resolvedTheme === "dark" ? "light" : "dark";
@@ -196,6 +216,11 @@ function ThemeToggle({ className }: { className?: string }) {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
+
+    if (!prefersReducedMotion) {
+      // Mounted by the flushSync below, inside the new view snapshot.
+      setCelestial({ kind: next === "light" ? "sun" : "moon", id: Date.now() });
+    }
 
     if (!document.startViewTransition || prefersReducedMotion || !button) {
       setTheme(next);
@@ -236,18 +261,73 @@ function ThemeToggle({ className }: { className?: string }) {
   };
 
   return (
-    <button
-      ref={buttonRef}
-      type="button"
-      onClick={toggleTheme}
-      aria-label="Toggle theme"
-      className={cn(
-        "rounded-lg p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground",
-        className,
-      )}
-    >
-      <Sun className="hidden h-5 w-5 dark:block" aria-hidden="true" />
-      <Moon className="h-5 w-5 dark:hidden" aria-hidden="true" />
-    </button>
+    <>
+      <button
+        ref={buttonRef}
+        type="button"
+        onClick={toggleTheme}
+        aria-label="Toggle theme"
+        className={cn(
+          "rounded-lg p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground",
+          className,
+        )}
+      >
+        <Sun className="hidden h-5 w-5 dark:block" aria-hidden="true" />
+        <Moon className="h-5 w-5 dark:hidden" aria-hidden="true" />
+      </button>
+
+      {celestial &&
+        createPortal(
+          <span
+            key={celestial.id}
+            aria-hidden="true"
+            className={cn(
+              "celestial-overlay",
+              celestial.kind === "sun" ? "celestial-sun" : "celestial-moon",
+            )}
+            onAnimationEnd={(event) => {
+              // Child animations bubble; only the overlay's own fade unmounts it.
+              if (event.target === event.currentTarget) setCelestial(null);
+            }}
+          >
+            {celestial.kind === "sun" ? (
+              <span className="celestial-body" />
+            ) : (
+              /* Crescent via SVG mask — exact geometry, real transparency,
+                 and drop-shadow follows the crescent's alpha reliably. */
+              <svg className="celestial-body" viewBox="0 0 100 100">
+                <defs>
+                  <mask id="celestial-crescent">
+                    <circle cx="50" cy="50" r="44" fill="#fff" />
+                    <circle cx="30" cy="42" r="40" fill="#000" />
+                  </mask>
+                </defs>
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="44"
+                  mask="url(#celestial-crescent)"
+                  className="celestial-moon-disc"
+                />
+              </svg>
+            )}
+            {celestial.kind === "moon" &&
+              CELESTIAL_STARS.map((star) => (
+                <span
+                  key={`${star.top}-${star.left}`}
+                  className="celestial-star"
+                  style={{
+                    top: star.top,
+                    left: star.left,
+                    width: star.size,
+                    height: star.size,
+                    animationDelay: `${star.delay}s`,
+                  }}
+                />
+              ))}
+          </span>,
+          document.body,
+        )}
+    </>
   );
 }

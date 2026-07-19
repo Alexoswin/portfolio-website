@@ -1,11 +1,9 @@
 import {
-  BarChart3,
   Cloud,
   Code2,
-  Cpu,
   Database,
   Globe,
-  Smartphone,
+  Server,
   type LucideIcon,
 } from "lucide-react";
 import { profile } from "@/lib/profile";
@@ -15,13 +13,11 @@ import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/effects/reveal";
 
 const categoryIcons: Record<string, LucideIcon> = {
-  Programming: Code2,
-  "Web Development": Globe,
-  "Mobile Development": Smartphone,
+  Languages: Code2,
+  Backend: Server,
+  Frontend: Globe,
   Databases: Database,
-  "Cloud & DevOps": Cloud,
-  "IoT & Embedded": Cpu,
-  "Data Analysis": BarChart3,
+  "Cloud & Infra": Cloud,
 };
 
 export function Skills() {
@@ -50,7 +46,7 @@ export function Skills() {
                   {skills.map((skill) => (
                     <li
                       key={skill}
-                      className="rounded-full border border-border bg-background/60 px-3 py-1 text-sm text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
+                      className="rounded-full border border-border bg-background/60 px-3 py-1 text-sm text-muted-foreground transition-[color,border-color,transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary hover:shadow-[0_4px_12px_-6px] hover:shadow-primary/40"
                     >
                       {skill}
                     </li>

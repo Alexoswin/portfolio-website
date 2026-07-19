@@ -9,7 +9,7 @@ interface CardProps extends React.ComponentProps<"div"> {
 }
 
 const cardStyles =
-  "group relative overflow-hidden rounded-2xl border bg-card p-6 " +
+  "group card-glow relative overflow-hidden rounded-2xl border bg-card p-6 " +
   "shadow-card dark:shadow-card-dark transition-[border-color,box-shadow,transform] duration-300 " +
   "hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5";
 

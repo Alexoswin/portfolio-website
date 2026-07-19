@@ -73,7 +73,10 @@ export async function Footer() {
           <div className="flex flex-col gap-3">
             <h2 className="text-sm font-semibold">Expertise</h2>
             <div className="flex flex-wrap gap-2">
-              {profile.skills["Web Development"].map((skill) => (
+              {[
+                ...(profile.skills.Backend ?? []),
+                ...(profile.skills.Frontend ?? []),
+              ].map((skill) => (
                 <span
                   key={skill}
                   className="rounded-full border border-border bg-background/60 px-2.5 py-1 text-xs text-muted-foreground"
