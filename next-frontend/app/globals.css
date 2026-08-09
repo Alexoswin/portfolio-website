@@ -26,8 +26,10 @@
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
   --shadow-glow: 0 0 24px -6px var(--primary);
-  --shadow-card: 0 1px 2px rgb(2 6 23 / 0.06), 0 8px 24px -12px rgb(2 6 23 / 0.12);
-  --shadow-card-dark: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 12px 32px -16px rgb(0 0 0 / 0.6);
+  --shadow-card:
+    0 1px 2px rgb(2 6 23 / 0.06), 0 8px 24px -12px rgb(2 6 23 / 0.12);
+  --shadow-card-dark:
+    0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 12px 32px -16px rgb(0 0 0 / 0.6);
 
   --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-fade-up-3d: fade-up-3d 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -56,8 +58,8 @@
   @keyframes fade-up-3d {
     from {
       opacity: 0;
-      transform: perspective(1000px) translate3d(0, 38px, -90px)
-        rotateX(14deg) scale(0.97);
+      transform: perspective(1000px) translate3d(0, 38px, -90px) rotateX(14deg)
+        scale(0.97);
       filter: blur(8px);
     }
     to {
@@ -69,8 +71,8 @@
   @keyframes scene-arrive {
     from {
       opacity: 0.72;
-      transform: perspective(1400px) translate3d(0, 22px, -140px)
-        rotateX(8deg) scale(0.965);
+      transform: perspective(1400px) translate3d(0, 22px, -140px) rotateX(8deg)
+        scale(0.965);
       filter: blur(10px) saturate(0.85);
     }
     55% {
@@ -85,8 +87,8 @@
   @keyframes depth-pop {
     from {
       opacity: 0;
-      transform: perspective(1200px) translate3d(0, 30px, -220px)
-        rotateX(18deg) rotateY(-14deg) scale(0.76);
+      transform: perspective(1200px) translate3d(0, 30px, -220px) rotateX(18deg)
+        rotateY(-14deg) scale(0.76);
       filter: blur(8px);
     }
     65% {
@@ -251,7 +253,9 @@
   body {
     background-color: var(--background);
     color: var(--foreground);
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: clip;
@@ -331,8 +335,16 @@
   }
 
   .mask-fade-edges {
-    mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, black 40%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, black 40%, transparent 100%);
+    mask-image: radial-gradient(
+      ellipse 75% 65% at 50% 40%,
+      black 40%,
+      transparent 100%
+    );
+    -webkit-mask-image: radial-gradient(
+      ellipse 75% 65% at 50% 40%,
+      black 40%,
+      transparent 100%
+    );
   }
 
   .eyebrow {
@@ -538,16 +550,38 @@
   }
 }
 
-/* Plain dawn sky for the sunrise pass — dusky enough for the sun to pop. */
+/*
+ * Dawn sky — deep violet zenith falling through rose to a burning horizon,
+ * so the sun climbs out of light rather than sitting on flat color. Each pass
+ * also publishes the two cloud gradient stops it wants (see .celestial-cloud).
+ */
 .celestial-sun {
+  --cloud-top: oklch(0.99 0.015 85);
+  --cloud-bottom: oklch(0.79 0.08 40);
   background: linear-gradient(
     to bottom,
-    oklch(0.82 0.03 255),
-    oklch(0.78 0.09 60)
+    oklch(0.55 0.13 285) 0%,
+    oklch(0.68 0.12 320) 26%,
+    oklch(0.82 0.1 25) 56%,
+    oklch(0.88 0.11 55) 80%,
+    oklch(0.92 0.12 72) 100%
   );
 }
 
-/* Sky wash behind the rising body — warm dawn or cool dusk. */
+/* Night sky — near-black zenith warming into an indigo horizon haze. */
+.celestial-moon {
+  --cloud-top: oklch(0.38 0.045 274);
+  --cloud-bottom: oklch(0.17 0.032 268);
+  background: linear-gradient(
+    to bottom,
+    oklch(0.07 0.02 265) 0%,
+    oklch(0.11 0.03 268) 34%,
+    oklch(0.17 0.045 275) 70%,
+    oklch(0.23 0.055 285) 100%
+  );
+}
+
+/* Horizon bloom sitting under the sky, where the body breaks the skyline. */
 .celestial-overlay::before {
   content: "";
   position: absolute;
@@ -555,28 +589,31 @@
 }
 
 .celestial-sun::before {
-  background: radial-gradient(
-    120% 85% at 50% 100%,
-    color-mix(in oklch, oklch(0.85 0.15 75) 30%, transparent),
-    transparent 62%
-  );
+  background:
+    radial-gradient(
+      70% 42% at 50% 102%,
+      color-mix(in oklch, oklch(0.97 0.14 85) 75%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      130% 70% at 50% 100%,
+      color-mix(in oklch, oklch(0.88 0.15 62) 42%, transparent),
+      transparent 68%
+    );
 }
 
 .celestial-moon::before {
-  background: radial-gradient(
-    120% 85% at 50% 100%,
-    color-mix(in oklch, oklch(0.55 0.12 275) 30%, transparent),
-    transparent 62%
-  );
-}
-
-/* Plain night sky for the sunset pass. */
-.celestial-moon {
-  background: linear-gradient(
-    to bottom,
-    oklch(0.09 0.018 268),
-    oklch(0.16 0.032 266)
-  );
+  background:
+    radial-gradient(
+      60% 34% at 50% 102%,
+      color-mix(in oklch, oklch(0.62 0.13 282) 45%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
+      120% 80% at 50% 100%,
+      color-mix(in oklch, oklch(0.5 0.11 278) 26%, transparent),
+      transparent 66%
+    );
 }
 
 .celestial-body {
@@ -600,30 +637,181 @@
   }
 }
 
-
 .celestial-sun .celestial-body {
   background: radial-gradient(
-    circle at 42% 40%,
-    oklch(0.99 0.06 100),
-    oklch(0.9 0.17 85) 58%,
-    oklch(0.82 0.17 65)
+    circle at 40% 36%,
+    oklch(1 0.03 100),
+    oklch(0.97 0.11 95) 34%,
+    oklch(0.9 0.18 82) 66%,
+    oklch(0.82 0.18 58)
   );
   box-shadow:
-    0 0 12px 2px oklch(0.95 0.12 90),
-    0 0 56px 20px color-mix(in oklch, oklch(0.88 0.16 80) 60%, transparent),
-    0 0 170px 80px color-mix(in oklch, oklch(0.8 0.15 70) 30%, transparent);
+    0 0 14px 3px oklch(0.96 0.11 90),
+    0 0 60px 22px color-mix(in oklch, oklch(0.9 0.16 80) 62%, transparent),
+    0 0 190px 90px color-mix(in oklch, oklch(0.82 0.15 68) 32%, transparent);
+}
+
+/* Ray burst — thin spokes masked to a ring so the disc stays clean. */
+.celestial-sun .celestial-body::before {
+  content: "";
+  position: absolute;
+  inset: -250%;
+  background: repeating-conic-gradient(
+    from 0deg,
+    color-mix(in oklch, oklch(0.98 0.1 88) 70%, transparent) 0deg 1.4deg,
+    transparent 1.4deg 15deg
+  );
+  mask-image: radial-gradient(
+    closest-side,
+    transparent 20%,
+    #000 34%,
+    transparent 76%
+  );
+  animation:
+    celestial-rays-in 1.2s ease-out both,
+    celestial-rays-spin 26s linear infinite;
+}
+
+/* Corona — a soft second halo, wider and slower to bloom than the rays. */
+.celestial-sun .celestial-body::after {
+  content: "";
+  position: absolute;
+  inset: -150%;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in oklch, oklch(0.95 0.13 84) 34%, transparent),
+    transparent 72%
+  );
+  animation: celestial-corona-in 1.3s ease-out both;
+}
+
+@keyframes celestial-rays-in {
+  from {
+    opacity: 0;
+    scale: 0.55;
+  }
+  to {
+    opacity: 0.48;
+    scale: 1;
+  }
+}
+
+@keyframes celestial-rays-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes celestial-corona-in {
+  from {
+    opacity: 0;
+    scale: 0.6;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
 }
 
 /* Crescent moon — SVG in the markup; glow hugs the crescent's alpha. */
 .celestial-moon-disc {
-  fill: oklch(0.94 0.015 260);
+  fill: oklch(0.95 0.015 258);
 }
 
-.celestial-moon .celestial-body {
+.celestial-moon-crater {
+  fill: oklch(0.86 0.018 262);
+}
+
+/* Tight rim glow only — the crescent's alpha drives it, so the light stays
+   crescent shaped. A wider one gets squared off by the SVG's filter region. */
+.celestial-moon-body svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
   filter: drop-shadow(
-      0 0 10px color-mix(in oklch, oklch(0.85 0.04 262) 55%, transparent)
-    )
-    drop-shadow(0 0 44px color-mix(in oklch, oklch(0.7 0.08 275) 32%, transparent));
+    0 0 9px color-mix(in oklch, oklch(0.88 0.04 262) 60%, transparent)
+  );
+}
+
+/* The broad halo, as an unclipped radial wash sitting behind the crescent. */
+.celestial-moon-body::after {
+  content: "";
+  position: absolute;
+  inset: -130%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in oklch, oklch(0.78 0.07 272) 28%, transparent),
+    transparent 70%
+  );
+  animation: celestial-corona-in 1.3s ease-out both;
+}
+
+/*
+ * Clouds — SVG silhouettes (two symbols in .celestial-defs) filled with one
+ * shared vertical gradient, so a cloud is lit along its crown and shaded
+ * underneath instead of reading as flat blobs. Opacity lives on the span, not
+ * the fill, which keeps the overlapping lobes seam-free.
+ */
+.celestial-cloud {
+  position: absolute;
+  /* Capped against the viewport so clouds stay clouds on a phone. */
+  width: min(var(--cloud-w), 58vw);
+  aspect-ratio: 200 / 96;
+  will-change: transform, opacity;
+  animation: celestial-cloud-drift 1.5s linear both;
+}
+
+.celestial-cloud svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Mirrored instances so no two clouds share a silhouette. */
+.celestial-cloud[data-flip="true"] svg {
+  scale: -1 1;
+}
+
+/* Atmospheric perspective: distance softens and desaturates. */
+.celestial-cloud[data-layer="back"] {
+  filter: blur(calc(var(--cloud-w) * 0.012)) saturate(0.75);
+}
+
+.celestial-cloud[data-layer="front"] {
+  filter: blur(calc(var(--cloud-w) * 0.004));
+}
+
+.celestial-cloud-top {
+  stop-color: var(--cloud-top);
+}
+
+.celestial-cloud-bottom {
+  stop-color: var(--cloud-bottom);
+}
+
+/* Defs carrier: in the flow but zero-sized, purely a symbol/gradient library. */
+.celestial-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+/* Drift across the pass, easing up out of the horizon as they fade in. */
+@keyframes celestial-cloud-drift {
+  0% {
+    opacity: 0;
+    transform: translate3d(calc(var(--cloud-drift) * -0.5), 10px, 0);
+  }
+  20% {
+    opacity: var(--cloud-opacity);
+  }
+  100% {
+    opacity: var(--cloud-opacity);
+    transform: translate3d(calc(var(--cloud-drift) * 0.5), 0, 0);
+  }
 }
 
 .celestial-star {
@@ -637,6 +825,28 @@
   animation:
     celestial-star-in 0.5s ease-out both,
     celestial-twinkle 1.1s ease-in-out infinite;
+}
+
+/* The brighter stars get a four-point diffraction flare. */
+.celestial-star[data-flare="true"]::before {
+  content: "";
+  position: absolute;
+  inset: -420%;
+  background:
+    linear-gradient(
+        to right,
+        transparent,
+        rgb(255 255 255 / 0.6) 50%,
+        transparent
+      )
+      center / 100% 1px no-repeat,
+    linear-gradient(
+        to bottom,
+        transparent,
+        rgb(255 255 255 / 0.6) 50%,
+        transparent
+      )
+      center / 1px 100% no-repeat;
 }
 
 @keyframes celestial-star-in {

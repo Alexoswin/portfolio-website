@@ -154,7 +154,9 @@ export function Navbar() {
                 style={{ transitionDelay: `${index * 30}ms` }}
                 className={cn(
                   "rounded-lg px-3 py-2.5 text-base font-medium transition-[color,background-color,opacity,translate] duration-300",
-                  isOpen ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0",
+                  isOpen
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-2 opacity-0",
                   isActive(item.href)
                     ? "bg-accent text-foreground"
                     : "text-muted-foreground hover:bg-accent/60 hover:text-foreground",
@@ -195,10 +197,179 @@ const CELESTIAL_STARS = [
 ];
 
 /**
+ * Clouds drifting across the pass. `layer` decides paint order around the
+ * rising body: "back" clouds sit behind it, "front" clouds sweep over it.
+ * `drift` is the total horizontal travel in px (negative drifts leftwards);
+ * `shape` picks one of the two silhouettes, `flip` mirrors it.
+ */
+const CELESTIAL_CLOUDS = [
+  {
+    top: "7%",
+    left: "-14%",
+    width: 240,
+    drift: 96,
+    opacity: 0.72,
+    layer: "back",
+    shape: "b",
+    flip: false,
+  },
+  {
+    top: "26%",
+    left: "58%",
+    width: 280,
+    drift: -112,
+    opacity: 0.62,
+    layer: "back",
+    shape: "a",
+    flip: true,
+  },
+  {
+    top: "60%",
+    left: "12%",
+    width: 190,
+    drift: 74,
+    opacity: 0.5,
+    layer: "back",
+    shape: "b",
+    flip: true,
+  },
+  {
+    top: "38%",
+    left: "-8%",
+    width: 330,
+    drift: 170,
+    opacity: 0.95,
+    layer: "front",
+    shape: "a",
+    flip: false,
+  },
+  // Clips the lower half of the risen body, so it reads as sky with depth.
+  {
+    top: "55%",
+    left: "33%",
+    width: 300,
+    drift: 150,
+    opacity: 0.88,
+    layer: "front",
+    shape: "a",
+    flip: true,
+  },
+  {
+    top: "52%",
+    left: "64%",
+    width: 230,
+    drift: -140,
+    opacity: 0.88,
+    layer: "front",
+    shape: "b",
+    flip: false,
+  },
+] as const;
+
+/**
+ * Symbol library for the pass — one shared cloud gradient (userSpaceOnUse so
+ * the lobes of a cloud sample one continuous ramp rather than each getting
+ * its own) and the two cloud silhouettes every instance draws with `<use>`.
+ */
+function CelestialDefs() {
+  return (
+    <svg className="celestial-defs" aria-hidden="true">
+      <defs>
+        {/*
+          A cloud is a pile of overlapping lobes, and each lobe antialiases
+          against transparency before they composite — which leaves pale
+          seams where two edges run close together. Pushing alpha up the
+          table collapses those partial coverages back to solid; the CSS
+          blur on the span puts the soft edge back.
+        */}
+        <filter id="celestial-cloud-solid" colorInterpolationFilters="sRGB">
+          <feComponentTransfer>
+            <feFuncA type="table" tableValues="0 1 1" />
+          </feComponentTransfer>
+        </filter>
+
+        <linearGradient
+          id="celestial-cloud-fill"
+          gradientUnits="userSpaceOnUse"
+          x1="0"
+          y1="6"
+          x2="0"
+          y2="94"
+        >
+          <stop offset="0" className="celestial-cloud-top" />
+          <stop offset="1" className="celestial-cloud-bottom" />
+        </linearGradient>
+
+        {/* Cumulus — tall crown, flat base. */}
+        <symbol id="celestial-cloud-a" viewBox="0 0 200 96">
+          <g
+            fill="url(#celestial-cloud-fill)"
+            filter="url(#celestial-cloud-solid)"
+          >
+            <rect x="12" y="56" width="176" height="34" rx="17" />
+            <circle cx="92" cy="44" r="34" />
+            <circle cx="56" cy="56" r="24" />
+            <circle cx="134" cy="54" r="26" />
+            <circle cx="30" cy="66" r="15" />
+            <circle cx="168" cy="64" r="17" />
+          </g>
+        </symbol>
+
+        {/* Stratocumulus — longer and lower, for the distance. */}
+        <symbol id="celestial-cloud-b" viewBox="0 0 200 96">
+          <g
+            fill="url(#celestial-cloud-fill)"
+            filter="url(#celestial-cloud-solid)"
+          >
+            <rect x="6" y="62" width="188" height="28" rx="14" />
+            <circle cx="104" cy="44" r="26" />
+            <circle cx="60" cy="52" r="22" />
+            <circle cx="146" cy="54" r="20" />
+            <circle cx="26" cy="62" r="13" />
+            <circle cx="176" cy="62" r="14" />
+          </g>
+        </symbol>
+      </defs>
+    </svg>
+  );
+}
+
+function CelestialClouds({ layer }: { layer: "front" | "back" }) {
+  return (
+    <>
+      {CELESTIAL_CLOUDS.filter((cloud) => cloud.layer === layer).map(
+        (cloud) => (
+          <span
+            key={`${cloud.top}-${cloud.left}`}
+            className="celestial-cloud"
+            data-layer={cloud.layer}
+            data-flip={cloud.flip}
+            style={
+              {
+                top: cloud.top,
+                left: cloud.left,
+                "--cloud-w": `${cloud.width}px`,
+                "--cloud-drift": `${cloud.drift}px`,
+                "--cloud-opacity": cloud.opacity,
+              } as React.CSSProperties
+            }
+          >
+            <svg viewBox="0 0 200 96">
+              <use href={`#celestial-cloud-${cloud.shape}`} />
+            </svg>
+          </span>
+        ),
+      )}
+    </>
+  );
+}
+
+/**
  * Renders both icons and lets CSS pick one based on `data-theme`, so there is
  * no mounted-state flash and no hydration mismatch. Switching themes plays a
  * celestial pass: an opaque sky overlay fades in over the page, a sun (light)
- * or crescent moon with stars (dark) rises across it, and the sky fades out
+ * or crescent moon with stars (dark) rises across it while clouds drift past
+ * in front of and behind it, and the sky fades out
  * to reveal the retinted page. The theme itself flips in the same React
  * commit that mounts the overlay, so the swap is never seen directly.
  * Reduced motion gets an instant swap.
@@ -251,32 +422,65 @@ function ThemeToggle({ className }: { className?: string }) {
               if (event.target === event.currentTarget) setCelestial(null);
             }}
           >
+            <CelestialDefs />
+            <CelestialClouds layer="back" />
             {celestial.kind === "sun" ? (
               <span className="celestial-body" />
             ) : (
               /* Crescent via SVG mask — exact geometry, real transparency,
-                 and drop-shadow follows the crescent's alpha reliably. */
-              <svg className="celestial-body" viewBox="0 0 100 100">
-                <defs>
-                  <mask id="celestial-crescent">
-                    <circle cx="50" cy="50" r="44" fill="#fff" />
-                    <circle cx="70" cy="42" r="40" fill="#000" />
-                  </mask>
-                </defs>
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="44"
-                  mask="url(#celestial-crescent)"
-                  className="celestial-moon-disc"
-                />
-              </svg>
+                 and drop-shadow follows the crescent's alpha reliably. The
+                 wide halo lives on the wrapper's ::after instead of a second
+                 drop-shadow, which the SVG's filter region would square off. */
+              <span className="celestial-body celestial-moon-body">
+                <svg viewBox="0 0 100 100">
+                  <defs>
+                    <mask id="celestial-crescent">
+                      <circle cx="50" cy="50" r="44" fill="#fff" />
+                      <circle cx="70" cy="42" r="40" fill="#000" />
+                    </mask>
+                  </defs>
+                  <g mask="url(#celestial-crescent)">
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="44"
+                      className="celestial-moon-disc"
+                    />
+                    {/* Maria, placed inside the lit limb so the mask keeps them. */}
+                    <circle
+                      cx="27"
+                      cy="63"
+                      r="7.5"
+                      className="celestial-moon-crater"
+                    />
+                    <circle
+                      cx="20"
+                      cy="39"
+                      r="5"
+                      className="celestial-moon-crater"
+                    />
+                    <circle
+                      cx="35"
+                      cy="76"
+                      r="4"
+                      className="celestial-moon-crater"
+                    />
+                    <circle
+                      cx="14"
+                      cy="53"
+                      r="3.2"
+                      className="celestial-moon-crater"
+                    />
+                  </g>
+                </svg>
+              </span>
             )}
             {celestial.kind === "moon" &&
               CELESTIAL_STARS.map((star) => (
                 <span
                   key={`${star.top}-${star.left}`}
                   className="celestial-star"
+                  data-flare={star.size >= 3}
                   style={{
                     top: star.top,
                     left: star.left,
@@ -286,6 +490,7 @@ function ThemeToggle({ className }: { className?: string }) {
                   }}
                 />
               ))}
+            <CelestialClouds layer="front" />
           </span>,
           document.body,
         )}
