@@ -448,56 +448,6 @@
 }
 
 /*
- * Animated card border glow — a conic highlight sweeps the border while the
- * card is hovered or focused. The mask keeps only a 1px rim visible. Without
- * @property support the sweep stays put and simply fades in — still fine.
- */
-@property --card-glow-angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-
-.card-glow::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  pointer-events: none;
-  background: conic-gradient(
-    from var(--card-glow-angle),
-    transparent,
-    var(--glow-1) 12%,
-    var(--glow-2) 22%,
-    transparent 34%
-  );
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  animation: card-glow-spin 3.5s linear infinite paused;
-}
-
-.card-glow:hover::after,
-.card-glow:focus-within::after {
-  opacity: 1;
-  animation-play-state: running;
-}
-
-@keyframes card-glow-spin {
-  to {
-    --card-glow-angle: 360deg;
-  }
-}
-
-/*
  * Theme-switch celestial pass (see ThemeToggle). The overlay mounts in the
  * same flush as the theme change, so the sun/moon rises inside the expanding
  * view-transition circle, then the whole pass fades and unmounts on
