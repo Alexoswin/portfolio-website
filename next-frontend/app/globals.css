@@ -563,7 +563,20 @@
   }
 }
 
-.celestial-sun .celestial-body {
+/*
+ * WebGL orb (see CelestialOrb): the canvas is 5x the body so the shader's
+ * corona has room to fall off to zero before the canvas edge.
+ */
+.celestial-orb-canvas {
+  position: absolute;
+  top: -200%;
+  left: -200%;
+  width: 500%;
+  height: 500%;
+}
+
+/* CSS sun — fallback when WebGL is unavailable. */
+.celestial-sun-disc {
   background: radial-gradient(
     circle at 40% 36%,
     oklch(1 0.03 100),
@@ -578,7 +591,7 @@
 }
 
 /* Ray burst — thin spokes masked to a ring so the disc stays clean. */
-.celestial-sun .celestial-body::before {
+.celestial-sun-disc::before {
   content: "";
   position: absolute;
   inset: -250%;
@@ -599,7 +612,7 @@
 }
 
 /* Corona — a soft second halo, wider and slower to bloom than the rays. */
-.celestial-sun .celestial-body::after {
+.celestial-sun-disc::after {
   content: "";
   position: absolute;
   inset: -150%;
@@ -640,7 +653,7 @@
   }
 }
 
-/* Crescent moon — SVG in the markup; glow hugs the crescent's alpha. */
+/* Crescent moon (WebGL fallback) — SVG in the markup; glow hugs the crescent's alpha. */
 .celestial-moon-disc {
   fill: oklch(0.95 0.015 258);
 }

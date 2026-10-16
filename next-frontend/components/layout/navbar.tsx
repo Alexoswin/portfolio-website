@@ -11,6 +11,7 @@ import { profile } from "@/lib/profile";
 import { siteConfig } from "@/lib/site";
 import { BrandMark } from "@/components/ui/brand-mark";
 import { Magnetic } from "@/components/effects/magnetic";
+import { CelestialOrb } from "@/components/effects/celestial-orb";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -370,8 +371,9 @@ function CelestialClouds({ layer }: { layer: "front" | "back" }) {
 /**
  * Renders both icons and lets CSS pick one based on `data-theme`, so there is
  * no mounted-state flash and no hydration mismatch. Switching themes plays a
- * celestial pass: an opaque sky overlay fades in over the page, a sun (light)
- * or crescent moon with stars (dark) rises across it while clouds drift past
+ * celestial pass: an opaque sky overlay fades in over the page, a WebGL orb
+ * rises across it morphing from the old theme's body into the new one — sun
+ * (light) or crescent moon with stars (dark) — while clouds drift past
  * in front of and behind it, and the sky fades out
  * to reveal the retinted page. The theme itself flips in the same React
  * commit that mounts the overlay, so the swap is never seen directly.
@@ -427,57 +429,62 @@ function ThemeToggle({ className }: { className?: string }) {
           >
             <CelestialDefs />
             <CelestialClouds layer="back" />
-            {celestial.kind === "sun" ? (
-              <span className="celestial-body" />
-            ) : (
-              /* Crescent via SVG mask — exact geometry, real transparency,
+            <CelestialOrb
+              kind={celestial.kind}
+              fallback={
+                celestial.kind === "sun" ? (
+                  <span className="celestial-body celestial-sun-disc" />
+                ) : (
+                  /* Crescent via SVG mask — exact geometry, real transparency,
                  and drop-shadow follows the crescent's alpha reliably. The
                  wide halo lives on the wrapper's ::after instead of a second
                  drop-shadow, which the SVG's filter region would square off. */
-              <span className="celestial-body celestial-moon-body">
-                <svg viewBox="0 0 100 100">
-                  <defs>
-                    <mask id="celestial-crescent">
-                      <circle cx="50" cy="50" r="44" fill="#fff" />
-                      <circle cx="70" cy="42" r="40" fill="#000" />
-                    </mask>
-                  </defs>
-                  <g mask="url(#celestial-crescent)">
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="44"
-                      className="celestial-moon-disc"
-                    />
-                    {/* Maria, placed inside the lit limb so the mask keeps them. */}
-                    <circle
-                      cx="27"
-                      cy="63"
-                      r="7.5"
-                      className="celestial-moon-crater"
-                    />
-                    <circle
-                      cx="20"
-                      cy="39"
-                      r="5"
-                      className="celestial-moon-crater"
-                    />
-                    <circle
-                      cx="35"
-                      cy="76"
-                      r="4"
-                      className="celestial-moon-crater"
-                    />
-                    <circle
-                      cx="14"
-                      cy="53"
-                      r="3.2"
-                      className="celestial-moon-crater"
-                    />
-                  </g>
-                </svg>
-              </span>
-            )}
+                  <span className="celestial-body celestial-moon-body">
+                    <svg viewBox="0 0 100 100">
+                      <defs>
+                        <mask id="celestial-crescent">
+                          <circle cx="50" cy="50" r="44" fill="#fff" />
+                          <circle cx="70" cy="42" r="40" fill="#000" />
+                        </mask>
+                      </defs>
+                      <g mask="url(#celestial-crescent)">
+                        <circle
+                          cx="50"
+                          cy="50"
+                          r="44"
+                          className="celestial-moon-disc"
+                        />
+                        {/* Maria, placed inside the lit limb so the mask keeps them. */}
+                        <circle
+                          cx="27"
+                          cy="63"
+                          r="7.5"
+                          className="celestial-moon-crater"
+                        />
+                        <circle
+                          cx="20"
+                          cy="39"
+                          r="5"
+                          className="celestial-moon-crater"
+                        />
+                        <circle
+                          cx="35"
+                          cy="76"
+                          r="4"
+                          className="celestial-moon-crater"
+                        />
+                        <circle
+                          cx="14"
+                          cy="53"
+                          r="3.2"
+                          className="celestial-moon-crater"
+                        />
+                      </g>
+                    </svg>
+                  </span>
+                )
+              }
+            />
             {celestial.kind === "moon" &&
               CELESTIAL_STARS.map((star) => (
                 <span
