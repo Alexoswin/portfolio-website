@@ -5,6 +5,7 @@ import { siteConfig } from "@/lib/site";
 import { getCurrentYear } from "@/lib/time";
 import { Container } from "@/components/ui/container";
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/icons";
+import { Magnetic } from "@/components/effects/magnetic";
 
 const stack = [
   { name: "Next.js 16", href: "https://nextjs.org" },

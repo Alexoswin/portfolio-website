@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { profile } from "@/lib/profile";
 import { siteConfig } from "@/lib/site";
 import { BrandMark } from "@/components/ui/brand-mark";
+import { Magnetic } from "@/components/effects/magnetic";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -101,15 +102,17 @@ export function Navbar() {
             </Link>
           ))}
           <span className="mx-2 h-5 w-px bg-border" aria-hidden="true" />
-          <a
-            href={profile.contact.resume}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card/60 px-4 py-1.5 text-sm font-medium transition-colors hover:border-primary/50 hover:text-primary"
-          >
-            <FileText className="h-3.5 w-3.5" aria-hidden="true" />
-            Resume
-          </a>
+          <Magnetic strength={6}>
+            <a
+              href={profile.contact.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card/60 px-4 py-1.5 text-sm font-medium transition-colors hover:border-primary/50 hover:text-primary"
+            >
+              <FileText className="h-3.5 w-3.5" aria-hidden="true" />
+              Resume
+            </a>
+          </Magnetic>
           <ThemeToggle className="ml-1" />
         </nav>
 

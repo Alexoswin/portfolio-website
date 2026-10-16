@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/effects/reveal";
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/icons";
 import { ContactForm } from "@/components/sections/contact-form";
+import { Magnetic } from "@/components/effects/magnetic";
 
 export function Contact() {
   return (
@@ -45,24 +46,28 @@ export function Contact() {
           </ul>
 
           <div className="flex gap-3">
-            <a
-              href={profile.contact.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub profile"
-              className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-card/60 text-muted-foreground transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary"
-            >
-              <GitHubIcon className="h-5 w-5" />
-            </a>
-            <a
-              href={profile.contact.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn profile"
-              className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-card/60 text-muted-foreground transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary"
-            >
-              <LinkedInIcon className="h-5 w-5" />
-            </a>
+            <Magnetic strength={6}>
+              <a
+                href={profile.contact.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub profile"
+                className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-card/60 text-muted-foreground transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary"
+              >
+                <GitHubIcon className="h-5 w-5" />
+              </a>
+            </Magnetic>
+            <Magnetic strength={6}>
+              <a
+                href={profile.contact.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn profile"
+                className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-card/60 text-muted-foreground transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary"
+              >
+                <LinkedInIcon className="h-5 w-5" />
+              </a>
+            </Magnetic>
           </div>
         </Reveal>
 
