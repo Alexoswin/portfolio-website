@@ -208,7 +208,7 @@
   /* Particle constellation — needs more contrast than the glow colors in light mode. */
   --particle: oklch(0.46 0.13 48);
   /* Hex lattice line tint — warm honeycomb wire in light mode. */
-  --hex-tint: color-mix(in oklch, var(--glow-2) 20%, transparent);
+  --hex-tint: color-mix(in oklch, var(--glow-2) 30%, transparent);
 }
 
 [data-theme="dark"] {
@@ -235,8 +235,8 @@
   --glow-3: oklch(0.72 0.16 330);
   --aurora-opacity: 0.22;
   --particle: oklch(0.78 0.12 230);
-  /* Hex lattice line tint — neutral wire in dark mode (unchanged). */
-  --hex-tint: color-mix(in oklch, var(--foreground) 7%, transparent);
+  /* Hex lattice line tint — neutral wire in dark mode. */
+  --hex-tint: color-mix(in oklch, var(--foreground) 13%, transparent);
 }
 
 @layer base {
