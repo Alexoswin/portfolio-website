@@ -133,14 +133,16 @@ function SocialLink({
   icon,
 }: Readonly<{ href: string; label: string; icon: React.ReactNode }>) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={label}
-      className="flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-background/60 text-muted-foreground transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary"
-    >
-      {icon}
-    </a>
+    <Magnetic strength={6}>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={label}
+        className="flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-background/60 text-muted-foreground transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary"
+      >
+        {icon}
+      </a>
+    </Magnetic>
   );
 }
