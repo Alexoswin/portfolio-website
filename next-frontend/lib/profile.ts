@@ -96,13 +96,11 @@ export const profile: Profile = {
       period: "Sept. 2025 – Present",
       location: "Mumbai, India",
       achievements: [
-        "Building mple.ai, an AI-powered sales training and agentic learning platform delivering realistic customer service and sales roleplay simulations.",
-        "Built robust error tracking with contextual error codes, improving observability and cutting time-to-resolution for production issues.",
-        "Optimized backend APIs and MongoDB aggregation pipelines in Node.js/NestJS, improving query performance and reducing response latency across core services.",
-        "Shipped dashboard analytics with MongoDB aggregations and charts, surfacing user engagement, roleplay performance, and system health.",
-        "Implemented persona customization, enabling dynamic control over AI avatar behavior, tone, and background across training scenarios.",
-        "Improved reliability and synchronization of live AI avatar interactions over WebSockets.",
-        "Delivered product features end to end — from requirements to deployment — across React.js frontends and backend services.",
+        "Develop and scale backend services for mple.ai, an AI-driven sales training and agentic learning platform serving 500K+ users across realistic customer service and sales roleplay simulations.",
+        "Cut REST API and MongoDB aggregation response times from 5–7 seconds to under 300 ms (95% faster) by rewriting 20+ aggregation pipelines, adding compound indexes, and root-causing production incidents end to end.",
+        "Integrated LLM agents, Retrieval-Augmented Generation (RAG), and a host/worker multi-agent architecture that sustains 10K+ conversational roleplay sessions per month at sub-2 second first-response latency.",
+        "Engineered a rate-limited asynchronous messaging service on AWS SQS and Redis, processing 1K+ messages/minute with queue-based concurrency caps and caching that eliminated 100% of downstream overload failures.",
+        "Delivered and maintain seeedemaseekhelp.com, an AI-based edema score assessment platform.",
       ],
     },
   ],
@@ -112,7 +110,7 @@ export const profile: Profile = {
       contribution: "OAuth2 Refresh Token Fix",
       link: "https://github.com/frappe/frappe/pull/36145",
       details:
-        "Fixed a critical issue where OAuth2 refresh token requests returned 403 Forbidden. Implemented RFC 6749 compliant validation methods.",
+        "Resolved a defect in the Frappe Framework (8K+ star repository) where OAuth2 refresh token requests returned 403 Forbidden. Diagnosed the root cause across 2 token validation methods that loaded OAuth Bearer Token documents without ignore_permissions=True, failing under guest context. Patched validation by passing ignore_permissions=True and setting request.user = otoken.user, restoring 100% of refresh token requests to success and full OAuth2 RFC 6749 compliance, with 0 regressions across existing flows.",
     },
   ],
   education: [
@@ -147,10 +145,10 @@ export const profile: Profile = {
     },
     {
       title: "Winner – Smart India Hackathon 2023",
-      event: "SIH1366",
+      event: "SIH1366 — Centralized System for De-addiction Centers",
       date: "Dec. 2023",
       description:
-        "Udaipur. Led development of a full-stack centralized system for de-addiction centers.",
+        "Udaipur. Led a 6-member team to 1st place among 10,000+ competing teams, shipping a centralized full-stack system with real-time patient tracking and RBAC across 4 user roles in 36 hours.",
     },
   ],
   projects: [
@@ -159,26 +157,28 @@ export const profile: Profile = {
       link: "https://edema.mple.ai/",
       tech: ["Next.js", "NestJS", "MongoDB", "Tailwind CSS"],
       highlights: [
-        "Web platform for edema severity assessment with automated scoring.",
-        "AI-powered doctor avatar for real-time symptom guidance.",
-        "AI-based report generation analyzing medical responses.",
+        "Public patient self-screening web platform that scores edema risk from a structured questionnaire and returns an instant preliminary score with guidance on when to seek care.",
+        "Integrated a conversational AI doctor avatar to guide patients through symptom questions in real time.",
+        "Automated assessment report generation from questionnaire responses, giving patients a formatted summary of their score.",
+        "Designed REST APIs for edema scoring, patient response processing, and report delivery.",
       ],
     },
     {
-      title: "OutReach — AI-Powered Signal-Based Outreach Platform",
+      title: "ReachConvert — AI-Powered Outreach Platform",
       tech: [
         "Next.js",
         "NestJS",
         "MongoDB",
         "Redis",
+        "AWS SES",
         "Twilio",
         "Google Gemini",
-        "AWS SES",
+        "Tailwind CSS",
       ],
       highlights: [
-        "Full-stack outreach workspace managing contacts, personalized email campaigns, and AI voice calling campaigns.",
-        "NestJS backend with modules for auth, contacts, templates, email campaigns, calling bots, signals, and a campaign scheduler.",
-        "Bulk email sender for high-volume, templated, personalized dispatch with delivery tracking and provider failover over AWS SES.",
+        "Open-source AI-powered outreach platform combining personalized email campaigns, AI voice calling, lead management, and campaign analytics in a unified workspace.",
+        "Automated AI voice agents for outbound calling and conversational lead engagement, alongside bulk email campaigns with personalized messaging and delivery tracking.",
+        "Scalable full-stack architecture supporting AI agents, campaign automation, contact management, and real-time outreach tracking.",
       ],
     },
     {
@@ -200,17 +200,25 @@ export const profile: Profile = {
   ],
   skills: {
     Languages: ["TypeScript", "JavaScript", "Python"],
-    Backend: ["Node.js", "NestJS", "Express.js", "WebSockets"],
-    Frontend: ["Next.js", "React.js", "React Native", "Tailwind CSS", "WebView"],
-    Databases: ["MongoDB", "Redis"],
+    Backend: ["Node.js", "NestJS", "Express.js", "REST APIs", "WebSockets"],
+    Frontend: ["Next.js", "React.js", "React Native", "React Native WebView"],
+    Databases: ["MongoDB", "Redis", "PostgreSQL"],
+    "AI/ML": [
+      "Generative AI",
+      "LLM Integration",
+      "Multi-Agent Systems",
+      "Retrieval-Augmented Generation (RAG)",
+    ],
     "Cloud & Infra": [
       "AWS S3",
       "AWS SES",
+      "AWS SQS",
       "AWS CloudFront",
       "Google Cloud Run",
-      "Google Cloud VM",
+      "Google Compute Engine (GCE)",
       "Google Cloud Scheduler",
     ],
+    Tools: ["Docker", "Git", "GitHub", "CI/CD", "Linux"],
   },
   certifications: [
     {
@@ -219,7 +227,7 @@ export const profile: Profile = {
       date: "Apr. 2025",
       link: "https://www.credly.com/go/gUNJh086",
       details:
-        "Core AWS services (EC2, S3, RDS, Lambda) and cloud security best practices.",
+        "Completed a foundational cloud program spanning 10+ core AWS services (EC2, S3, IAM, VPC, RDS, Lambda) plus cloud security, the shared responsibility model, pricing, and compliance frameworks.",
     },
   ],
 };

@@ -1,9 +1,11 @@
 import {
+  BrainCircuit,
   Cloud,
   Code2,
   Database,
   Globe,
   Server,
+  Terminal,
   type LucideIcon,
 } from "lucide-react";
 import { profile } from "@/lib/profile";
@@ -17,7 +19,9 @@ const categoryIcons: Record<string, LucideIcon> = {
   Backend: Server,
   Frontend: Globe,
   Databases: Database,
+  "AI/ML": BrainCircuit,
   "Cloud & Infra": Cloud,
+  Tools: Terminal,
 };
 
 export function Skills() {

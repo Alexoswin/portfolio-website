@@ -11,10 +11,9 @@ interface SpotlightProps extends React.ComponentProps<"div"> {
 const MAX_TILT_DEG = 7;
 
 /**
- * Cursor-following radial highlight (see `.spotlight` in globals.css) with an
- * optional 3D tilt. Only CSS custom properties and an inline transform change
- * on pointermove — no React re-renders, GPU-composited throughout. Tilt is
- * skipped for touch pointers and under prefers-reduced-motion.
+ * Pointer-tracked 3D tilt. Only an inline transform changes on pointermove —
+ * no React re-renders, GPU-composited throughout. Skipped for touch pointers
+ * and under prefers-reduced-motion.
  */
 export function Spotlight({
   tilt = false,
@@ -32,22 +31,18 @@ export function Spotlight({
 
   return (
     <div
-      className={cn("spotlight", tilt && "will-change-transform", className)}
+      className={cn(tilt && "will-change-transform", className)}
       onPointerMove={(event) => {
+        if (!tilt || event.pointerType === "touch" || reducedMotion.current) {
+          return;
+        }
         const el = event.currentTarget;
         const rect = el.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-        el.style.setProperty("--spot-x", `${x}px`);
-        el.style.setProperty("--spot-y", `${y}px`);
-
-        if (tilt && event.pointerType !== "touch" && !reducedMotion.current) {
-          const px = x / rect.width - 0.5;
-          const py = y / rect.height - 0.5;
-          el.style.transform =
-            `perspective(900px) rotateX(${(-py * MAX_TILT_DEG).toFixed(2)}deg) ` +
-            `rotateY(${(px * MAX_TILT_DEG).toFixed(2)}deg)`;
-        }
+        const px = (event.clientX - rect.left) / rect.width - 0.5;
+        const py = (event.clientY - rect.top) / rect.height - 0.5;
+        el.style.transform =
+          `perspective(900px) rotateX(${(-py * MAX_TILT_DEG).toFixed(2)}deg) ` +
+          `rotateY(${(px * MAX_TILT_DEG).toFixed(2)}deg)`;
       }}
       onPointerLeave={(event) => {
         event.currentTarget.style.transform = "";
