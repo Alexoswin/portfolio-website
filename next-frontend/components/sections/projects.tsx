@@ -5,7 +5,6 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/effects/reveal";
-import { BrandMark } from "@/components/ui/brand-mark";
 import { cn } from "@/lib/utils";
 
 export function Projects() {
@@ -89,30 +88,6 @@ function ProjectCard({
       tilt
       className={cn("flex h-full flex-col gap-4", featured && "md:p-8")}
     >
-      {/* Featured banner — abstract glow field + hex lattice + brand mark,
-          so the flagship project leads with a visual instead of text. */}
-      {featured && (
-        <div
-          aria-hidden="true"
-          className="relative mb-2 h-40 overflow-hidden rounded-xl border border-border/60 md:h-48"
-        >
-          <div
-            className="absolute inset-0"
-            style={{
-              background: `
-                radial-gradient(120% 160% at 12% 18%, color-mix(in oklch, var(--glow-1) 26%, transparent), transparent 55%),
-                radial-gradient(110% 140% at 88% 25%, color-mix(in oklch, var(--glow-2) 22%, transparent), transparent 60%),
-                radial-gradient(120% 120% at 55% 95%, color-mix(in oklch, var(--glow-3) 18%, transparent), transparent 62%)`,
-            }}
-          />
-          <div className="bg-hex-grid absolute inset-0 opacity-70" />
-          <BrandMark
-            id="brand-featured"
-            className="absolute -right-4 -bottom-8 h-40 w-40 opacity-25"
-          />
-        </div>
-      )}
-
       <div
         className={cn(
           "flex h-full flex-col gap-4",
